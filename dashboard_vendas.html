@@ -55,6 +55,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text-900);min-heig
 /* BUTTONS */
 .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 15px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;border:none;transition:var(--ease);white-space:nowrap;font-family:var(--font)}
 .btn-primary{background:var(--primary);color:#fff}
+.btn-save{background:#059669;color:#fff;border:none;gap:6px}
+.btn-save:hover{background:#047857;box-shadow:0 4px 12px rgba(5,150,105,.3);transform:translateY(-1px)}
+.btn-save.saving{background:#D97706;pointer-events:none}
+.btn-save.saved{background:#059669}
+.btn-save.error-state{background:#DC2626}
 .btn-primary:hover{background:#1D4ED8;box-shadow:0 4px 12px rgba(37,99,235,.3);transform:translateY(-1px)}
 .btn-outline{background:transparent;color:var(--primary);border:1.5px solid var(--primary)}
 .btn-outline:hover{background:var(--primary-50)}
@@ -245,6 +250,10 @@ tbody td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
       Importar Excel
     </label>
     <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" onchange="onFileChosen(event)">
+    <button class="btn btn-save hidden" id="btnSave" onclick="saveToGitHub()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      <span id="btnSaveLabel">Salvar para todos</span>
+    </button>
   </div>
 </header>
 
@@ -479,6 +488,14 @@ tbody td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
 const EXCEL_URL = './dados.xlsx'; // ← ALTERE AQUI
 
 /* ============================================================
+   ☁️  GITHUB SYNC — dados persistentes para todos os usuários
+============================================================ */
+const GH_OWNER = 'rafaeleualiria-dotcom';
+const GH_REPO  = 'aliria-dashboards';
+const GH_RAW   = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/main/dados.json`;
+const GH_API   = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/dados.json`;
+
+/* ============================================================
    PALETA DE CORES
 ============================================================ */
 const P = ['#2563EB','#059669','#D97706','#DC2626','#7C3AED',
@@ -672,6 +689,10 @@ function ingest(buf) {
     document.getElementById('lastUpdTime').textContent = new Date().toLocaleString('pt-BR');
     showAlert(`✅ ${raw.length.toLocaleString('pt-BR')} registros carregados com sucesso.`,'success');
     setTimeout(clearAlert, 4000);
+    // Mostrar botão de salvar (para o admin publicar os dados)
+    const btnSave = document.getElementById('btnSave');
+    btnSave.classList.remove('hidden','saved','saving','error-state');
+    document.getElementById('btnSaveLabel').textContent = 'Salvar para todos';
   } catch(e) {
     showAlert('Erro ao processar planilha: '+e.message,'error');
   }
@@ -1574,10 +1595,124 @@ dz.addEventListener('drop', e=>{
 });
 
 /* ============================================================
+   ☁️  SALVAR DADOS NO GITHUB (admin)
+============================================================ */
+async function saveToGitHub() {
+  const btn   = document.getElementById('btnSave');
+  const label = document.getElementById('btnSaveLabel');
+
+  // Verificar/obter token
+  let token = localStorage.getItem('gh_token');
+  if (!token) {
+    token = prompt(
+      'Cole seu GitHub Personal Access Token:\n' +
+      '(Crie em: github.com → Settings → Developer settings → Personal access tokens → Tokens (classic))\n' +
+      'Permissão necessária: public_repo\n\n' +
+      'O token será salvo apenas no seu navegador.'
+    );
+    if (!token) return;
+    localStorage.setItem('gh_token', token.trim());
+    token = token.trim();
+  }
+
+  // Serializar dados (converter Dates para ISO string)
+  const payload = {
+    savedAt : new Date().toISOString(),
+    version : 1,
+    records : raw.map(r => ({ ...r, data: r.data ? r.data.toISOString() : null }))
+  };
+
+  const contentB64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+
+  btn.classList.add('saving');
+  label.textContent = 'Salvando...';
+  btn.disabled = true;
+
+  try {
+    // Buscar SHA atual do arquivo (necessário para atualizar)
+    let sha = null;
+    const getRes = await fetch(GH_API, {
+      headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    if (getRes.ok) { sha = (await getRes.json()).sha; }
+
+    // Commit do arquivo
+    const putRes = await fetch(GH_API, {
+      method  : 'PUT',
+      headers : { Authorization: `token ${token}`, 'Content-Type': 'application/json', Accept: 'application/vnd.github.v3+json' },
+      body    : JSON.stringify({
+        message : `Atualização de dados — ${new Date().toLocaleDateString('pt-BR')}`,
+        content : contentB64,
+        ...(sha ? { sha } : {})
+      })
+    });
+
+    if (!putRes.ok) {
+      const err = await putRes.json();
+      throw new Error(err.message || `HTTP ${putRes.status}`);
+    }
+
+    btn.classList.remove('saving');
+    btn.classList.add('saved');
+    label.textContent = '✓ Salvo!';
+    showAlert('✅ Dados publicados! Todos os visitantes verão a planilha atualizada.', 'success');
+    setTimeout(() => {
+      clearAlert();
+      label.textContent = 'Salvar para todos';
+      btn.classList.remove('saved');
+    }, 5000);
+
+  } catch(e) {
+    btn.classList.remove('saving');
+    btn.classList.add('error-state');
+    label.textContent = 'Erro — tentar novamente';
+    if (e.message.toLowerCase().includes('bad credentials')) {
+      localStorage.removeItem('gh_token');
+      showAlert('❌ Token inválido ou expirado. Clique em "Salvar para todos" novamente para inserir um novo token.', 'error');
+    } else {
+      showAlert('❌ Erro ao salvar: ' + e.message, 'error');
+    }
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+/* ============================================================
+   ☁️  CARREGAR DADOS DO GITHUB (visitantes)
+============================================================ */
+async function loadFromGitHub() {
+  try {
+    const res = await fetch(GH_RAW + '?_t=' + Date.now(), { cache: 'no-store' });
+    if (!res.ok) return; // ainda não há dados salvos
+
+    const payload = await res.json();
+    if (!payload.records || !payload.records.length) return;
+
+    // Reconstruir objetos Date
+    raw = payload.records.map(r => ({ ...r, data: r.data ? new Date(r.data) : null }));
+
+    clearAlert();
+    initFilters();
+    applyFilters();
+    document.getElementById('emptyState').classList.add('hidden');
+    document.getElementById('dashboard').classList.remove('hidden');
+    document.getElementById('lastUpdTime').textContent =
+      new Date(payload.savedAt).toLocaleString('pt-BR');
+    showAlert(`✅ ${raw.length.toLocaleString('pt-BR')} registros carregados automaticamente.`, 'success');
+    setTimeout(clearAlert, 4000);
+  } catch(e) {
+    // falha silenciosa — usuário ainda pode importar manualmente
+  }
+}
+
+/* ============================================================
    INICIALIZAÇÃO — tenta carregar via URL se customizada
 ============================================================ */
 (async () => {
-  if (EXCEL_URL && EXCEL_URL !== './dados.xlsx') {
+  // 1. Tenta carregar dados salvos no GitHub (todos os visitantes)
+  await loadFromGitHub();
+  // 2. Fallback: tenta URL configurada no EXCEL_URL
+  if (!raw.length && EXCEL_URL && EXCEL_URL !== './dados.xlsx') {
     await refreshData();
   }
 })();
