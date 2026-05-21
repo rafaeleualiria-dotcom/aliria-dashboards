@@ -347,45 +347,6 @@ tbody td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
       </div>
     </div>
 
-    <!-- =====================================================
-         RELATÓRIO SEMANAL — visível só com mês único selecionado
-    ====================================================== -->
-    <div id="weeklySection" class="hidden">
-
-      <div class="weekly-banner">
-        <span class="weekly-ico">📅</span>
-        <div>
-          <div class="weekly-banner-title" id="weeklyTitle">Relatório Semanal</div>
-          <div class="weekly-banner-sub">Evolução de vendas, resultado e margem — semana a semana por canal</div>
-        </div>
-      </div>
-
-      <!-- Gráfico semanal -->
-      <div class="charts-grid cols-1" style="margin-bottom:18px">
-        <div class="chart-card">
-          <div class="chart-hd">
-            <div>
-              <div class="chart-title">Evolução Semanal por Canal</div>
-              <div class="chart-sub">Faturamento empilhado por Fonte · Linha tracejada: Margem ($) — eixo direito</div>
-            </div>
-          </div>
-          <div class="chart-body" style="height:320px"><canvas id="cWeekly"></canvas></div>
-        </div>
-      </div>
-
-      <!-- Tabela semanal -->
-      <div class="table-card" style="margin-bottom:26px">
-        <div class="table-hd">
-          <div>
-            <div class="chart-title">Detalhamento Semanal por Canal</div>
-            <div class="chart-sub">Valor total de vendas, resultado e margem por semana e fonte</div>
-          </div>
-        </div>
-        <div class="table-scroll"><table id="weeklyTable"></table></div>
-      </div>
-
-    </div><!-- /weeklySection -->
-
     <!-- KPIs -->
     <div class="sec-title">Indicadores Chave de Desempenho</div>
     <div class="kpi-grid" id="kpiGrid"></div>
@@ -458,6 +419,45 @@ tbody td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
       </div>
       <div class="ins-grid" id="insGrid"></div>
     </div>
+
+    <!-- =====================================================
+         RELATÓRIO SEMANAL — visível só com mês único selecionado
+    ====================================================== -->
+    <div id="weeklySection" class="hidden">
+
+      <div class="weekly-banner">
+        <span class="weekly-ico">📅</span>
+        <div>
+          <div class="weekly-banner-title" id="weeklyTitle">Relatório Semanal</div>
+          <div class="weekly-banner-sub">Evolução de vendas, resultado e margem — semana a semana por canal</div>
+        </div>
+      </div>
+
+      <!-- Gráfico semanal -->
+      <div class="charts-grid cols-1" style="margin-bottom:18px">
+        <div class="chart-card">
+          <div class="chart-hd">
+            <div>
+              <div class="chart-title">Evolução Semanal por Canal</div>
+              <div class="chart-sub">Faturamento empilhado por Fonte · Linha tracejada: Margem ($) — eixo direito</div>
+            </div>
+          </div>
+          <div class="chart-body" style="height:320px"><canvas id="cWeekly"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Tabela semanal -->
+      <div class="table-card" style="margin-bottom:26px">
+        <div class="table-hd">
+          <div>
+            <div class="chart-title">Detalhamento Semanal por Canal</div>
+            <div class="chart-sub">Valor total de vendas, resultado e margem por semana e fonte</div>
+          </div>
+        </div>
+        <div class="table-scroll"><table id="weeklyTable"></table></div>
+      </div>
+
+    </div><!-- /weeklySection -->
 
     <!-- Summary Table -->
     <div class="table-card">
