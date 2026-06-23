@@ -1663,14 +1663,21 @@ async function saveToGitHub() {
     btn.classList.add('error-state');
     label.textContent = 'Erro — tentar novamente';
     if (e.message.toLowerCase().includes('bad credentials')) {
-      localStorage.removeItem('gh_token');
-      showAlert('❌ Token inválido ou expirado. Clique em "Salvar para todos" novamente para inserir um novo token.', 'error');
+      showAlert(
+        '❌ Token inválido ou expirado. <a href="#" onclick="resetGhToken()" style="color:inherit;font-weight:bold;text-decoration:underline">Clique aqui para inserir um novo token</a>.',
+        'error'
+      );
     } else {
       showAlert('❌ Erro ao salvar: ' + e.message, 'error');
     }
   } finally {
     btn.disabled = false;
   }
+}
+
+function resetGhToken() {
+  localStorage.removeItem('gh_token');
+  saveToGitHub();
 }
 
 /* ============================================================
