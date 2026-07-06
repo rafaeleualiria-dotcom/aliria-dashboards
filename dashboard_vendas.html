@@ -1985,8 +1985,12 @@ async function loadFromGitHub() {
     document.getElementById('reconnectBanner').classList.add('hidden');
     document.getElementById('lastUpdTime').textContent =
       new Date(payload.savedAt).toLocaleString('pt-BR');
-    showAlert(`✅ ${raw.length.toLocaleString('pt-BR')} registros carregados.`, 'success');
-    setTimeout(clearAlert, 4000);
+    if (payload.avisos && payload.avisos.length) {
+      showAlert(payload.avisos.join('\n'), 'error');
+    } else {
+      showAlert(`✅ ${raw.length.toLocaleString('pt-BR')} registros carregados.`, 'success');
+      setTimeout(clearAlert, 4000);
+    }
   } catch(e) {
     showAlert(`Erro ao carregar (${step}): ${e.message}`, 'error');
     console.error('loadFromGitHub:', step, e);
