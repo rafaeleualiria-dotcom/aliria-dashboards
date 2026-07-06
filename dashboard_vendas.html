@@ -257,7 +257,10 @@ tbody td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
       Última atualização
       <strong id="lastUpdTime">—</strong>
     </div>
-    <div id="syncStatus" class="sync-status hidden"></div>
+    <button class="btn btn-save hidden" id="btnSave" onclick="saveToGitHub()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+      <span id="btnSaveLabel">Salvar para todos</span>
+    </button>
     <label for="fileInput" class="btn btn-ghost" style="cursor:pointer;font-size:12px">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
       Importar
@@ -702,7 +705,6 @@ function onFileChosen(e) {
   rd.onload = ev => {
     try {
       ingest(ev.target.result);
-      autoSaveToGitHub();
     } catch(err) {
       showAlert('Erro ao ler arquivo: '+err.message,'error');
     }
@@ -723,6 +725,9 @@ function ingest(buf) {
     document.getElementById('lastUpdTime').textContent = new Date().toLocaleString('pt-BR');
     showAlert(`✅ ${raw.length.toLocaleString('pt-BR')} registros carregados com sucesso.`,'success');
     setTimeout(clearAlert, 4000);
+    document.getElementById('btnSave').classList.remove('hidden');
+    document.getElementById('btnSaveLabel').textContent = 'Salvar para todos';
+    document.getElementById('btnSave').classList.remove('saving','saved','error-state');
     document.getElementById('btnToken').classList.remove('hidden');
   } catch(e) {
     showAlert('Erro ao processar planilha: '+e.message,'error');
