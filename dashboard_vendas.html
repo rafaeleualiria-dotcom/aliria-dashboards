@@ -1943,10 +1943,19 @@ async function autoSaveToGitHub() {
 ============================================================ */
 async function loadFromGitHub() {
   try {
-    const res = await fetch(GH_RAW + '?_t=' + Date.now(), { cache: 'no-store' });
+    // Usa a API (não raw CDN) para garantir dados sempre atualizados
+    const res = await fetch(GH_API, {
+      headers: { Accept: 'application/vnd.github.v3+json' },
+      cache: 'no-store'
+    });
     if (!res.ok) return; // ainda não há dados salvos
 
-    const payload = await res.json();
+    const file = await res.json();
+    if (!file.content) return;
+
+    // Decodificar base64 → string UTF-8 → JSON
+    const jsonStr = decodeURIComponent(escape(atob(file.content.replace(/\n/g, ''))));
+    const payload = JSON.parse(jsonStr);
     if (!payload.records || !payload.records.length) return;
 
     // Reconstruir objetos Date
