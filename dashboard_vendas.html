@@ -1941,19 +1941,19 @@ async function autoSaveToGitHub() {
 ============================================================ */
 async function loadFromGitHub() {
   try {
-    // Usa a API com token (se disponível) — requisições autenticadas não usam cache CDN
-    const token = localStorage.getItem('gh_token');
-    const headers = { Accept: 'application/vnd.github.v3+json' };
-    if (token) headers.Authorization = `Bearer ${token}`;
-    const res = await fetch(GH_API, { headers, cache: 'no-store' });
-    if (!res.ok) return; // ainda não há dados salvos
+    // Leitura pública via API (sem token) — evita falha quando token expirado
+    const res = await fetch(GH_API, {
+      headers: { Accept: 'application/vnd.github.v3+json' },
+      cache: 'no-store'
+    });
+    if (!res.ok) return;
 
     const file = await res.json();
     if (!file.content) return;
 
-    // Decodificar base64 → UTF-8 via TextDecoder (mais robusto para acentos)
-    const bytes = Uint8Array.from(atob(file.content.replace(/\n/g, '')), c => c.charCodeAt(0));
-    const payload = JSON.parse(new TextDecoder().decode(bytes));
+    // Decodificar base64 — mesmo esquema usado no saveToGitHub
+    const jsonStr = decodeURIComponent(escape(atob(file.content.replace(/[\n\r ]/g, ''))));
+    const payload = JSON.parse(jsonStr);
     if (!payload.records || !payload.records.length) return;
 
     // Reconstruir objetos Date
