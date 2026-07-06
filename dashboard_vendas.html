@@ -278,18 +278,18 @@ tbody td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
   <div id="alertArea"></div>
 
   <!-- EMPTY STATE -->
+  <!-- Reconectar arquivo local — fica visível mesmo quando o dashboard já carregou dados do GitHub -->
+  <div id="reconnectBanner" class="reconnect-banner hidden">
+    <div class="reconnect-ico">⚡</div>
+    <div class="reconnect-body">
+      <div class="reconnect-title">Planilha local conectada</div>
+      <div class="reconnect-file" id="reconnectFileName"></div>
+    </div>
+    <button class="btn btn-primary" onclick="reconnectLocalFile()">Carregar dados recentes</button>
+  </div>
+
   <div id="emptyState">
     <div class="upload-wrap">
-
-      <!-- Reconectar arquivo local (aparece quando há handle salvo mas precisa de permissão) -->
-      <div id="reconnectBanner" class="reconnect-banner hidden">
-        <div class="reconnect-ico">⚡</div>
-        <div class="reconnect-body">
-          <div class="reconnect-title">Planilha local conectada</div>
-          <div class="reconnect-file" id="reconnectFileName"></div>
-        </div>
-        <button class="btn btn-primary" onclick="reconnectLocalFile()">Carregar dados</button>
-      </div>
 
       <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
         <span class="upload-icon">📂</span>
