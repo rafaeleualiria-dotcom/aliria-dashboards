@@ -62,6 +62,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text-900);min-heig
 .btn-save.error-state{background:#DC2626}
 .btn-token{font-size:11px;padding:0 10px;color:var(--text-400);gap:5px}
 .btn-token:hover{color:var(--text-900)}
+.sync-status{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:100px;letter-spacing:.2px;white-space:nowrap}
+.sync-status.syncing{background:#FFF7ED;color:#D97706;border:1px solid #FDE68A}
+.sync-status.synced{background:#ECFDF5;color:#059669;border:1px solid #6EE7B7}
+.sync-status.sync-error{background:#FEF2F2;color:#DC2626;border:1px solid #FECACA;cursor:pointer}
+.sync-status.needs-token{background:#EFF6FF;color:#2563EB;border:1px solid #BFDBFE;cursor:pointer}
 .btn-primary:hover{background:#1D4ED8;box-shadow:0 4px 12px rgba(37,99,235,.3);transform:translateY(-1px)}
 .btn-outline{background:transparent;color:var(--primary);border:1.5px solid var(--primary)}
 .btn-outline:hover{background:var(--primary-50)}
@@ -252,15 +257,12 @@ tbody td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
       Última atualização
       <strong id="lastUpdTime">—</strong>
     </div>
-    <label for="fileInput" class="btn btn-outline" style="cursor:pointer">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-      Importar Excel
+    <div id="syncStatus" class="sync-status hidden"></div>
+    <label for="fileInput" class="btn btn-ghost" style="cursor:pointer;font-size:12px">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      Importar
     </label>
     <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" onchange="onFileChosen(event)">
-    <button class="btn btn-save hidden" id="btnSave" onclick="saveToGitHub()">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-      <span id="btnSaveLabel">Salvar para todos</span>
-    </button>
     <button class="btn btn-ghost btn-token hidden" id="btnToken" onclick="resetToken()" title="Trocar token GitHub">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
       Token
@@ -714,10 +716,6 @@ function ingest(buf) {
     document.getElementById('lastUpdTime').textContent = new Date().toLocaleString('pt-BR');
     showAlert(`✅ ${raw.length.toLocaleString('pt-BR')} registros carregados com sucesso.`,'success');
     setTimeout(clearAlert, 4000);
-    // Mostrar botões de salvar/token (para o admin publicar os dados)
-    const btnSave = document.getElementById('btnSave');
-    btnSave.classList.remove('hidden','saved','saving','error-state');
-    document.getElementById('btnSaveLabel').textContent = 'Salvar para todos';
     document.getElementById('btnToken').classList.remove('hidden');
   } catch(e) {
     showAlert('Erro ao processar planilha: '+e.message,'error');
@@ -1663,12 +1661,26 @@ async function clearHandle() {
   } catch {}
 }
 
+function setSyncStatus(state, msg) {
+  const el = document.getElementById('syncStatus');
+  el.className = 'sync-status';
+  if (state === 'hidden') { el.classList.add('hidden'); return; }
+  el.classList.remove('hidden');
+  const icons = { syncing:'⟳', synced:'✓', error:'⚠', token:'🔑' };
+  const classes = { syncing:'syncing', synced:'synced', error:'sync-error', token:'needs-token' };
+  el.classList.add(classes[state] || 'syncing');
+  el.textContent = (icons[state] || '') + ' ' + msg;
+  el.onclick = (state === 'error' || state === 'token') ? () => autoSaveToGitHub() : null;
+}
+
 async function readHandle(handle) {
   const file = await handle.getFile();
   const buf  = await file.arrayBuffer();
   ingest(buf);
   document.getElementById('lastUpdTime').innerHTML =
     `<span class="local-badge">⚡ Local</span> ${file.name} &mdash; ${new Date(file.lastModified).toLocaleString('pt-BR')}`;
+  // Auto-save para todos os visitantes
+  autoSaveToGitHub();
 }
 
 // Conectar arquivo pela primeira vez (abre seletor)
@@ -1832,6 +1844,85 @@ async function saveToGitHub() {
     }
   } finally {
     btn.disabled = false;
+  }
+}
+
+/* ============================================================
+   ☁️  AUTO-SYNC SILENCIOSO (disparado ao carregar arquivo local)
+============================================================ */
+async function autoSaveToGitHub() {
+  let token = localStorage.getItem('gh_token');
+  if (!token) {
+    setSyncStatus('token', 'Configurar sync — clique aqui');
+    document.getElementById('syncStatus').onclick = async () => {
+      const t = prompt(
+        'Cole seu GitHub Personal Access Token para ativar o sync automático:\n' +
+        '(Crie em: github.com → Settings → Developer settings → Personal access tokens)\n' +
+        'Permissão: public_repo   |   Validade: No expiration\n\n' +
+        'Após configurar, a planilha será salva automaticamente.'
+      );
+      if (!t) return;
+      localStorage.setItem('gh_token', t.trim());
+      autoSaveToGitHub();
+    };
+    return;
+  }
+
+  setSyncStatus('syncing', 'Sincronizando...');
+
+  const payload = {
+    savedAt : new Date().toISOString(),
+    version : 1,
+    records : raw.map(r => ({ ...r, data: r.data ? r.data.toISOString() : null }))
+  };
+  const contentB64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+
+  try {
+    let sha = null;
+    const getRes = await fetch(GH_API, {
+      headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    if (getRes.status === 401 || getRes.status === 403) {
+      localStorage.removeItem('gh_token');
+      setSyncStatus('token', 'Token expirado — clique para atualizar');
+      document.getElementById('syncStatus').onclick = async () => {
+        localStorage.removeItem('gh_token');
+        autoSaveToGitHub();
+      };
+      return;
+    }
+    if (getRes.ok) { sha = (await getRes.json()).sha; }
+
+    const putRes = await fetch(GH_API, {
+      method  : 'PUT',
+      headers : { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', Accept: 'application/vnd.github.v3+json' },
+      body    : JSON.stringify({
+        message : `Atualização de dados — ${new Date().toLocaleDateString('pt-BR')}`,
+        content : contentB64,
+        ...(sha ? { sha } : {})
+      })
+    });
+
+    if (putRes.status === 401 || putRes.status === 403) {
+      localStorage.removeItem('gh_token');
+      setSyncStatus('token', 'Token expirado — clique para atualizar');
+      document.getElementById('syncStatus').onclick = async () => {
+        localStorage.removeItem('gh_token');
+        autoSaveToGitHub();
+      };
+      return;
+    }
+    if (!putRes.ok) {
+      const err = await putRes.json().catch(() => ({}));
+      throw new Error(err.message || `HTTP ${putRes.status}`);
+    }
+
+    setSyncStatus('synced', 'Sincronizado');
+    setTimeout(() => setSyncStatus('hidden', ''), 8000);
+
+  } catch(e) {
+    setSyncStatus('error', 'Erro ao sincronizar — clique para tentar novamente');
+    console.error('autoSaveToGitHub:', e);
   }
 }
 
