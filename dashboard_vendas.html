@@ -1940,8 +1940,8 @@ async function autoSaveToGitHub() {
    ☁️  CARREGAR DADOS DO GITHUB (visitantes)
 ============================================================ */
 async function loadFromGitHub() {
+  let step = 'início';
   try {
-    // Tenta com token (sem cache CDN); se falhar auth, tenta sem token
     const token = localStorage.getItem('gh_token');
     const makeReq = (auth) => fetch(GH_API, {
       headers: {
@@ -1951,21 +1951,37 @@ async function loadFromGitHub() {
       cache: 'no-store'
     });
 
+    step = 'fetch';
     let res = await makeReq(token);
     if ((res.status === 401 || res.status === 403) && token) {
-      res = await makeReq(null); // token expirado — tenta sem
+      res = await makeReq(null);
     }
-    if (!res.ok) return;
 
+    step = `status ${res.status}`;
+    if (!res.ok) {
+      showAlert(`Erro ao carregar dados: GitHub retornou ${res.status}`, 'error');
+      return;
+    }
+
+    step = 'json';
     const file = await res.json();
-    if (!file.content) return;
+    if (!file.content) {
+      showAlert('Erro: dados.json não encontrado no repositório', 'error');
+      return;
+    }
 
+    step = 'decode';
     const jsonStr = decodeURIComponent(escape(atob(file.content.replace(/[\n\r ]/g, ''))));
+
+    step = 'parse';
     const payload = JSON.parse(jsonStr);
-    if (!payload.records || !payload.records.length) return;
+    if (!payload.records || !payload.records.length) {
+      showAlert('Arquivo dados.json existe mas está vazio', 'error');
+      return;
+    }
 
+    step = 'render';
     raw = payload.records.map(r => ({ ...r, data: r.data ? new Date(r.data) : null }));
-
     clearAlert();
     initFilters();
     applyFilters();
@@ -1977,7 +1993,8 @@ async function loadFromGitHub() {
     showAlert(`✅ ${raw.length.toLocaleString('pt-BR')} registros carregados.`, 'success');
     setTimeout(clearAlert, 4000);
   } catch(e) {
-    console.error('loadFromGitHub:', e);
+    showAlert(`Erro ao carregar (${step}): ${e.message}`, 'error');
+    console.error('loadFromGitHub:', step, e);
   }
 }
 
