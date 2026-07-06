@@ -1691,8 +1691,6 @@ async function readHandle(handle) {
   ingest(buf);
   document.getElementById('lastUpdTime').innerHTML =
     `<span class="local-badge">⚡ Local</span> ${file.name} &mdash; ${new Date(file.lastModified).toLocaleString('pt-BR')}`;
-  // Auto-save para todos os visitantes
-  autoSaveToGitHub();
 }
 
 // Conectar arquivo pela primeira vez (abre seletor)
@@ -1943,19 +1941,19 @@ async function autoSaveToGitHub() {
 ============================================================ */
 async function loadFromGitHub() {
   try {
-    // Usa a API (não raw CDN) para garantir dados sempre atualizados
-    const res = await fetch(GH_API, {
-      headers: { Accept: 'application/vnd.github.v3+json' },
-      cache: 'no-store'
-    });
+    // Usa a API com token (se disponível) — requisições autenticadas não usam cache CDN
+    const token = localStorage.getItem('gh_token');
+    const headers = { Accept: 'application/vnd.github.v3+json' };
+    if (token) headers.Authorization = `Bearer ${token}`;
+    const res = await fetch(GH_API, { headers, cache: 'no-store' });
     if (!res.ok) return; // ainda não há dados salvos
 
     const file = await res.json();
     if (!file.content) return;
 
-    // Decodificar base64 → string UTF-8 → JSON
-    const jsonStr = decodeURIComponent(escape(atob(file.content.replace(/\n/g, ''))));
-    const payload = JSON.parse(jsonStr);
+    // Decodificar base64 → UTF-8 via TextDecoder (mais robusto para acentos)
+    const bytes = Uint8Array.from(atob(file.content.replace(/\n/g, '')), c => c.charCodeAt(0));
+    const payload = JSON.parse(new TextDecoder().decode(bytes));
     if (!payload.records || !payload.records.length) return;
 
     // Reconstruir objetos Date
