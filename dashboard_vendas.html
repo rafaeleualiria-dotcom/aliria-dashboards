@@ -699,7 +699,14 @@ function onFileChosen(e) {
   const f = e.target.files[0];
   if (!f) return;
   const rd = new FileReader();
-  rd.onload = ev => { try { ingest(ev.target.result); } catch(err) { showAlert('Erro ao ler arquivo: '+err.message,'error'); } };
+  rd.onload = ev => {
+    try {
+      ingest(ev.target.result);
+      autoSaveToGitHub();
+    } catch(err) {
+      showAlert('Erro ao ler arquivo: '+err.message,'error');
+    }
+  };
   rd.readAsArrayBuffer(f);
   e.target.value = '';
 }
