@@ -1941,22 +1941,29 @@ async function autoSaveToGitHub() {
 ============================================================ */
 async function loadFromGitHub() {
   try {
-    // Leitura pública via API (sem token) — evita falha quando token expirado
-    const res = await fetch(GH_API, {
-      headers: { Accept: 'application/vnd.github.v3+json' },
+    // Tenta com token (sem cache CDN); se falhar auth, tenta sem token
+    const token = localStorage.getItem('gh_token');
+    const makeReq = (auth) => fetch(GH_API, {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+        ...(auth ? { Authorization: `Bearer ${auth}` } : {})
+      },
       cache: 'no-store'
     });
+
+    let res = await makeReq(token);
+    if ((res.status === 401 || res.status === 403) && token) {
+      res = await makeReq(null); // token expirado — tenta sem
+    }
     if (!res.ok) return;
 
     const file = await res.json();
     if (!file.content) return;
 
-    // Decodificar base64 — mesmo esquema usado no saveToGitHub
     const jsonStr = decodeURIComponent(escape(atob(file.content.replace(/[\n\r ]/g, ''))));
     const payload = JSON.parse(jsonStr);
     if (!payload.records || !payload.records.length) return;
 
-    // Reconstruir objetos Date
     raw = payload.records.map(r => ({ ...r, data: r.data ? new Date(r.data) : null }));
 
     clearAlert();
@@ -1964,12 +1971,13 @@ async function loadFromGitHub() {
     applyFilters();
     document.getElementById('emptyState').classList.add('hidden');
     document.getElementById('dashboard').classList.remove('hidden');
+    document.getElementById('reconnectBanner').classList.add('hidden');
     document.getElementById('lastUpdTime').textContent =
       new Date(payload.savedAt).toLocaleString('pt-BR');
-    showAlert(`✅ ${raw.length.toLocaleString('pt-BR')} registros carregados automaticamente.`, 'success');
+    showAlert(`✅ ${raw.length.toLocaleString('pt-BR')} registros carregados.`, 'success');
     setTimeout(clearAlert, 4000);
   } catch(e) {
-    // falha silenciosa — usuário ainda pode importar manualmente
+    console.error('loadFromGitHub:', e);
   }
 }
 
