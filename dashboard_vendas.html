@@ -86,7 +86,16 @@ input[type="file"]{display:none}
 .upload-icon{font-size:52px;margin-bottom:16px;display:block}
 .upload-title{font-size:20px;font-weight:700;color:var(--text-900);margin-bottom:8px}
 .upload-text{font-size:14px;color:var(--text-400);line-height:1.6;margin-bottom:24px}
-.upload-hint{margin-top:20px;font-size:12px;color:var(--text-400)}
+.upload-hint{margin-top:16px;font-size:12px;color:var(--text-400);line-height:1.5}
+.upload-actions{display:flex;flex-direction:column;gap:10px;align-items:center}
+.btn-connect{background:var(--primary-50);color:var(--primary);border:1.5px solid var(--primary-100);gap:6px}
+.btn-connect:hover{background:var(--primary-100)}
+.reconnect-banner{width:100%;max-width:520px;background:var(--surface);border:1.5px solid var(--primary-100);border-radius:var(--radius);padding:18px 22px;display:flex;align-items:center;gap:16px;margin-bottom:16px;box-shadow:var(--shadow-md)}
+.reconnect-ico{font-size:28px;flex-shrink:0}
+.reconnect-body{flex:1}
+.reconnect-title{font-size:14px;font-weight:700;color:var(--text-900)}
+.reconnect-file{font-size:12px;color:var(--text-400);margin-top:2px;word-break:break-all}
+.local-badge{display:inline-flex;align-items:center;gap:5px;background:var(--success-50);color:var(--success);border:1px solid #6EE7B7;border-radius:100px;font-size:10px;font-weight:700;padding:2px 9px;letter-spacing:.3px}
 .upload-hint code{background:var(--bg);padding:2px 8px;border-radius:4px;color:var(--primary);font-size:11px}
 
 /* FILTERS */
@@ -269,6 +278,17 @@ tbody td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
   <!-- EMPTY STATE -->
   <div id="emptyState">
     <div class="upload-wrap">
+
+      <!-- Reconectar arquivo local (aparece quando há handle salvo mas precisa de permissão) -->
+      <div id="reconnectBanner" class="reconnect-banner hidden">
+        <div class="reconnect-ico">⚡</div>
+        <div class="reconnect-body">
+          <div class="reconnect-title">Planilha local conectada</div>
+          <div class="reconnect-file" id="reconnectFileName"></div>
+        </div>
+        <button class="btn btn-primary" onclick="reconnectLocalFile()">Carregar dados</button>
+      </div>
+
       <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
         <span class="upload-icon">📂</span>
         <div class="upload-title">Carregue sua planilha</div>
@@ -276,14 +296,17 @@ tbody td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
           Arraste e solte o arquivo <strong>.xlsx</strong> aqui, ou clique para selecionar.<br>
           O dashboard será gerado automaticamente.
         </div>
-        <button class="btn btn-primary" style="pointer-events:none">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          Selecionar arquivo
-        </button>
-        <div class="upload-hint">
-          Ou configure a URL do arquivo:<br>
-          <code>const EXCEL_URL = './dados.xlsx'</code>
+        <div class="upload-actions">
+          <button class="btn btn-primary" style="pointer-events:none">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Selecionar arquivo
+          </button>
+          <button class="btn btn-connect" onclick="connectLocalFile(event)" id="btnConnect">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            Conectar arquivo local
+          </button>
         </div>
+        <div class="upload-hint">Conecte uma vez — o dashboard carrega automaticamente sempre que abrir.</div>
       </div>
     </div>
   </div>
@@ -1600,6 +1623,123 @@ dz.addEventListener('drop', e=>{
 /* ============================================================
    ☁️  SALVAR DADOS NO GITHUB (admin)
 ============================================================ */
+/* ============================================================
+   📁  FILE SYSTEM ACCESS API — planilha local automática
+============================================================ */
+const IDB_NAME = 'aliria-fsa', IDB_STORE = 'handles', IDB_KEY = 'excel';
+
+function openIDB() {
+  return new Promise((res, rej) => {
+    const r = indexedDB.open(IDB_NAME, 1);
+    r.onupgradeneeded = e => e.target.result.createObjectStore(IDB_STORE);
+    r.onsuccess = e => res(e.target.result);
+    r.onerror   = () => rej(r.error);
+  });
+}
+async function saveHandle(h) {
+  const db = await openIDB();
+  return new Promise((res, rej) => {
+    const tx = db.transaction(IDB_STORE, 'readwrite');
+    tx.objectStore(IDB_STORE).put(h, IDB_KEY);
+    tx.oncomplete = res; tx.onerror = rej;
+  });
+}
+async function loadHandle() {
+  try {
+    const db = await openIDB();
+    return new Promise(res => {
+      const tx = db.transaction(IDB_STORE, 'readonly');
+      const r  = tx.objectStore(IDB_STORE).get(IDB_KEY);
+      r.onsuccess = () => res(r.result || null);
+      r.onerror   = () => res(null);
+    });
+  } catch { return null; }
+}
+async function clearHandle() {
+  try {
+    const db = await openIDB();
+    const tx = db.transaction(IDB_STORE, 'readwrite');
+    tx.objectStore(IDB_STORE).delete(IDB_KEY);
+  } catch {}
+}
+
+async function readHandle(handle) {
+  const file = await handle.getFile();
+  const buf  = await file.arrayBuffer();
+  ingest(buf);
+  document.getElementById('lastUpdTime').innerHTML =
+    `<span class="local-badge">⚡ Local</span> ${file.name} &mdash; ${new Date(file.lastModified).toLocaleString('pt-BR')}`;
+}
+
+// Conectar arquivo pela primeira vez (abre seletor)
+async function connectLocalFile(e) {
+  e.stopPropagation(); // evita acionar o uploadZone
+  if (!window.showOpenFilePicker) {
+    showAlert('Seu navegador não suporta essa função. Use Chrome ou Edge.', 'warning');
+    return;
+  }
+  try {
+    const [handle] = await window.showOpenFilePicker({
+      types: [{ description: 'Planilha Excel', accept: {
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['.xlsx'],
+        'application/vnd.ms-excel': ['.xls'],
+        'text/csv': ['.csv']
+      }}],
+      excludeAcceptAllOption: false
+    });
+    await saveHandle(handle);
+    await readHandle(handle);
+  } catch(err) {
+    if (err.name !== 'AbortError') showAlert('Erro ao conectar arquivo: ' + err.message, 'error');
+  }
+}
+
+// Reconectar (permissão expirou, mas handle existe — pede permissão sem reabrir seletor)
+async function reconnectLocalFile() {
+  const handle = await loadHandle();
+  if (!handle) return;
+  try {
+    const perm = await handle.requestPermission({ mode: 'read' });
+    if (perm === 'granted') {
+      await readHandle(handle);
+      document.getElementById('reconnectBanner').classList.add('hidden');
+    }
+  } catch(err) {
+    showAlert('Não foi possível reconectar: ' + err.message, 'error');
+  }
+}
+
+// Desconectar arquivo local
+async function disconnectLocalFile() {
+  await clearHandle();
+  document.getElementById('btnDisconnect')?.remove();
+  showAlert('Arquivo local desconectado.', 'warning');
+  setTimeout(clearAlert, 3000);
+}
+
+// Tenta carregar o arquivo local automaticamente ao abrir a página
+async function tryLoadLocalFile() {
+  if (!window.showOpenFilePicker) return false;
+  const handle = await loadHandle();
+  if (!handle) return false;
+
+  const perm = await handle.queryPermission({ mode: 'read' });
+
+  if (perm === 'granted') {
+    try { await readHandle(handle); return true; }
+    catch { return false; }
+  }
+
+  // Permissão expirou — mostra banner de reconectar
+  try {
+    const file = await handle.getFile().catch(() => null);
+    const banner = document.getElementById('reconnectBanner');
+    document.getElementById('reconnectFileName').textContent = file ? file.name : 'arquivo conectado';
+    banner.classList.remove('hidden');
+  } catch {}
+  return false;
+}
+
 function resetToken() {
   localStorage.removeItem('gh_token');
   showAlert('🔑 Token removido. Clique em "Salvar para todos" para inserir um novo.', 'warning');
@@ -1727,9 +1867,14 @@ async function loadFromGitHub() {
    INICIALIZAÇÃO — tenta carregar via URL se customizada
 ============================================================ */
 (async () => {
-  // 1. Tenta carregar dados salvos no GitHub (todos os visitantes)
+  // 1. Tenta arquivo local (File System Access API) — apenas no dispositivo do usuário
+  const loadedLocal = await tryLoadLocalFile();
+  if (loadedLocal) return;
+
+  // 2. Tenta dados salvos no GitHub (todos os visitantes)
   await loadFromGitHub();
-  // 2. Fallback: tenta URL configurada no EXCEL_URL
+
+  // 3. Fallback: URL configurada no EXCEL_URL
   if (!raw.length && EXCEL_URL && EXCEL_URL !== './dados.xlsx') {
     await refreshData();
   }
