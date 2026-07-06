@@ -266,10 +266,6 @@ tbody td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
       Importar
     </label>
     <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" onchange="onFileChosen(event)">
-    <button class="btn btn-ghost btn-token hidden" id="btnToken" onclick="resetToken()" title="Trocar token GitHub">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
-      Token
-    </button>
   </div>
 </header>
 
@@ -728,7 +724,6 @@ function ingest(buf) {
     document.getElementById('btnSave').classList.remove('hidden');
     document.getElementById('btnSaveLabel').textContent = 'Salvar para todos';
     document.getElementById('btnSave').classList.remove('saving','saved','error-state');
-    document.getElementById('btnToken').classList.remove('hidden');
   } catch(e) {
     showAlert('Erro ao processar planilha: '+e.message,'error');
   }
