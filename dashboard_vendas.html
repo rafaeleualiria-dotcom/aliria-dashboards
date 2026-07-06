@@ -648,7 +648,7 @@ function parseBuffer(buf) {
     out.push({
       fonte:        String(get(r,'fonte')||'').trim(),
       data:         dt,
-      mes:          String(get(r,'mes')||'').trim() || (dt ? moLabel(dt) : ''),
+      mes:          dt ? moLabel(dt) : '',
       estado:       String(get(r,'estado_destino')||'').trim().toUpperCase(),
       item:         String(get(r,'item')||'').trim(),
       laboratorio:  String(get(r,'laboratorio')||'').trim(),
@@ -1976,7 +1976,7 @@ async function loadFromGitHub() {
     }
 
     step = 'render';
-    raw = payload.records.map(r => ({ ...r, data: r.data ? new Date(r.data) : null }));
+    raw = payload.records.map(r => ({ ...r, data: r.data ? pDate(r.data) : null }));
     clearAlert();
     initFilters();
     applyFilters();
