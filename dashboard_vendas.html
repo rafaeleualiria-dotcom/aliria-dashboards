@@ -1748,7 +1748,7 @@ async function tryLoadLocalFile() {
   const perm = await handle.queryPermission({ mode: 'read' });
 
   if (perm === 'granted') {
-    try { await readHandle(handle); return true; }
+    try { await readHandle(handle); return raw.length > 0; }
     catch { return false; }
   }
 
