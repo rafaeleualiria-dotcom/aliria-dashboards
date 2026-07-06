@@ -291,7 +291,7 @@ tbody td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
     <button class="btn btn-primary" onclick="reconnectLocalFile()">Carregar dados recentes</button>
   </div>
 
-  <div id="emptyState">
+  <div id="emptyState" class="hidden">
     <div class="upload-wrap">
 
       <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
@@ -2002,16 +2002,21 @@ async function loadFromGitHub() {
    INICIALIZAÇÃO — tenta carregar via URL se customizada
 ============================================================ */
 (async () => {
-  // 1. Tenta arquivo local (File System Access API) — apenas no dispositivo do usuário
+  // 1. Tenta arquivo local
   const loadedLocal = await tryLoadLocalFile();
   if (loadedLocal) return;
 
-  // 2. Tenta dados salvos no GitHub (todos os visitantes)
+  // 2. Tenta dados salvos no GitHub
   await loadFromGitHub();
 
   // 3. Fallback: URL configurada no EXCEL_URL
   if (!raw.length && EXCEL_URL && EXCEL_URL !== './dados.xlsx') {
     await refreshData();
+  }
+
+  // Só mostra tela de upload se não carregou nenhum dado
+  if (!raw.length) {
+    document.getElementById('emptyState').classList.remove('hidden');
   }
 })();
 </script>
