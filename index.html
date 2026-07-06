@@ -1782,11 +1782,11 @@ async function saveToGitHub() {
     token = token.trim();
   }
 
-  // Serializar dados (converter Dates para ISO string)
+  // Serializar dados (YYYY-MM-DD para evitar bug de fuso ao recarregar)
   const payload = {
     savedAt : new Date().toISOString(),
     version : 1,
-    records : raw.map(r => ({ ...r, data: r.data ? r.data.toISOString() : null }))
+    records : raw.map(r => ({ ...r, data: r.data ? `${r.data.getFullYear()}-${String(r.data.getMonth()+1).padStart(2,'0')}-${String(r.data.getDate()).padStart(2,'0')}` : null }))
   };
 
   const contentB64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
@@ -1878,7 +1878,7 @@ async function autoSaveToGitHub() {
   const payload = {
     savedAt : new Date().toISOString(),
     version : 1,
-    records : raw.map(r => ({ ...r, data: r.data ? r.data.toISOString() : null }))
+    records : raw.map(r => ({ ...r, data: r.data ? `${r.data.getFullYear()}-${String(r.data.getMonth()+1).padStart(2,'0')}-${String(r.data.getDate()).padStart(2,'0')}` : null }))
   };
   const contentB64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
 
