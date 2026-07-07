@@ -78,15 +78,19 @@ body{font-family:var(--font);background:var(--bg);color:var(--text-900);min-heig
 .upload-title{font-size:20px;font-weight:700;color:var(--text-900);margin-bottom:8px}
 .upload-text{font-size:14px;color:var(--text-400);line-height:1.6}
 /* PAINEL DE ALERTAS DE QUALIDADE */
-.quality-panel{background:#fff;border:1.5px solid #FCA5A5;border-radius:var(--radius);margin:0 0 18px 0;overflow:hidden;box-shadow:0 2px 8px rgba(220,38,38,.08)}
-.quality-panel-header{display:flex;align-items:center;gap:10px;padding:14px 18px;background:#FEF2F2;border-bottom:1px solid #FCA5A5}
-.quality-panel-title{font-size:14px;font-weight:700;color:#B91C1C;flex:1}
-.quality-panel-count{background:#DC2626;color:#fff;border-radius:100px;font-size:11px;font-weight:700;padding:2px 9px}
-.quality-panel-body{padding:12px 18px;display:flex;flex-direction:column;gap:8px}
-.quality-item{display:flex;gap:10px;align-items:flex-start;font-size:13px}
-.quality-item-badge{background:#FEE2E2;color:#991B1B;border-radius:6px;font-size:11px;font-weight:700;padding:2px 8px;white-space:nowrap;flex-shrink:0;margin-top:1px}
-.quality-item-text{color:var(--text-600);line-height:1.5}
-.quality-item-count{font-weight:700;color:#B91C1C}
+.quality-panel{background:#FFFBEB;border:1px solid #FCD34D;border-left:4px solid #F59E0B;border-radius:var(--radius);margin:0 0 18px 0;overflow:hidden}
+.quality-panel-header{display:flex;align-items:center;gap:8px;padding:10px 14px;cursor:pointer;user-select:none}
+.quality-panel-title{font-size:13px;font-weight:600;color:#78350F;flex:1}
+.quality-panel-count{background:#F59E0B;color:#fff;border-radius:100px;font-size:11px;font-weight:700;padding:1px 8px;min-width:20px;text-align:center}
+.quality-panel-toggle{font-size:13px;color:#B45309;padding:0 2px}
+.quality-panel-dismiss{background:none;border:none;color:#B45309;font-size:17px;cursor:pointer;padding:0 0 0 4px;line-height:1;opacity:.6}
+.quality-panel-dismiss:hover{opacity:1}
+.quality-panel-body{padding:0 14px 12px;display:flex;flex-direction:column;gap:0;border-top:1px solid #FDE68A}
+.quality-panel-body.collapsed{display:none}
+.quality-item{display:flex;gap:8px;align-items:baseline;font-size:12px;padding-top:7px}
+.quality-item-badge{background:#FDE68A;color:#78350F;border-radius:4px;font-size:11px;font-weight:600;padding:1px 6px;white-space:nowrap;flex-shrink:0}
+.quality-item-count{font-weight:700;color:#92400E;white-space:nowrap}
+.quality-item-text{color:#92400E;font-size:11px;line-height:1.4;opacity:.75;word-break:break-word}
 
 /* FILTERS */
 .filters-bar{background:var(--surface);border-radius:var(--radius);padding:18px 22px;border:1px solid var(--border);box-shadow:var(--shadow);display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap;margin-bottom:26px}
@@ -1523,20 +1527,32 @@ function renderQualityPanel(avisos) {
       : '';
     return `<div class="quality-item">
       <span class="quality-item-badge">${escHtml(a.tipo)}</span>
-      <div>
-        <span class="quality-item-count">${a.total} ocorrência(s)</span>
-        ${exemplos}
-      </div>
+      <div><span class="quality-item-count">${a.total} ocorrência(s)</span>${exemplos}</div>
     </div>`;
   }).join('');
 
   panel.innerHTML = `
     <div class="quality-panel-header">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B91C1C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
       <span class="quality-panel-title">Alertas de Qualidade de Dados</span>
       <span class="quality-panel-count">${total}</span>
+      <span class="quality-panel-toggle">▾</span>
+      <button class="quality-panel-dismiss" title="Fechar">✕</button>
     </div>
     <div class="quality-panel-body">${items}</div>`;
+
+  panel.querySelector('.quality-panel-header').addEventListener('click', function(e) {
+    if (e.target.closest('.quality-panel-dismiss')) return;
+    const body = panel.querySelector('.quality-panel-body');
+    const toggle = panel.querySelector('.quality-panel-toggle');
+    body.classList.toggle('collapsed');
+    toggle.textContent = body.classList.contains('collapsed') ? '▸' : '▾';
+  });
+  panel.querySelector('.quality-panel-dismiss').addEventListener('click', function(e) {
+    e.stopPropagation();
+    panel.classList.add('hidden');
+  });
+
   panel.classList.remove('hidden');
 }
 
