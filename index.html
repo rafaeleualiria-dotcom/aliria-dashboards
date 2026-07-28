@@ -448,6 +448,7 @@ tbody td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
 const GH_OWNER = 'rafaeleualiria-dotcom';
 const GH_REPO  = 'aliria-dashboards';
 const GH_API   = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/dados.json`;
+const GH_RAW   = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/main/dados.json`;
 
 /* ============================================================
    PALETA DE CORES
@@ -1431,20 +1432,10 @@ function clearAlert() { document.getElementById('alertArea').innerHTML=''; }
 async function loadFromGitHub() {
   let step = 'início';
   try {
-    const token = localStorage.getItem('gh_token');
-    const makeReq = (auth) => fetch(GH_API, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-        ...(auth ? { Authorization: `Bearer ${auth}` } : {})
-      },
-      cache: 'no-store'
-    });
-
+    // Leitura via raw.githubusercontent (CDN público, sem limite de 60/h da API).
+    // Cache-buster (?t=) garante que a versão mais recente seja sempre buscada.
     step = 'fetch';
-    let res = await makeReq(token);
-    if ((res.status === 401 || res.status === 403) && token) {
-      res = await makeReq(null);
-    }
+    const res = await fetch(`${GH_RAW}?t=${Date.now()}`, { cache: 'no-store' });
 
     step = `status ${res.status}`;
     if (!res.ok) {
@@ -1452,18 +1443,8 @@ async function loadFromGitHub() {
       return;
     }
 
-    step = 'json';
-    const file = await res.json();
-    if (!file.content) {
-      showAlert('Erro: dados.json não encontrado no repositório', 'error');
-      return;
-    }
-
-    step = 'decode';
-    const jsonStr = decodeURIComponent(escape(atob(file.content.replace(/[\n\r ]/g, ''))));
-
     step = 'parse';
-    const payload = JSON.parse(jsonStr);
+    const payload = await res.json();
     if (!payload.records || !payload.records.length) {
       showAlert('Arquivo dados.json existe mas está vazio', 'error');
       return;
