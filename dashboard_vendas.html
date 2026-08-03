@@ -464,6 +464,7 @@ let view = [];       // registros após filtros
 let base = [];       // registros filtrados por data+estado (sem filtro de fonte) — usado para comparativo
 let activeSources = []; // fontes atualmente selecionadas no filtro
 let lastSavedAt = null; // carimbo da última versão publicada carregada (auto-refresh)
+let appETag = null;     // ETag do HTML carregado — detecta nova versão do dashboard (auto-reload)
 let CH = {};         // instâncias Chart.js
 
 /* ============================================================
@@ -1506,6 +1507,26 @@ async function checkForUpdates() {
 }
 
 /* ============================================================
+   AUTO-RELOAD — detecta nova versão do dashboard e recarrega
+   Assim, quando o código do painel é atualizado, a aba pega
+   sozinha, sem o usuário precisar limpar cache / dar F5.
+============================================================ */
+async function checkAppVersion() {
+  try {
+    const r = await fetch(`${location.pathname}?v=${Date.now()}`, { cache: 'no-store' });
+    const et = r.headers.get('etag') || r.headers.get('last-modified');
+    if (!et) return;
+    if (appETag === null) { appETag = et; return; }  // baseline na 1ª verificação
+    if (et !== appETag) {
+      // Versão nova publicada → recarrega furando o cache do navegador
+      location.replace(`${location.pathname}?v=${Date.now()}`);
+    }
+  } catch (e) {
+    console.warn('checkAppVersion:', e.message);
+  }
+}
+
+/* ============================================================
    INICIALIZAÇÃO
 ============================================================ */
 (async () => {
@@ -1513,8 +1534,9 @@ async function checkForUpdates() {
   if (!raw.length) {
     document.getElementById('emptyState').classList.remove('hidden');
   }
-  // Verifica atualizações a cada 2 minutos
-  setInterval(checkForUpdates, 120000);
+  await checkAppVersion();   // captura o ETag da versão atual (baseline)
+  // A cada 2 min: verifica dados novos E nova versão do dashboard
+  setInterval(() => { checkForUpdates(); checkAppVersion(); }, 120000);
 })();
 </script>
 </body>
