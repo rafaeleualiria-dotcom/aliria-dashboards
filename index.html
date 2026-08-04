@@ -1537,6 +1537,11 @@ async function checkAppVersion() {
   await checkAppVersion();   // captura o ETag da versão atual (baseline)
   // A cada 2 min: verifica dados novos E nova versão do dashboard
   setInterval(() => { checkForUpdates(); checkAppVersion(); }, 120000);
+  // Revalida imediatamente quando o usuário volta para a aba (padrão de apps profissionais)
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') { checkForUpdates(); checkAppVersion(); }
+  });
+  window.addEventListener('focus', () => { checkForUpdates(); checkAppVersion(); });
 })();
 </script>
 </body>
