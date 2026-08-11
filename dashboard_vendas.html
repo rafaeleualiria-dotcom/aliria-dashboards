@@ -449,6 +449,9 @@ const GH_OWNER = 'rafaeleualiria-dotcom';
 const GH_REPO  = 'aliria-dashboards';
 const GH_API   = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/dados.json`;
 const GH_RAW   = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/main/dados.json`;
+// Canal de leitura dos dados: GitHub Pages (mesma origem) entrega sem o atraso de
+// cache do raw.githubusercontent. Caminho relativo funciona em index e dashboard_vendas.
+const GH_DATA  = 'dados.json';
 
 /* ============================================================
    PALETA DE CORES
@@ -1437,7 +1440,7 @@ async function loadFromGitHub() {
     // Leitura via raw.githubusercontent (CDN público, sem limite de 60/h da API).
     // Cache-buster (?t=) garante que a versão mais recente seja sempre buscada.
     step = 'fetch';
-    const res = await fetch(`${GH_RAW}?t=${Date.now()}`, { cache: 'no-store' });
+    const res = await fetch(`${GH_DATA}?t=${Date.now()}`, { cache: 'no-store' });
 
     step = `status ${res.status}`;
     if (!res.ok) {
@@ -1478,7 +1481,7 @@ async function loadFromGitHub() {
 ============================================================ */
 async function checkForUpdates() {
   try {
-    const res = await fetch(`${GH_RAW}?t=${Date.now()}`, { cache: 'no-store' });
+    const res = await fetch(`${GH_DATA}?t=${Date.now()}`, { cache: 'no-store' });
     if (!res.ok) return;
     const payload = await res.json();
     if (!payload.records || !payload.records.length) return;
