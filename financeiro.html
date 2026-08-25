@@ -1,0 +1,2031 @@
+<!DOCTYPE html>
+<!-- v1 -->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Financeiro Analytics Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"
+        onerror="window.__noChart=true"></script>
+<style>
+/* DESIGN SYSTEM */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F1F5F9;
+  --surface:#FFFFFF;
+  --primary:#2563EB;
+  --primary-50:#EFF6FF;
+  --primary-100:#DBEAFE;
+  --success:#059669;
+  --success-50:#ECFDF5;
+  --warning:#D97706;
+  --warning-50:#FFFBEB;
+  --danger:#DC2626;
+  --danger-50:#FEF2F2;
+  --purple:#7C3AED;
+  --purple-50:#F5F3FF;
+  --teal:#0891B2;
+  --teal-50:#ECFEFF;
+  --text-900:#0F172A;
+  --text-600:#475569;
+  --text-400:#94A3B8;
+  --border:#E2E8F0;
+  --radius:12px;
+  --radius-sm:8px;
+  --radius-lg:16px;
+  --shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.04);
+  --shadow-md:0 4px 12px rgba(0,0,0,.06),0 2px 4px rgba(0,0,0,.04);
+  --font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --ease:.2s ease;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text-900);min-height:100vh;line-height:1.5;font-size:14px}
+
+/* HEADER */
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 28px;height:68px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:var(--shadow)}
+.header-brand{display:flex;align-items:center;gap:14px}
+.brand-icon{width:38px;height:38px;background:linear-gradient(135deg,#2563EB,#7C3AED);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.brand-logo{height:40px;max-width:160px;object-fit:contain;display:block;flex-shrink:0}
+.brand-title{font-size:18px;font-weight:700;color:var(--text-900);letter-spacing:-.3px}
+.brand-sub{font-size:12px;color:var(--text-400);margin-top:1px}
+.header-actions{display:flex;align-items:center;gap:10px}
+.last-upd{text-align:right;font-size:11px;color:var(--text-400);line-height:1.4}
+.last-upd strong{color:var(--text-600);display:block}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 15px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;border:none;transition:var(--ease);white-space:nowrap;font-family:var(--font);text-decoration:none}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:#1D4ED8;box-shadow:0 4px 12px rgba(37,99,235,.3);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--primary);border:1.5px solid var(--primary)}
+.btn-outline:hover{background:var(--primary-50)}
+.btn-ghost{background:var(--bg);color:var(--text-600);border:1px solid var(--border)}
+.btn-ghost:hover{background:var(--border)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+
+/* MAIN */
+.main{padding:28px;max-width:1600px;margin:0 auto}
+
+/* ALERT */
+.alert{padding:12px 16px;border-radius:var(--radius-sm);font-size:13px;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.alert-error{background:var(--danger-50);border:1px solid #FECACA;color:#991B1B}
+.alert-warning{background:var(--warning-50);border:1px solid #FDE68A;color:#92400E}
+.alert-success{background:var(--success-50);border:1px solid #6EE7B7;color:#065F46}
+
+/* EMPTY STATE */
+.upload-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 120px);padding:40px 20px}
+.upload-zone{width:100%;max-width:520px;border:2px dashed var(--border);border-radius:var(--radius-lg);padding:52px 40px;text-align:center;background:white}
+.upload-icon{font-size:52px;margin-bottom:16px;display:block}
+.upload-title{font-size:20px;font-weight:700;color:var(--text-900);margin-bottom:8px}
+.upload-text{font-size:14px;color:var(--text-400);line-height:1.6}
+
+/* TABS */
+.tabs{display:flex;gap:5px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:5px;box-shadow:var(--shadow);margin-bottom:20px;flex-wrap:wrap}
+.tab{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;color:var(--text-600);background:transparent;border:none;cursor:pointer;font-family:var(--font);transition:var(--ease);white-space:nowrap}
+.tab:hover{background:var(--bg)}
+.tab.active{background:var(--primary);color:#fff;box-shadow:0 4px 12px rgba(37,99,235,.3)}
+
+/* FILTERS */
+.filters-bar{background:var(--surface);border-radius:var(--radius);padding:18px 22px;border:1px solid var(--border);box-shadow:var(--shadow);display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap;margin-bottom:26px}
+.filter-group{display:flex;flex-direction:column;gap:5px;min-width:150px}
+.filter-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-400)}
+.filter-sel,.filter-inp{padding:8px 11px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:13px;color:var(--text-900);background:white;cursor:pointer;transition:var(--ease);font-family:var(--font)}
+.filter-sel:focus,.filter-inp:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.filter-count{margin-left:auto;align-self:center;font-size:12px;color:var(--text-400)}
+.filter-count strong{color:var(--text-900);font-weight:700}
+
+/* SECTION TITLE */
+.sec-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-400);margin-bottom:14px}
+
+/* KPI GRID */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-bottom:26px}
+.kpi-card{background:var(--surface);border-radius:var(--radius);padding:22px;border:1px solid var(--border);box-shadow:var(--shadow);transition:var(--ease);position:relative;overflow:hidden}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--kpi-accent,var(--primary))}
+.kpi-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.kpi-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.kpi-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-400)}
+.kpi-ico{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;background:var(--kpi-bg,var(--primary-50))}
+.kpi-val{font-size:26px;font-weight:800;color:var(--text-900);letter-spacing:-.8px;line-height:1}
+.kpi-meta{font-size:11px;color:var(--text-400);margin-top:5px}
+.kpi-breakdown{margin-top:12px;padding-top:12px;border-top:1px solid var(--border);display:flex;gap:10px;flex-wrap:wrap}
+.kpi-bd-item{flex:1;min-width:70px}
+.kpi-bd-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--text-400)}
+.kpi-bd-val{font-size:13px;font-weight:700;color:var(--text-900);margin-top:2px}
+
+/* CHARTS */
+.charts-grid{display:grid;gap:18px;margin-bottom:18px}
+.cols-2{grid-template-columns:2fr 1fr}
+.cols-eq{grid-template-columns:1fr 1fr}
+.cols-1{grid-template-columns:1fr}
+.chart-card{background:var(--surface);border-radius:var(--radius);padding:22px;border:1px solid var(--border);box-shadow:var(--shadow)}
+.chart-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;gap:14px;flex-wrap:wrap}
+.chart-title{font-size:14px;font-weight:700;color:var(--text-900);letter-spacing:-.2px}
+.chart-sub{font-size:11px;color:var(--text-400);margin-top:2px}
+.chart-body{position:relative;height:300px}
+.chart-body-sm{height:260px}
+
+/* INSIGHTS */
+.insights-card{background:linear-gradient(135deg,#0F172A 0%,#1B3A6B 100%);border-radius:var(--radius-lg);padding:26px 30px;margin-bottom:26px;color:white;position:relative;overflow:hidden}
+.insights-card::after{content:'';position:absolute;top:-50px;right:-50px;width:220px;height:220px;background:rgba(37,99,235,.12);border-radius:50%;pointer-events:none}
+.insights-card::before{content:'';position:absolute;bottom:-70px;right:80px;width:160px;height:160px;background:rgba(124,58,237,.1);border-radius:50%;pointer-events:none}
+.ins-hd{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.ins-ico{width:38px;height:38px;background:rgba(255,255,255,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px}
+.ins-title{font-size:15px;font-weight:700;color:white}
+.ins-sub{font-size:11px;color:rgba(255,255,255,.45);margin-top:1px}
+.ins-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;position:relative;z-index:1}
+.ins-item{background:rgba(255,255,255,.07);border-radius:var(--radius-sm);padding:14px 18px;border:1px solid rgba(255,255,255,.07)}
+.ins-cat{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:rgba(255,255,255,.4);margin-bottom:5px;display:flex;align-items:center;gap:6px}
+.ins-dot{width:6px;height:6px;border-radius:50%;display:inline-block}
+.ins-txt{font-size:12px;color:rgba(255,255,255,.82);line-height:1.6}
+.ins-val{font-weight:700;color:#60A5FA}
+
+/* TABLE */
+.table-card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;margin-bottom:28px}
+.table-hd{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.table-scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12px}
+thead th{padding:10px 14px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-400);background:var(--bg);border-bottom:1px solid var(--border);white-space:nowrap}
+thead th:not(:first-child){text-align:right}
+tbody tr{border-bottom:1px solid var(--border);transition:background var(--ease)}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:var(--bg)}
+tbody td{padding:11px 14px;color:var(--text-900)}
+tbody td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
+.pos{color:var(--success);font-weight:600}
+.neg{color:var(--danger);font-weight:600}
+.row-total{font-weight:700;background:var(--bg)!important}
+.row-grp td{padding:7px 14px!important;font-size:12px;font-weight:700;background:var(--bg);border-top:2px solid var(--border)}
+.td-sub{padding-left:22px!important;font-size:12px;color:var(--text-600)}
+
+/* BADGES DE STATUS (auditoria) */
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;padding:3px 9px;border-radius:100px;letter-spacing:.3px}
+.badge-ok{background:var(--success-50);color:#065F46;border:1px solid #6EE7B7}
+.badge-warn{background:var(--warning-50);color:#92400E;border:1px solid #FDE68A}
+.badge-err{background:var(--danger-50);color:#991B1B;border:1px solid #FECACA}
+
+/* BANNER DE SECAO */
+.weekly-banner{background:linear-gradient(135deg,var(--primary-50) 0%,#F5F3FF 100%);border:1.5px solid var(--primary-100);border-radius:var(--radius);padding:15px 20px;margin-bottom:18px;display:flex;align-items:center;gap:12px}
+.weekly-ico{font-size:22px;flex-shrink:0}
+.weekly-banner-title{font-size:14px;font-weight:700;color:var(--primary);letter-spacing:-.2px}
+.weekly-banner-sub{font-size:11px;color:var(--text-400);margin-top:2px}
+
+/* NOTA EXPLICATIVA */
+.note{background:var(--warning-50);border:1px solid #FDE68A;border-radius:var(--radius-sm);padding:11px 14px;font-size:11px;color:#92400E;line-height:1.6;margin-bottom:18px}
+.note-info{background:var(--primary-50);border-color:var(--primary-100);color:#1E3A8A}
+
+/* SPINNER */
+.spin{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .7s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* UTILS */
+.hidden{display:none!important}
+
+/* RESPONSIVE */
+@media(max-width:1080px){.cols-2,.cols-eq{grid-template-columns:1fr}}
+@media(max-width:760px){
+  .main{padding:14px}
+  .header{padding:0 14px}
+  .brand-title{font-size:15px}
+  .kpi-val{font-size:22px}
+  .header-actions .last-upd{display:none}
+  .brand-sub{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+============================================================ -->
+<header class="header">
+  <div class="header-brand">
+    <img
+      src="data:image/png;base64,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"
+      alt="Logo"
+      class="brand-logo"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+    >
+    <!-- Ícone de fallback (oculto quando o logo carrega) -->
+    <div class="brand-icon" style="display:none">💵</div>
+
+    <div>
+      <div class="brand-title">Financeiro Analytics</div>
+      <div class="brand-sub">Resultado, Despesas e Liquidez</div>
+    </div>
+  </div>
+  <div class="header-actions">
+    <a class="btn btn-ghost" href="index.html">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Voltar
+    </a>
+    <div class="last-upd">
+      Última atualização
+      <strong id="lastUpdTime">—</strong>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+
+  <div id="alertArea"></div>
+
+  <!-- ESTADO VAZIO / CARREGANDO -->
+  <div id="emptyState">
+    <div class="upload-wrap">
+      <div class="upload-zone">
+        <span class="upload-icon">⏳</span>
+        <div class="upload-title" id="emptyTitle">Carregando dados financeiros…</div>
+        <div class="upload-text" id="emptyText">Lendo <strong>dados_financeiro.json</strong>. O painel se atualiza sozinho a cada 2 minutos e ao voltar para a aba.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       DASHBOARD
+  ============================================================ -->
+  <div id="dashboard" class="hidden">
+
+    <!-- ABAS -->
+    <div class="tabs" role="tablist" aria-label="Seções do dashboard">
+      <button class="tab active" id="tabResumo"    type="button" role="tab" aria-selected="true"  onclick="switchTab('resumo')">📊 Resumo</button>
+      <button class="tab"        id="tabDetalhado" type="button" role="tab" aria-selected="false" onclick="switchTab('detalhado')">🔎 Detalhado</button>
+      <button class="tab"        id="tabAuditoria" type="button" role="tab" aria-selected="false" onclick="switchTab('auditoria')">🛡️ Auditoria</button>
+    </div>
+
+    <!-- FILTRO DE PERÍODO (restrito aos meses preenchidos) -->
+    <div class="filters-bar">
+      <div class="filter-group">
+        <label class="filter-label" for="fFrom">Período De</label>
+        <select class="filter-sel" id="fFrom" aria-label="Período inicial" onchange="onPeriodChange('from')"></select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label" for="fTo">Período Até</label>
+        <select class="filter-sel" id="fTo" aria-label="Período final" onchange="onPeriodChange('to')"></select>
+      </div>
+      <div style="display:flex;gap:8px;align-items:flex-end">
+        <button class="btn btn-ghost" type="button" onclick="clearFilters()">Ano todo</button>
+        <button class="btn btn-primary" type="button" onclick="applyFilters()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          Filtrar
+        </button>
+      </div>
+      <div class="filter-count">
+        <strong id="mesCount">0</strong> meses no período · <strong id="mesAtivoCount">0</strong> com Evolução do Ativo
+      </div>
+    </div>
+
+    <!-- ==========================================================
+         VISÃO 1 — RESUMO
+    ========================================================== -->
+    <section id="viewResumo">
+
+      <div class="sec-title">Indicadores Chave — Período Selecionado</div>
+      <div class="kpi-grid" id="kpiResumo"></div>
+
+      <div class="charts-grid cols-1">
+        <div class="chart-card">
+          <div class="chart-hd">
+            <div>
+              <div class="chart-title">Faturamento × Resultado por Mês</div>
+              <div class="chart-sub">Barras: faturamento e resultado · Linha: margem % (eixo direito)</div>
+            </div>
+          </div>
+          <div class="chart-body" style="height:320px"><canvas id="cFatRes" role="img" aria-label="Gráfico de faturamento e resultado por mês, com a margem percentual em linha"></canvas></div>
+        </div>
+      </div>
+
+      <div class="charts-grid cols-eq" style="margin-top:18px">
+        <div class="chart-card">
+          <div class="chart-hd">
+            <div>
+              <div class="chart-title">Aliria × Licitação por Mês</div>
+              <div class="chart-sub">Faturamento por origem de venda</div>
+            </div>
+          </div>
+          <div class="chart-body chart-body-sm"><canvas id="cAlLic" role="img" aria-label="Gráfico de faturamento por origem de venda, Aliria e Licitação, por mês"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-hd">
+            <div>
+              <div class="chart-title">Evolução da Liquidez</div>
+              <div class="chart-sub">Somente meses com Evolução do Ativo preenchida</div>
+            </div>
+          </div>
+          <div class="chart-body chart-body-sm"><canvas id="cLiq" role="img" aria-label="Gráfico de evolução da liquidez por mês"></canvas></div>
+        </div>
+      </div>
+
+      <div class="insights-card" style="margin-top:26px">
+        <div class="ins-hd">
+          <div class="ins-ico">🤖</div>
+          <div>
+            <div class="ins-title">Insights Automáticos</div>
+            <div class="ins-sub">Análise executiva gerada automaticamente com base no período filtrado</div>
+          </div>
+        </div>
+        <div class="ins-grid" id="insGrid"></div>
+      </div>
+
+      <div class="table-card">
+        <div class="table-hd">
+          <div>
+            <div class="chart-title">Resumo Mensal</div>
+            <div class="chart-sub">Uma linha por mês preenchido · Liquidez exibida só nos meses com Evolução do Ativo</div>
+          </div>
+        </div>
+        <div class="table-scroll"><table id="tblMensal"></table></div>
+      </div>
+
+    </section>
+
+    <!-- ==========================================================
+         VISÃO 2 — DETALHADO
+    ========================================================== -->
+    <section id="viewDetalhado" class="hidden">
+
+      <!-- COMPOSIÇÃO DO RESULTADO -->
+      <div class="weekly-banner">
+        <span class="weekly-ico">🧮</span>
+        <div>
+          <div class="weekly-banner-title" id="compTitle">Composição do Resultado de Vendas</div>
+          <div class="weekly-banner-sub">Cascata do faturamento bruto até o resultado, acumulado no período filtrado</div>
+        </div>
+      </div>
+
+      <div class="charts-grid cols-1">
+        <div class="chart-card">
+          <div class="chart-hd">
+            <div>
+              <div class="chart-title">Cascata — Do Faturamento ao Resultado</div>
+              <div class="chart-sub">Cada barra é o efeito do componente sobre o resultado acumulado</div>
+            </div>
+          </div>
+          <div class="chart-body" style="height:320px"><canvas id="cWaterfall" role="img" aria-label="Gráfico em cascata do faturamento até o resultado, mostrando o efeito de cada componente"></canvas></div>
+        </div>
+      </div>
+
+      <div class="table-card" style="margin-top:18px">
+        <div class="table-hd">
+          <div>
+            <div class="chart-title">Composição do Resultado — Valores</div>
+            <div class="chart-sub">Percentual calculado sobre o Valor Total de vendas do período</div>
+          </div>
+        </div>
+        <div class="table-scroll"><table id="tblComposicao"></table></div>
+      </div>
+
+      <!-- ALÍQUOTAS EFETIVAS -->
+      <div class="sec-title">Alíquotas Efetivas sobre Vendas</div>
+      <div class="kpi-grid" id="kpiAliquotas"></div>
+
+      <div class="charts-grid cols-1">
+        <div class="chart-card">
+          <div class="chart-hd">
+            <div>
+              <div class="chart-title">Alíquotas Efetivas por Mês</div>
+              <div class="chart-sub">ICMS (saída − entrada), DIFAL e IRPJ+CSLL como % do faturamento</div>
+            </div>
+          </div>
+          <div class="chart-body chart-body-sm"><canvas id="cAliq" role="img" aria-label="Gráfico das alíquotas efetivas por mês: ICMS, DIFAL e IRPJ mais CSLL como percentual do faturamento"></canvas></div>
+        </div>
+      </div>
+
+      <!-- DESPESAS POR CATEGORIA -->
+      <div class="sec-title" style="margin-top:26px">Despesas por Categoria — Regime de Caixa</div>
+      <div class="note" id="noteDespesas">
+        ⚠️ <strong>Atenção:</strong> estas linhas vêm do extrato bancário e incluem entradas (Receita de Vendas, Resgate Itaú Privilege).
+        O total é o <strong>movimento líquido de caixa</strong>, não a despesa operacional. Para despesa operacional use o <strong>SG&amp;A</strong>.
+      </div>
+
+      <div class="charts-grid cols-1">
+        <div class="chart-card">
+          <div class="chart-hd">
+            <div>
+              <div class="chart-title">Maiores Saídas de Caixa</div>
+              <div class="chart-sub">Top categorias com valor negativo no período (em módulo)</div>
+            </div>
+          </div>
+          <div class="chart-body" style="height:420px"><canvas id="cDespesas" role="img" aria-label="Gráfico das maiores saídas de caixa por categoria no período"></canvas></div>
+        </div>
+      </div>
+
+      <div class="table-card" style="margin-top:18px">
+        <div class="table-hd">
+          <div>
+            <div class="chart-title">Extrato Consolidado por Categoria</div>
+            <div class="chart-sub">Todas as categorias do período · negativo = saída de caixa</div>
+          </div>
+          <label style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text-600);cursor:pointer;user-select:none">
+            <input type="checkbox" id="chkZerados" onchange="renderDespesasTabela()" style="width:14px;height:14px;accent-color:var(--primary);cursor:pointer">
+            Ocultar categorias zeradas
+          </label>
+        </div>
+        <div class="table-scroll"><table id="tblDespesas"></table></div>
+      </div>
+
+      <!-- EVOLUÇÃO DO ATIVO -->
+      <div class="weekly-banner" style="margin-top:26px">
+        <span class="weekly-ico">🏦</span>
+        <div>
+          <div class="weekly-banner-title" id="ativoTitle">Evolução do Ativo</div>
+          <div class="weekly-banner-sub">Fotografia patrimonial do mês selecionado — posição de fechamento</div>
+        </div>
+      </div>
+
+      <div class="filters-bar" style="margin-bottom:18px">
+        <div class="filter-group">
+          <label class="filter-label" for="fAtivoMes">Mês do Ativo</label>
+          <select class="filter-sel" id="fAtivoMes" aria-label="Mês de referência do ativo" onchange="renderAtivoBloco()"></select>
+        </div>
+        <div class="filter-count" id="ativoHint"></div>
+      </div>
+
+      <div class="kpi-grid" id="kpiLiquidez"></div>
+
+      <div class="charts-grid cols-2">
+        <div class="chart-card">
+          <div class="chart-hd">
+            <div>
+              <div class="chart-title">Composição do Ativo e Passivo</div>
+              <div class="chart-sub">Positivo = ativo · Negativo = passivo ou dedução</div>
+            </div>
+          </div>
+          <div class="chart-body" style="height:460px"><canvas id="cAtivo" role="img" aria-label="Gráfico da composição do ativo e do passivo no mês selecionado"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-hd">
+            <div>
+              <div class="chart-title">A Receber por Origem</div>
+              <div class="chart-sub">Distribuição do contas a receber no mês</div>
+            </div>
+          </div>
+          <div class="chart-body" style="height:460px"><canvas id="cReceber" role="img" aria-label="Gráfico do contas a receber por origem no mês selecionado"></canvas></div>
+        </div>
+      </div>
+
+      <div class="table-card" style="margin-top:18px">
+        <div class="table-hd">
+          <div>
+            <div class="chart-title">Evolução do Ativo — Detalhe</div>
+            <div class="chart-sub" id="ativoTableSub">Itens agrupados conforme entram no cálculo da liquidez</div>
+          </div>
+        </div>
+        <div class="table-scroll"><table id="tblAtivo"></table></div>
+      </div>
+
+    </section>
+
+    <!-- ==========================================================
+         VISÃO 3 — AUDITORIA
+    ========================================================== -->
+    <section id="viewAuditoria" class="hidden">
+
+      <div class="sec-title">Saúde da Extração</div>
+      <div class="kpi-grid" id="kpiAuditoria"></div>
+
+      <div class="table-card">
+        <div class="table-hd">
+          <div>
+            <div class="chart-title">Check de Reconciliação das Despesas</div>
+            <div class="chart-sub">Diferença entre o extrato consolidado e o extrato bancário — deve ser zero · <strong>todos os meses do arquivo (não segue o filtro de período)</strong></div>
+          </div>
+        </div>
+        <div class="table-scroll"><table id="tblRecon"></table></div>
+      </div>
+
+      <div class="note note-info">
+        ℹ️ <strong>Conferência da Liquidez com DIFAL.</strong> A planilha calcula
+        <strong>Liquidez com DIFAL = Liquidez + DIFAL Retido</strong> (linha 115 = linha 114 + linha 107).
+        A fórmula foi conferida termo a termo e <strong>nenhum item é omitido</strong> — todos os
+        &quot;A Receber&quot;, inclusive o SC Saúde, estão incluídos. A coluna <strong>Diferença</strong>
+        abaixo confirma que o sistema reproduz a planilha exatamente: deve ser sempre zero.
+      </div>
+
+      <div class="table-card">
+        <div class="table-hd">
+          <div>
+            <div class="chart-title">Liquidez com DIFAL — Sistema × Planilha</div>
+            <div class="chart-sub">Somente meses com Evolução do Ativo preenchida · <strong>todos os meses do arquivo (não segue o filtro de período)</strong></div>
+          </div>
+        </div>
+        <div class="table-scroll"><table id="tblLiqAudit"></table></div>
+      </div>
+
+      <div class="insights-card">
+        <div class="ins-hd">
+          <div class="ins-ico">📋</div>
+          <div>
+            <div class="ins-title">Avisos da Extração</div>
+            <div class="ins-sub">Gerados pelo extrator ao ler a planilha original — leitura obrigatória antes de decidir</div>
+          </div>
+        </div>
+        <div class="ins-grid" id="avisosGrid"></div>
+      </div>
+
+      <div class="table-card">
+        <div class="table-hd">
+          <div>
+            <div class="chart-title">Origem dos Dados</div>
+            <div class="chart-sub">Rastreabilidade da carga atual</div>
+          </div>
+        </div>
+        <div class="table-scroll"><table id="tblOrigem"></table></div>
+      </div>
+
+    </section>
+
+  </div><!-- /#dashboard -->
+</main>
+
+<script>
+/* ============================================================
+   ☁️  ORIGEM DOS DADOS
+   O JSON fica na mesma pasta do HTML (GitHub Pages, mesma origem).
+   Caminho relativo + cache-buster garantem sempre a versão nova.
+============================================================ */
+const FIN_DATA = 'dados_financeiro.json';
+
+/* ============================================================
+   PALETA DE CORES (idêntica ao dashboard de vendas)
+============================================================ */
+const P = ['#2563EB','#059669','#D97706','#DC2626','#7C3AED',
+           '#0891B2','#DB2777','#EA580C','#4F46E5','#65A30D'];
+
+/* ============================================================
+   ESTADO GLOBAL
+============================================================ */
+let FIN         = null;  // payload completo do JSON
+let mesesVendas = [];    // meses com vendasPreenchido = true
+let mesesAtivo  = [];    // meses com ativoPreenchido  = true
+let view        = [];    // meses de vendas dentro do período filtrado
+let viewAtivo   = [];    // meses de ativo  dentro do período filtrado
+let TAB         = 'resumo';
+let lastSavedAt = null;  // carimbo da versão carregada (auto-refresh)
+let appETag     = null;  // ETag do HTML (auto-reload de código)
+let CH          = {};    // instâncias Chart.js
+
+/* ============================================================
+   FORMATADORES
+   Regra: R$ com milhar "." e decimal "," ; percentuais em pt-BR ;
+   null / NaN / Infinity sempre viram travessão, nunca 0 ou NaN.
+============================================================ */
+const DASH = '<span style="color:var(--text-400)">—</span>';
+
+function isNum(v){ return v !== null && v !== undefined && typeof v === 'number' && isFinite(v); }
+
+/* Elimina o "menos zero": -0 e valores que arredondam para zero na casa
+   exibida viram zero positivo, para nunca imprimir "-R$ 0,00" ou "-0,0%". */
+function zero(v, dec = 2){
+  return Math.abs(v) < 0.5 / Math.pow(10, dec) ? 0 : v;
+}
+
+const F = {
+  /* Moeda completa (2 casas) — usada nas tabelas */
+  brl: (v, dec = 2) => new Intl.NumberFormat('pt-BR',{
+        style:'currency', currency:'BRL',
+        minimumFractionDigits:dec, maximumFractionDigits:dec }).format(v),
+
+  /* Moeda sem casas decimais. Negativo entre parênteses — mesma convenção das tabelas. */
+  brl0: v => {
+    if (!isNum(v)) return '—';
+    v = zero(v, 0);
+    const s = new Intl.NumberFormat('pt-BR',{
+      style:'currency', currency:'BRL', maximumFractionDigits:0 }).format(Math.abs(v));
+    return v < 0 ? `(${s})` : s;
+  },
+
+  /* Moeda completa com parênteses no negativo — usada nas metas de KPI e tooltips */
+  brlP: (v, dec = 2) => {
+    if (!isNum(v)) return '—';
+    v = zero(v, dec);
+    const s = F.brl(Math.abs(v), dec);
+    return v < 0 ? `(${s})` : s;
+  },
+
+  /* Inteiro pt-BR */
+  n: v => new Intl.NumberFormat('pt-BR').format(Math.round(v)),
+
+  /* Abreviação numérica para ticks de gráfico: 20.0M / 350.0k */
+  k: v => {
+    const a = Math.abs(v), s = v < 0 ? '-' : '';
+    if (a >= 1e6) return s + (a/1e6).toFixed(1).replace('.',',') + 'M';
+    if (a >= 1e3) return s + (a/1e3).toFixed(1).replace('.',',') + 'k';
+    return v.toFixed(0);
+  },
+
+  /* Abreviação monetária para os KPIs: R$ 20,0M */
+  kbrl: v => {
+    if (!isNum(v)) return '—';
+    v = zero(v, 0);
+    const a = Math.abs(v);
+    let s;
+    if      (a >= 1e6) s = 'R$ ' + (a/1e6).toFixed(1).replace('.',',') + 'M';
+    else if (a >= 1e3) s = 'R$ ' + (a/1e3).toFixed(1).replace('.',',') + 'k';
+    else               s = F.brl0(a);
+    return v < 0 ? `(${s})` : s;
+  },
+
+  /* Percentual a partir de FRAÇÃO (0.104405 -> "10,4%"); null -> "—" */
+  pct: (frac, dec = 1) => isNum(frac)
+        ? zero(frac*100, dec).toFixed(dec).replace('.',',') + '%'
+        : '—'
+};
+
+/* Escapa texto vindo da planilha antes de injetar no HTML */
+function esc(s){
+  return String(s === null || s === undefined ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* --- Células de valor -------------------------------------------------
+   mny    : positivo neutro, negativo em vermelho e entre parênteses
+   mnySig : positivo em verde, negativo em vermelho e entre parênteses
+   pctSig : percentual com cor por sinal
+---------------------------------------------------------------------- */
+function mny(v, dec = 2){
+  if (!isNum(v)) return DASH;
+  v = zero(v, dec);
+  if (v < 0) return `<span class="neg">(${F.brl(Math.abs(v),dec)})</span>`;
+  return F.brl(v,dec);
+}
+function mnySig(v, dec = 2){
+  if (!isNum(v)) return DASH;
+  v = zero(v, dec);
+  if (v < 0) return `<span class="neg">(${F.brl(Math.abs(v),dec)})</span>`;
+  return `<span class="pos">${F.brl(v,dec)}</span>`;
+}
+function pctSig(frac, dec = 1){
+  if (!isNum(frac)) return DASH;
+  return `<span class="${frac >= 0 ? 'pos' : 'neg'}">${F.pct(frac,dec)}</span>`;
+}
+/* Valor de KPI com cor por sinal (negativo em vermelho) */
+function kpiColor(v){ return isNum(v) && v < 0 ? 'color:var(--danger)' : ''; }
+
+/* ============================================================
+   AGREGAÇÕES
+   Todos os somatórios trabalham SEMPRE sobre meses preenchidos.
+============================================================ */
+function soma(arr, fn){ return arr.reduce((s,m)=> s + (Number(fn(m)) || 0), 0); }
+
+/* Agrega os blocos de vendas/resultado do período */
+function aggPeriodo(ms){
+  const c = {
+    valorTotal : soma(ms, m=>m.vendas.valorTotal),
+    totalCompra: soma(ms, m=>m.vendas.totalCompra),
+    icmsEntrada: soma(ms, m=>m.vendas.icmsEntrada),
+    icmsSaida  : soma(ms, m=>m.vendas.icmsSaida),
+    difal      : soma(ms, m=>m.vendas.difal),
+    irpjCsll   : soma(ms, m=>m.vendas.irpjCsll),
+    cartao     : soma(ms, m=>m.vendas.cartao),
+    cr         : soma(ms, m=>m.vendas.cr),
+    frete      : soma(ms, m=>m.vendas.frete),
+    resultado  : soma(ms, m=>m.vendas.resultado)
+  };
+  const aliriaV   = soma(ms, m=>m.aliria.vendas);
+  const aliriaR   = soma(ms, m=>m.aliria.resultado);
+  const licitV    = soma(ms, m=>m.licitacao.vendas);
+  const licitR    = soma(ms, m=>m.licitacao.resultado);
+  const sgna      = soma(ms, m=>m.sgna);
+  const resOper   = soma(ms, m=>m.resultadoOperacional);
+
+  return {
+    n: ms.length,
+    comp: c,
+    vendas: c.valorTotal,
+    resultado: c.resultado,
+    margemPct: c.valorTotal ? c.resultado / c.valorTotal : null,
+    aliria:    { vendas: aliriaV, resultado: aliriaR, margemPct: aliriaV ? aliriaR/aliriaV : null },
+    licitacao: { vendas: licitV,  resultado: licitR,  margemPct: licitV  ? licitR /licitV  : null },
+    sgna, resultadoOperacional: resOper,
+    /* Alíquotas efetivas do período: mesma fórmula usada mês a mês na planilha */
+    aliquotas: {
+      icms    : c.valorTotal ? (c.icmsSaida - c.icmsEntrada) / c.valorTotal : null,
+      difal   : c.valorTotal ? c.difal    / c.valorTotal : null,
+      irpjCsll: c.valorTotal ? c.irpjCsll / c.valorTotal : null
+    }
+  };
+}
+
+/* Consolida o extrato (45 categorias) somando os meses do período.
+   A ordem das categorias é a da planilha e é idêntica em todos os meses. */
+function aggDespesas(ms){
+  const ordem = (FIN.meses[0].despesas || []).map(d => d.categoria);
+  const mapa  = new Map(ordem.map(c => [c, 0]));
+  ms.forEach(m => (m.despesas || []).forEach(d => {
+    mapa.set(d.categoria, (mapa.get(d.categoria) || 0) + (Number(d.valor) || 0));
+  }));
+  return ordem.map(c => ({ categoria: c, valor: mapa.get(c) || 0 }));
+}
+
+/* Último mês com Evolução do Ativo dentro do período (liquidez é estoque, não fluxo) */
+function ultimoAtivo(){ return viewAtivo.length ? viewAtivo[viewAtivo.length - 1] : null; }
+
+/* ============================================================
+   FILTRO DE PERÍODO
+   O seletor só oferece meses REALMENTE preenchidos (regra 1 e 2).
+============================================================ */
+function initFilters(){
+  const from = document.getElementById('fFrom');
+  const to   = document.getElementById('fTo');
+  const prevFrom = from.value, prevTo = to.value;
+
+  const opts = mesesVendas.map(m => `<option value="${m.mes}">${esc(m.label)}</option>`).join('');
+  from.innerHTML = opts;
+  to.innerHTML   = opts;
+
+  const validos = mesesVendas.map(m => String(m.mes));
+  from.value = validos.includes(prevFrom) ? prevFrom : validos[0];
+  to.value   = validos.includes(prevTo)   ? prevTo   : validos[validos.length - 1];
+}
+
+/* Impede período invertido: o lado alterado empurra o outro */
+function onPeriodChange(lado){
+  const from = document.getElementById('fFrom');
+  const to   = document.getElementById('fTo');
+  if (Number(from.value) > Number(to.value)) {
+    if (lado === 'from') to.value = from.value;
+    else                 from.value = to.value;
+  }
+  applyFilters();
+}
+
+function clearFilters(){
+  const validos = mesesVendas.map(m => String(m.mes));
+  document.getElementById('fFrom').value = validos[0];
+  document.getElementById('fTo').value   = validos[validos.length - 1];
+  applyFilters();
+}
+
+/* ============================================================
+   RENDERIZAÇÃO PRINCIPAL
+============================================================ */
+function applyFilters(){
+  const a = Number(document.getElementById('fFrom').value);
+  const b = Number(document.getElementById('fTo').value);
+  const lo = Math.min(a,b), hi = Math.max(a,b);
+
+  /* REGRA 1 — meses não preenchidos nunca entram */
+  view      = mesesVendas.filter(m => m.mes >= lo && m.mes <= hi);
+  viewAtivo = mesesAtivo .filter(m => m.mes >= lo && m.mes <= hi);
+
+  document.getElementById('mesCount').textContent      = view.length;
+  document.getElementById('mesAtivoCount').textContent = viewAtivo.length;
+
+  /* Tabelas e blocos que não dependem de canvas visível */
+  renderKPIsResumo();
+  renderTabelaMensal();
+  renderInsights();
+  renderComposicaoTabela();
+  renderKPIsAliquotas();
+  renderDespesasTabela();
+  initAtivoSelect();
+  renderAuditoria();
+
+  /* Gráficos só da aba visível (canvas oculto não tem dimensão) */
+  renderChartsAtivos();
+}
+
+/* Troca de aba — re-renderiza os gráficos da aba que ficou visível */
+function switchTab(name){
+  TAB = name;
+  ['resumo','detalhado','auditoria'].forEach(t => {
+    const btn  = document.getElementById('tab'  + t.charAt(0).toUpperCase() + t.slice(1));
+    const sec  = document.getElementById('view' + t.charAt(0).toUpperCase() + t.slice(1));
+    btn.classList.toggle('active', t === name);
+    btn.setAttribute('aria-selected', String(t === name));
+    sec.classList.toggle('hidden', t !== name);
+  });
+  renderChartsAtivos();
+}
+
+function renderChartsAtivos(){
+  /* Se o CDN do Chart.js foi bloqueado pela rede da empresa, os gráficos são
+     omitidos mas os KPIs e as TABELAS continuam funcionando. A guarda fica por
+     bloco (não no topo), senão o bloco "Evolução do Ativo" — que tem KPIs e
+     tabela sem canvas — desaparecia junto. */
+  const temChart = typeof Chart !== 'undefined';
+  if (TAB === 'resumo') {
+    if (!temChart) return;
+    renderFatRes();
+    renderAliriaLicitacao();
+    renderLiquidez();
+  } else if (TAB === 'detalhado') {
+    if (temChart) {
+      renderWaterfall();
+      renderAliquotasChart();
+      renderDespesasChart();
+    }
+    renderAtivoBloco();   // KPIs + tabela do ativo não dependem do Chart.js
+  }
+  /* A aba Auditoria é 100% tabular — não tem canvas. */
+}
+
+/* ============================================================
+   KPI CARDS — VISÃO RESUMO
+============================================================ */
+function renderKPIsResumo(){
+  const t  = aggPeriodo(view);
+  const ma = ultimoAtivo();
+
+  const liqVal   = ma ? ma.liquidez          : null;
+  const liqDifal = ma ? ma.liquidezComDifal  : null;
+
+  document.getElementById('kpiResumo').innerHTML = `
+    <div class="kpi-card" style="--kpi-accent:var(--primary);--kpi-bg:var(--primary-50)">
+      <div class="kpi-head"><span class="kpi-lbl">Faturamento</span><span class="kpi-ico">💰</span></div>
+      <div class="kpi-val">${F.kbrl(t.vendas)}</div>
+      <div class="kpi-meta">${F.brlP(t.vendas)}</div>
+      <div class="kpi-breakdown">
+        <div class="kpi-bd-item">
+          <div class="kpi-bd-lbl">Aliria</div>
+          <div class="kpi-bd-val">${F.kbrl(t.aliria.vendas)}</div>
+        </div>
+        <div class="kpi-bd-item">
+          <div class="kpi-bd-lbl">Licitação</div>
+          <div class="kpi-bd-val">${F.kbrl(t.licitacao.vendas)}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kpi-card" style="--kpi-accent:var(--success);--kpi-bg:var(--success-50)">
+      <div class="kpi-head"><span class="kpi-lbl">Resultado de Vendas</span><span class="kpi-ico">📈</span></div>
+      <div class="kpi-val" style="color:${t.resultado >= 0 ? 'var(--success)' : 'var(--danger)'}">${F.kbrl(t.resultado)}</div>
+      <div class="kpi-meta">${F.brlP(t.resultado)}</div>
+      <div class="kpi-breakdown">
+        <div class="kpi-bd-item">
+          <div class="kpi-bd-lbl">Aliria</div>
+          <div class="kpi-bd-val" style="color:${t.aliria.resultado >= 0 ? 'var(--success)' : 'var(--danger)'}">${F.kbrl(t.aliria.resultado)}</div>
+        </div>
+        <div class="kpi-bd-item">
+          <div class="kpi-bd-lbl">Licitação</div>
+          <div class="kpi-bd-val" style="color:${t.licitacao.resultado >= 0 ? 'var(--success)' : 'var(--danger)'}">${F.kbrl(t.licitacao.resultado)}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kpi-card" style="--kpi-accent:var(--warning);--kpi-bg:var(--warning-50)">
+      <div class="kpi-head"><span class="kpi-lbl">Margem %</span><span class="kpi-ico">🎯</span></div>
+      <div class="kpi-val">${F.pct(t.margemPct)}</div>
+      <div class="kpi-meta">Resultado ÷ faturamento do período</div>
+      <div class="kpi-breakdown">
+        <div class="kpi-bd-item">
+          <div class="kpi-bd-lbl">Aliria</div>
+          <div class="kpi-bd-val">${F.pct(t.aliria.margemPct)}</div>
+        </div>
+        <div class="kpi-bd-item">
+          <div class="kpi-bd-lbl">Licitação</div>
+          <div class="kpi-bd-val">${F.pct(t.licitacao.margemPct)}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kpi-card" style="--kpi-accent:var(--danger);--kpi-bg:var(--danger-50)">
+      <div class="kpi-head"><span class="kpi-lbl">SG&amp;A</span><span class="kpi-ico">🧾</span></div>
+      <div class="kpi-val" style="${kpiColor(t.sgna)}">${F.kbrl(t.sgna)}</div>
+      <div class="kpi-meta">${F.brlP(t.sgna)} · despesa operacional em ${t.n} ${t.n === 1 ? 'mês' : 'meses'}</div>
+      <div class="kpi-breakdown">
+        <div class="kpi-bd-item">
+          <div class="kpi-bd-lbl">Média / mês</div>
+          <div class="kpi-bd-val" style="${kpiColor(t.sgna)}">${t.n ? F.kbrl(t.sgna/t.n) : '—'}</div>
+        </div>
+        <div class="kpi-bd-item">
+          <div class="kpi-bd-lbl">% s/ Vendas</div>
+          <div class="kpi-bd-val">${F.pct(t.vendas ? Math.abs(t.sgna)/t.vendas : null)}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kpi-card" style="--kpi-accent:var(--purple);--kpi-bg:var(--purple-50)">
+      <div class="kpi-head"><span class="kpi-lbl">Resultado Operacional</span><span class="kpi-ico">🏁</span></div>
+      <div class="kpi-val" style="color:${t.resultadoOperacional >= 0 ? 'var(--success)' : 'var(--danger)'}">${F.kbrl(t.resultadoOperacional)}</div>
+      <div class="kpi-meta">${F.brlP(t.resultadoOperacional)}</div>
+      <div class="kpi-breakdown">
+        <div class="kpi-bd-item">
+          <div class="kpi-bd-lbl">Margem Operac.</div>
+          <div class="kpi-bd-val">${F.pct(t.vendas ? t.resultadoOperacional/t.vendas : null)}</div>
+        </div>
+        <div class="kpi-bd-item">
+          <div class="kpi-bd-lbl">Média / mês</div>
+          <div class="kpi-bd-val">${t.n ? F.kbrl(t.resultadoOperacional/t.n) : '—'}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kpi-card" style="--kpi-accent:var(--teal);--kpi-bg:var(--teal-50)">
+      <div class="kpi-head"><span class="kpi-lbl">Liquidez</span><span class="kpi-ico">💧</span></div>
+      <div class="kpi-val" style="${kpiColor(liqVal)}">${F.kbrl(liqVal)}</div>
+      <div class="kpi-meta">${ma ? 'Posição de ' + esc(ma.label) : 'Sem Evolução do Ativo no período'}</div>
+      <div class="kpi-breakdown">
+        <div class="kpi-bd-item">
+          <div class="kpi-bd-lbl">Valor Exato</div>
+          <div class="kpi-bd-val" style="${kpiColor(liqVal)}">${F.brlP(liqVal)}</div>
+        </div>
+        <div class="kpi-bd-item">
+          <div class="kpi-bd-lbl">Com DIFAL</div>
+          <div class="kpi-bd-val" style="${kpiColor(liqDifal)}">${F.kbrl(liqDifal)}</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+/* ============================================================
+   HELPERS DE CHART.JS
+============================================================ */
+function kill(id){ if (CH[id]) { CH[id].destroy(); delete CH[id]; } }
+
+const TT = {
+  backgroundColor:'#0F172A', titleColor:'#F8FAFC', bodyColor:'#CBD5E1',
+  borderColor:'rgba(255,255,255,.08)', borderWidth:1, padding:12, cornerRadius:8
+};
+const TICK   = { color:'#94A3B8', font:{size:11,family:'system-ui'} };
+const GRID   = { color:'#F1F5F9', drawBorder:false };
+const LEGEND = { boxWidth:10, boxHeight:10, padding:14, color:'#475569', font:{size:11} };
+
+/* Mensagem para canvas sem dados (evita gráfico vazio sem explicação) */
+function semDados(canvasId, msg){
+  const cv = document.getElementById(canvasId);
+  if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const w = cv.parentElement.clientWidth, h = cv.parentElement.clientHeight;
+  cv.width = w; cv.height = h;
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle = '#94A3B8';
+  ctx.font = '13px system-ui';
+  ctx.textAlign = 'center';
+  ctx.fillText(msg, w/2, h/2);
+}
+
+/* ============================================================
+   1. FATURAMENTO × RESULTADO POR MÊS (barras + linha de margem)
+============================================================ */
+function renderFatRes(){
+  kill('fatres');
+  if (!view.length) { semDados('cFatRes','Nenhum mês preenchido no período selecionado'); return; }
+
+  const labels = view.map(m => m.label);
+  CH.fatres = new Chart(document.getElementById('cFatRes').getContext('2d'), {
+    data: {
+      labels,
+      datasets: [
+        { type:'bar', label:'Faturamento', data: view.map(m=>m.vendas.valorTotal),
+          backgroundColor:P[0]+'BB', borderColor:P[0], borderWidth:1.5, borderRadius:4,
+          yAxisID:'yLeft', order:2 },
+        { type:'bar', label:'Resultado', data: view.map(m=>m.vendas.resultado),
+          backgroundColor:P[1]+'BB', borderColor:P[1], borderWidth:1.5, borderRadius:4,
+          yAxisID:'yLeft', order:2 },
+        { type:'line', label:'Margem %', data: view.map(m=>isNum(m.vendas.margemPct)?m.vendas.margemPct*100:null),
+          borderColor:'#F59E0B', backgroundColor:'transparent', borderDash:[5,4], borderWidth:2.5,
+          pointRadius:5, pointHoverRadius:7, pointBackgroundColor:'#F59E0B',
+          pointBorderColor:'#fff', pointBorderWidth:2, tension:.3,
+          yAxisID:'yRight', order:0, spanGaps:false }
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      interaction:{ mode:'index', intersect:false },
+      plugins:{
+        legend:{ position:'bottom', labels:LEGEND },
+        tooltip:{ ...TT, callbacks:{ label: ctx =>
+          ctx.dataset.label === 'Margem %'
+            ? ` Margem: ${isNum(ctx.parsed.y) ? ctx.parsed.y.toFixed(1).replace('.',',') + '%' : '—'}`
+            : ` ${ctx.dataset.label}: ${F.brlP(ctx.parsed.y)}` } }
+      },
+      scales:{
+        x:{ grid:{display:false}, ticks:TICK },
+        yLeft:{ position:'left', grid:GRID, ticks:{...TICK, callback:v=>F.k(v)},
+                title:{display:true,text:'Valores (R$)',color:'#94A3B8',font:{size:10}} },
+        yRight:{ position:'right', grid:{display:false}, ticks:{...TICK, color:'#F59E0B', callback:v=>v.toFixed(1).replace('.',',')+'%'},
+                title:{display:true,text:'Margem (%)',color:'#F59E0B',font:{size:10}} }
+      }
+    }
+  });
+}
+
+/* ============================================================
+   2. ALIRIA × LICITAÇÃO POR MÊS (barras agrupadas)
+============================================================ */
+function renderAliriaLicitacao(){
+  kill('allic');
+  if (!view.length) { semDados('cAlLic','Nenhum mês preenchido no período selecionado'); return; }
+
+  CH.allic = new Chart(document.getElementById('cAlLic').getContext('2d'), {
+    type:'bar',
+    data:{
+      labels: view.map(m=>m.label),
+      datasets:[
+        { label:'Aliria',    data: view.map(m=>m.aliria.vendas),
+          backgroundColor:P[0]+'BB', borderColor:P[0], borderWidth:1.5, borderRadius:4 },
+        { label:'Licitação', data: view.map(m=>m.licitacao.vendas),
+          backgroundColor:P[4]+'BB', borderColor:P[4], borderWidth:1.5, borderRadius:4 }
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{ position:'top', labels:LEGEND },
+        tooltip:{ ...TT, callbacks:{ label: ctx => ` ${ctx.dataset.label}: ${F.brlP(ctx.parsed.y)}` } }
+      },
+      scales:{
+        x:{ grid:{display:false}, ticks:TICK },
+        y:{ grid:GRID, ticks:{...TICK, callback:v=>F.k(v)} }
+      }
+    }
+  });
+}
+
+/* ============================================================
+   3. EVOLUÇÃO DA LIQUIDEZ (linha) — SÓ meses com ativoPreenchido
+============================================================ */
+function renderLiquidez(){
+  kill('liq');
+  if (!viewAtivo.length) { semDados('cLiq','Nenhum mês com Evolução do Ativo no período'); return; }
+
+  CH.liq = new Chart(document.getElementById('cLiq').getContext('2d'), {
+    type:'line',
+    data:{
+      labels: viewAtivo.map(m=>m.label),
+      datasets:[
+        { label:'Liquidez', data: viewAtivo.map(m=>m.liquidez),
+          borderColor:P[5], backgroundColor:P[5]+'20', fill:true, tension:.4,
+          borderWidth:2.5, pointRadius:3, pointHoverRadius:5, spanGaps:false },
+        { label:'Liquidez com DIFAL', data: viewAtivo.map(m=>m.liquidezComDifal),
+          borderColor:P[4], backgroundColor:'transparent', fill:false, tension:.4,
+          borderDash:[4,3], borderWidth:2, pointRadius:3, pointHoverRadius:5, spanGaps:false }
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      interaction:{ mode:'index', intersect:false },
+      plugins:{
+        legend:{ position:'bottom', labels:LEGEND },
+        tooltip:{ ...TT, callbacks:{ label: ctx =>
+          ` ${ctx.dataset.label}: ${F.brlP(ctx.parsed.y)}` } }
+      },
+      scales:{
+        x:{ grid:{display:false}, ticks:TICK },
+        y:{ grid:GRID, ticks:{...TICK, callback:v=>F.k(v)} }
+      }
+    }
+  });
+}
+
+/* ============================================================
+   4. TABELA MENSAL (visão Resumo)
+============================================================ */
+function renderTabelaMensal(){
+  const t = aggPeriodo(view);
+
+  const linhas = view.map(m => `
+    <tr>
+      <td><strong>${esc(m.label)}</strong></td>
+      <td>${mny(m.vendas.valorTotal)}</td>
+      <td>${mnySig(m.vendas.resultado)}</td>
+      <td>${pctSig(m.vendas.margemPct)}</td>
+      <td>${mny(m.aliria.vendas)}</td>
+      <td>${mny(m.licitacao.vendas)}</td>
+      <td>${mny(m.sgna)}</td>
+      <td>${mnySig(m.resultadoOperacional)}</td>
+      <td>${m.ativoPreenchido ? mny(m.liquidez) : DASH}</td>
+    </tr>`).join('');
+
+  const total = view.length ? `
+    <tr class="row-total">
+      <td>📊 Total do Período</td>
+      <td>${mny(t.vendas)}</td>
+      <td>${mnySig(t.resultado)}</td>
+      <td>${pctSig(t.margemPct)}</td>
+      <td>${mny(t.aliria.vendas)}</td>
+      <td>${mny(t.licitacao.vendas)}</td>
+      <td>${mny(t.sgna)}</td>
+      <td>${mnySig(t.resultadoOperacional)}</td>
+      <td>${DASH}</td>
+    </tr>` : '';
+
+  document.getElementById('tblMensal').innerHTML = `
+    <thead><tr>
+      <th scope="col">Mês</th><th scope="col">Vendas</th><th scope="col">Resultado</th><th scope="col">mg %</th>
+      <th scope="col">Aliria</th><th scope="col">Licitação</th><th scope="col">SG&amp;A</th>
+      <th scope="col">Resultado Op.</th><th scope="col">Liquidez</th>
+    </tr></thead>
+    <tbody>${linhas || `<tr><td colspan="9" style="text-align:center;color:var(--text-400);padding:24px">Nenhum mês preenchido no período selecionado</td></tr>`}${total}</tbody>`;
+}
+
+/* ============================================================
+   5. INSIGHTS AUTOMÁTICOS
+============================================================ */
+function renderInsights(){
+  const el = document.getElementById('insGrid');
+  const t  = aggPeriodo(view);
+  const items = [];
+
+  if (!view.length) {
+    el.innerHTML = `<div class="ins-item"><div class="ins-txt">Selecione um período com meses preenchidos para gerar os insights.</div></div>`;
+    return;
+  }
+
+  /* Melhor e pior mês por margem */
+  const comMg = view.filter(m => isNum(m.vendas.margemPct));
+  if (comMg.length) {
+    const melhor = comMg.reduce((a,b)=> b.vendas.margemPct > a.vendas.margemPct ? b : a);
+    const pior   = comMg.reduce((a,b)=> b.vendas.margemPct < a.vendas.margemPct ? b : a);
+    items.push({ cat:'Margem', color:P[1],
+      txt:`Melhor margem em <span class="ins-val">${esc(melhor.label)}</span> (${F.pct(melhor.vendas.margemPct)}) e a menor em <span class="ins-val">${esc(pior.label)}</span> (${F.pct(pior.vendas.margemPct)}).` });
+  }
+
+  /* Peso da licitação */
+  const pesoLic = t.vendas ? t.licitacao.vendas / t.vendas : null;
+  items.push({ cat:'Mix de Canais', color:P[4],
+    txt:`Licitação representa <span class="ins-val">${F.pct(pesoLic)}</span> do faturamento (${F.brl0(t.licitacao.vendas)}) com margem de <span class="ins-val">${F.pct(t.licitacao.margemPct)}</span>, contra <span class="ins-val">${F.pct(t.aliria.margemPct)}</span> da Aliria.` });
+
+  /* SG&A consumindo o resultado */
+  const consumo = t.resultado ? Math.abs(t.sgna) / t.resultado : null;
+  items.push({ cat:'Estrutura de Custo', color:P[3],
+    txt:`O SG&A de <span class="ins-val">${F.brl0(Math.abs(t.sgna))}</span> consome <span class="ins-val">${F.pct(consumo)}</span> do resultado de vendas, deixando <span class="ins-val">${F.brl0(t.resultadoOperacional)}</span> de resultado operacional.` });
+
+  /* Carga tributária efetiva */
+  const carga = isNum(t.aliquotas.icms) && isNum(t.aliquotas.difal) && isNum(t.aliquotas.irpjCsll)
+    ? t.aliquotas.icms + t.aliquotas.difal + t.aliquotas.irpjCsll : null;
+  items.push({ cat:'Tributos', color:P[2],
+    txt:`Carga efetiva combinada de <span class="ins-val">${F.pct(carga,2)}</span> sobre vendas — ICMS ${F.pct(t.aliquotas.icms,2)}, DIFAL ${F.pct(t.aliquotas.difal,2)}, IRPJ+CSLL ${F.pct(t.aliquotas.irpjCsll,2)}.` });
+
+  /* Liquidez */
+  if (viewAtivo.length >= 2) {
+    const ini = viewAtivo[0], fim = viewAtivo[viewAtivo.length-1];
+    const delta = fim.liquidez - ini.liquidez;
+    items.push({ cat:'Liquidez', color:P[5],
+      txt:`Liquidez saiu de <span class="ins-val">${F.brl0(ini.liquidez)}</span> em ${esc(ini.label)} para <span class="ins-val">${F.brl0(fim.liquidez)}</span> em ${esc(fim.label)} — variação de <span class="ins-val">${delta>=0?'+':''}${F.brl0(delta)}</span>.` });
+  } else if (viewAtivo.length === 1) {
+    const u = viewAtivo[0];
+    items.push({ cat:'Liquidez', color:P[5],
+      txt:`Única posição patrimonial no período: <span class="ins-val">${F.brl0(u.liquidez)}</span> em ${esc(u.label)}.` });
+  }
+
+  /* Meses de vendas sem Evolução do Ativo — alerta de dado faltante */
+  const semAtivo = view.filter(m => !m.ativoPreenchido).map(m => m.label);
+  if (semAtivo.length) {
+    items.push({ cat:'Cobertura dos Dados', color:P[3],
+      txt:`<span class="ins-val">${semAtivo.length}</span> ${semAtivo.length===1?'mês tem':'meses têm'} vendas mas não ${semAtivo.length===1?'tem':'têm'} Evolução do Ativo (${esc(semAtivo.join(', '))}) — ${semAtivo.length===1?'ele fica':'eles ficam'} fora dos gráficos de liquidez.` });
+  }
+
+  el.innerHTML = items.map(i => `
+    <div class="ins-item">
+      <div class="ins-cat"><span class="ins-dot" style="background:${i.color}"></span>${i.cat}</div>
+      <div class="ins-txt">${i.txt}</div>
+    </div>`).join('');
+}
+
+/* ============================================================
+   6. COMPOSIÇÃO DO RESULTADO — cascata + tabela
+   Identidade da planilha:
+   valorTotal - totalCompra + icmsEntrada - icmsSaida - difal
+             - irpjCsll - cartao - cr - frete = resultado
+============================================================ */
+function passosComposicao(){
+  const c = aggPeriodo(view).comp;
+  return [
+    { lbl:'Valor Total',       delta:  c.valorTotal,  tipo:'in'  },
+    { lbl:'(−) Total Compra',  delta: -c.totalCompra, tipo:'out' },
+    { lbl:'(+) ICMS Entrada',  delta:  c.icmsEntrada, tipo:'in'  },
+    { lbl:'(−) ICMS Saída',    delta: -c.icmsSaida,   tipo:'out' },
+    { lbl:'(−) DIFAL',         delta: -c.difal,       tipo:'out' },
+    { lbl:'(−) IRPJ + CSLL',   delta: -c.irpjCsll,    tipo:'out' },
+    { lbl:'(−) Cartão',        delta: -c.cartao,      tipo:'out' },
+    { lbl:'(−) CR',            delta: -c.cr,          tipo:'out' },
+    { lbl:'(−) Frete',         delta: -c.frete,       tipo:'out' }
+  ];
+}
+
+function renderWaterfall(){
+  kill('wf');
+  if (!view.length) { semDados('cWaterfall','Nenhum mês preenchido no período selecionado'); return; }
+
+  const passos = passosComposicao();
+  const labels = passos.map(p => p.lbl);
+  const barras = [];
+  const cores  = [];
+  const bordas = [];
+  let acc = 0;
+
+  passos.forEach(p => {
+    const fim = Math.round((acc + p.delta) * 100) / 100;   // dinheiro: 2 casas
+    barras.push([acc, fim]);
+    cores .push(p.delta >= 0 ? P[1]+'BB' : P[3]+'BB');
+    bordas.push(p.delta >= 0 ? P[1] : P[3]);
+    acc = fim;
+  });
+
+  /* Resíduo de arredondamento: os componentes são gravados com 2 casas cada,
+     então a identidade pode fechar alguns centavos longe do campo 'resultado'.
+     Mostramos a diferença em vez de escondê-la. */
+  const resultadoOficial = aggPeriodo(view).comp.resultado;
+  const residuo = Math.round((resultadoOficial - acc) * 100) / 100;
+  if (residuo !== 0) {
+    labels.push('(±) Arredondamento');
+    barras.push([acc, resultadoOficial]);
+    cores .push(P[2]+'BB');
+    bordas.push(P[2]);
+    acc = resultadoOficial;
+  }
+
+  /* Barra final: o resultado, partindo do zero */
+  labels.push('(=) Resultado');
+  barras.push([0, resultadoOficial]);
+  cores .push(P[0]+'CC');
+  bordas.push(P[0]);
+
+  CH.wf = new Chart(document.getElementById('cWaterfall').getContext('2d'), {
+    type:'bar',
+    data:{ labels, datasets:[{
+      label:'Efeito no resultado', data:barras,
+      backgroundColor:cores, borderColor:bordas, borderWidth:1.5,
+      borderRadius:4, borderSkipped:false }] },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{ display:false },
+        tooltip:{ ...TT, callbacks:{
+          label: ctx => {
+            const i = ctx.dataIndex;
+            if (i >= barras.length - 1) return ` Resultado: ${F.brlP(resultadoOficial)}`;
+            if (i >= passos.length) return ` Resíduo de arredondamento: ${F.brlP(residuo)}`;
+            const d = passos[i].delta;
+            return [` Efeito: ${F.brlP(d)}`,
+                    ` Acumulado: ${F.brlP(barras[i][1])}`];
+          } } }
+      },
+      scales:{
+        x:{ grid:{display:false}, ticks:{...TICK, maxRotation:45, minRotation:35} },
+        y:{ grid:GRID, ticks:{...TICK, callback:v=>F.k(v)} }
+      }
+    }
+  });
+}
+
+function renderComposicaoTabela(){
+  const t = aggPeriodo(view);
+  const base = t.comp.valorTotal;
+  const passos = passosComposicao();
+
+  document.getElementById('compTitle').textContent =
+    view.length
+      ? `Composição do Resultado de Vendas — ${view[0].label} a ${view[view.length-1].label}`
+      : 'Composição do Resultado de Vendas';
+
+  if (!view.length) {
+    document.getElementById('tblComposicao').innerHTML =
+      `<thead><tr><th scope="col">Componente</th><th scope="col">Valor</th><th scope="col">% s/ Vendas</th><th scope="col">Acumulado</th></tr></thead>
+       <tbody><tr><td colspan="4" style="text-align:center;color:var(--text-400);padding:24px">Nenhum mês preenchido no período selecionado</td></tr></tbody>`;
+    return;
+  }
+
+  let acc = 0;
+  const linhas = passos.map(p => {
+    acc = Math.round((acc + p.delta) * 100) / 100;   // dinheiro: 2 casas
+
+    return `<tr>
+      <td>${p.lbl}</td>
+      <td>${mny(p.delta)}</td>
+      <td>${F.pct(base ? p.delta/base : null)}</td>
+      <td>${mny(acc)}</td>
+    </tr>`;
+  }).join('');
+
+  /* Resíduo: só aparece quando existe de fato (ver comentário em renderWaterfall) */
+  const residuo = Math.round((t.comp.resultado - acc) * 100) / 100;
+  const linhaResiduo = residuo === 0 ? '' : `
+      <tr>
+        <td>(±) Arredondamento <span style="color:var(--text-400)">(componentes gravados com 2 casas)</span></td>
+        <td>${mny(residuo)}</td>
+        <td>${F.pct(base ? residuo/base : null)}</td>
+        <td>${mny(t.comp.resultado)}</td>
+      </tr>`;
+
+  document.getElementById('tblComposicao').innerHTML = `
+    <thead><tr><th scope="col">Componente</th><th scope="col">Valor</th><th scope="col">% s/ Vendas</th><th scope="col">Acumulado</th></tr></thead>
+    <tbody>
+      ${linhas}
+      ${linhaResiduo}
+      <tr class="row-total">
+        <td>(=) Resultado</td>
+        <td>${mnySig(t.comp.resultado)}</td>
+        <td>${pctSig(t.margemPct)}</td>
+        <td>${mnySig(t.comp.resultado)}</td>
+      </tr>
+    </tbody>`;
+}
+
+/* ============================================================
+   7. ALÍQUOTAS EFETIVAS
+   Observação: exibidas com 2 casas decimais porque a alíquota de
+   ICMS fica abaixo de 1% — arredondar em 1 casa apagaria o dado.
+============================================================ */
+function renderKPIsAliquotas(){
+  const t = aggPeriodo(view);
+  const a = t.aliquotas;
+  const c = t.comp;
+
+  document.getElementById('kpiAliquotas').innerHTML = `
+    <div class="kpi-card" style="--kpi-accent:var(--teal);--kpi-bg:var(--teal-50)">
+      <div class="kpi-head"><span class="kpi-lbl">ICMS Efetivo</span><span class="kpi-ico">🧾</span></div>
+      <div class="kpi-val">${F.pct(a.icms,2)}</div>
+      <div class="kpi-meta">Saída ${F.brl0(c.icmsSaida)} − Entrada ${F.brl0(c.icmsEntrada)} = ${F.brl0(c.icmsSaida - c.icmsEntrada)}</div>
+    </div>
+    <div class="kpi-card" style="--kpi-accent:var(--warning);--kpi-bg:var(--warning-50)">
+      <div class="kpi-head"><span class="kpi-lbl">DIFAL Efetivo</span><span class="kpi-ico">🚚</span></div>
+      <div class="kpi-val">${F.pct(a.difal,2)}</div>
+      <div class="kpi-meta">${F.brlP(c.difal)} no período</div>
+    </div>
+    <div class="kpi-card" style="--kpi-accent:var(--purple);--kpi-bg:var(--purple-50)">
+      <div class="kpi-head"><span class="kpi-lbl">IRPJ + CSLL Efetivo</span><span class="kpi-ico">🏛️</span></div>
+      <div class="kpi-val">${F.pct(a.irpjCsll,2)}</div>
+      <div class="kpi-meta">${F.brlP(c.irpjCsll)} no período</div>
+    </div>
+    <div class="kpi-card" style="--kpi-accent:#DB2777;--kpi-bg:#FDF2F8">
+      <div class="kpi-head"><span class="kpi-lbl">Carga Combinada</span><span class="kpi-ico">⚖️</span></div>
+      <div class="kpi-val">${F.pct(
+        isNum(a.icms) && isNum(a.difal) && isNum(a.irpjCsll) ? a.icms + a.difal + a.irpjCsll : null, 2)}</div>
+      <div class="kpi-meta">Soma das três alíquotas efetivas sobre vendas</div>
+    </div>
+  `;
+}
+
+function renderAliquotasChart(){
+  kill('aliq');
+  if (!view.length) { semDados('cAliq','Nenhum mês preenchido no período selecionado'); return; }
+
+  /* Alíquotas nulas viram null (buraco na linha), nunca zero. */
+  const serie = campo => view.map(m => isNum(m.aliquotas[campo]) ? m.aliquotas[campo]*100 : null);
+
+  CH.aliq = new Chart(document.getElementById('cAliq').getContext('2d'), {
+    type:'line',
+    data:{
+      labels: view.map(m=>m.label),
+      datasets:[
+        { label:'ICMS',        data:serie('icms'),
+          borderColor:P[5], backgroundColor:P[5]+'18', fill:true, tension:.4,
+          borderWidth:2.5, pointRadius:3, pointHoverRadius:5, spanGaps:false },
+        { label:'DIFAL',       data:serie('difal'),
+          borderColor:P[2], backgroundColor:'transparent', fill:false, tension:.4,
+          borderWidth:2, borderDash:[4,3], pointRadius:3, pointHoverRadius:5, spanGaps:false },
+        { label:'IRPJ + CSLL', data:serie('irpjCsll'),
+          borderColor:P[4], backgroundColor:'transparent', fill:false, tension:.4,
+          borderWidth:2, pointRadius:3, pointHoverRadius:5, spanGaps:false }
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      interaction:{ mode:'index', intersect:false },
+      plugins:{
+        legend:{ position:'bottom', labels:LEGEND },
+        tooltip:{ ...TT, callbacks:{ label: ctx =>
+          ` ${ctx.dataset.label}: ${isNum(ctx.parsed.y) ? ctx.parsed.y.toFixed(2).replace('.',',')+'%' : '—'}` } }
+      },
+      scales:{
+        x:{ grid:{display:false}, ticks:TICK },
+        y:{ grid:GRID, ticks:{...TICK, callback:v=>v.toFixed(2).replace('.',',')+'%'} }
+      }
+    }
+  });
+}
+
+/* ============================================================
+   8. DESPESAS POR CATEGORIA (extrato bancário — regime de caixa)
+============================================================ */
+function renderDespesasChart(){
+  kill('desp');
+  if (!view.length) { semDados('cDespesas','Nenhum mês preenchido no período selecionado'); return; }
+
+  const saidas = aggDespesas(view)
+    .filter(d => d.valor < 0)
+    .sort((a,b) => a.valor - b.valor)   // mais negativo primeiro
+    .slice(0, 15);
+
+  if (!saidas.length) { semDados('cDespesas','Nenhuma saída de caixa no período'); return; }
+
+  CH.desp = new Chart(document.getElementById('cDespesas').getContext('2d'), {
+    type:'bar',
+    data:{
+      labels: saidas.map(d => d.categoria.length > 26 ? d.categoria.slice(0,26)+'…' : d.categoria),
+      datasets:[{
+        label:'Saída de caixa',
+        data: saidas.map(d => Math.abs(d.valor)),
+        backgroundColor: saidas.map((_,i) => P[i % P.length]+'CC'),
+        borderColor:     saidas.map((_,i) => P[i % P.length]),
+        borderWidth:1.5, borderRadius:5, borderSkipped:false
+      }]
+    },
+    options:{
+      indexAxis:'y', responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{ display:false },
+        tooltip:{ ...TT, callbacks:{
+          title: items => saidas[items[0].dataIndex].categoria,
+          label: ctx => ' Saída: ' + F.brlP(ctx.parsed.x) } }
+      },
+      scales:{
+        x:{ grid:GRID, ticks:{...TICK, callback:v=>F.k(v)} },
+        y:{ grid:{display:false}, ticks:{...TICK, color:'#475569'} }
+      }
+    }
+  });
+}
+
+function renderDespesasTabela(){
+  const el = document.getElementById('tblDespesas');
+  if (!view.length) {
+    el.innerHTML = `<thead><tr><th scope="col">Categoria</th><th scope="col">Valor no Período</th><th scope="col">Média / Mês</th></tr></thead>
+      <tbody><tr><td colspan="3" style="text-align:center;color:var(--text-400);padding:24px">Nenhum mês preenchido no período selecionado</td></tr></tbody>`;
+    return;
+  }
+
+  const ocultarZero = document.getElementById('chkZerados').checked;
+  const todas = aggDespesas(view);
+  const total = todas.reduce((s,d)=> s + d.valor, 0);
+  const lista = ocultarZero ? todas.filter(d => Math.abs(d.valor) > 0.005) : todas;
+  const n = view.length;
+
+  const linhas = lista.map(d => `
+    <tr>
+      <td>${esc(d.categoria)}</td>
+      <td>${mny(d.valor)}</td>
+      <td>${mny(d.valor / n)}</td>
+    </tr>`).join('');
+
+  const t = aggPeriodo(view);
+
+  el.innerHTML = `
+    <thead><tr><th scope="col">Categoria</th><th scope="col">Valor no Período</th><th scope="col">Média / Mês</th></tr></thead>
+    <tbody>
+      ${linhas || `<tr><td colspan="3" style="text-align:center;color:var(--text-400);padding:24px">Nenhuma categoria com movimento</td></tr>`}
+      <tr class="row-total">
+        <td>💵 Movimento Líquido de Caixa</td>
+        <td>${mny(total)}</td>
+        <td>${mny(total / n)}</td>
+      </tr>
+      <tr class="row-total">
+        <td>🧾 SG&amp;A (despesa operacional)</td>
+        <td>${mny(t.sgna)}</td>
+        <td>${mny(t.sgna / n)}</td>
+      </tr>
+    </tbody>`;
+}
+
+/* ============================================================
+   9. EVOLUÇÃO DO ATIVO
+   Itens exibidos com o sinal EXATO do JSON. A liquidez NUNCA é
+   recalculada aqui — o extrator avisa que somar os componentes já
+   arredondados devolve até R$ 0,01 de diferença. Usamos o campo.
+============================================================ */
+const ATIVO_GRUPOS = [
+  { grupo:'Disponibilidades e Estoque', itens:[
+      ['caixa','Caixa'],
+      ['privilegeDi','Privilege DI'],
+      ['estoque','Estoque'],
+      ['loggo','Loggo']
+  ]},
+  { grupo:'A Receber por Origem', itens:[
+      ['aReceberItau','A Receber — Itaú'],
+      ['aReceberAsaas','A Receber — Asaas'],
+      ['aReceberLicitacoes','A Receber — Licitações'],
+      ['aReceberEpharma','A Receber — Epharma'],
+      ['aReceberUnimed','A Receber — Unimed'],
+      ['aReceberSami','A Receber — Sami'],
+      ['aReceberScSaude','A Receber — SC Saúde'],
+      ['aReceberAlice','A Receber — Alice']
+  ]},
+  { grupo:'Passivos', itens:[
+      ['aPagarFornecedores','A Pagar Fornecedores'],
+      ['icms','ICMS'],
+      ['irpjCsll','IRPJ + CSLL'],
+      ['difalAPagar','DIFAL a Pagar'],
+      ['docAPagar','Doc a Pagar']
+  ]},
+  // sinal:-1 — na planilha estes itens são POSITIVOS, mas entram SUBTRAINDO na liquidez.
+  // Sem o sinal, apareciam como "ativo verde" nos gráficos/tabelas (bug corrigido).
+  { grupo:'Deduções (entram subtraindo na liquidez)', sinal:-1, itens:[
+      ['depositadoNaoIdentificado','Depositado Não Identificado'],
+      ['difalRetido','DIFAL Retido']
+  ]}
+];
+
+const RECEBER_ITENS = ATIVO_GRUPOS[1].itens;
+
+/* Popula o seletor de mês do ativo com os meses válidos do período */
+function initAtivoSelect(){
+  const sel = document.getElementById('fAtivoMes');
+  const prev = sel.value;
+
+  if (!viewAtivo.length) {
+    sel.innerHTML = '<option value="">Sem meses disponíveis</option>';
+    sel.disabled = true;
+    document.getElementById('ativoHint').innerHTML =
+      'Nenhum mês do período tem <strong>Evolução do Ativo</strong> preenchida.';
+    return;
+  }
+
+  sel.disabled = false;
+  sel.innerHTML = viewAtivo.map(m => `<option value="${m.mes}">${esc(m.label)}</option>`).join('');
+  const validos = viewAtivo.map(m => String(m.mes));
+  sel.value = validos.includes(prev) ? prev : validos[validos.length - 1];
+  document.getElementById('ativoHint').innerHTML =
+    `<strong>${viewAtivo.length}</strong> ${viewAtivo.length===1?'mês disponível':'meses disponíveis'} no período`;
+}
+
+function mesAtivoSelecionado(){
+  const v = document.getElementById('fAtivoMes').value;
+  if (!v) return null;
+  return viewAtivo.find(m => String(m.mes) === String(v)) || null;
+}
+
+/* Bloco completo: KPIs de liquidez + 2 gráficos + tabela */
+function renderAtivoBloco(){
+  const m = mesAtivoSelecionado();
+
+  document.getElementById('ativoTitle').textContent =
+    m ? `Evolução do Ativo — ${m.label}` : 'Evolução do Ativo';
+  document.getElementById('ativoTableSub').textContent =
+    m ? `Posição de fechamento em ${m.dataFim.split('-').reverse().join('/')}`
+      : 'Itens agrupados conforme entram no cálculo da liquidez';
+
+  renderKPIsLiquidez(m);
+  renderAtivoChart(m);
+  renderReceberChart(m);
+  renderAtivoTabela(m);
+}
+
+function renderKPIsLiquidez(m){
+  const el = document.getElementById('kpiLiquidez');
+  if (!m) {
+    el.innerHTML = `
+      <div class="kpi-card" style="--kpi-accent:var(--text-400);--kpi-bg:var(--bg)">
+        <div class="kpi-head"><span class="kpi-lbl">Liquidez</span><span class="kpi-ico">💧</span></div>
+        <div class="kpi-val">—</div>
+        <div class="kpi-meta">Nenhum mês com Evolução do Ativo no período</div>
+      </div>`;
+    return;
+  }
+
+  const receber = RECEBER_ITENS.reduce((s,[k]) => s + (Number(m.ativo[k]) || 0), 0);
+
+  el.innerHTML = `
+    <div class="kpi-card" style="--kpi-accent:var(--teal);--kpi-bg:var(--teal-50)">
+      <div class="kpi-head"><span class="kpi-lbl">Liquidez</span><span class="kpi-ico">💧</span></div>
+      <div class="kpi-val" style="${kpiColor(m.liquidez)}">${F.kbrl(m.liquidez)}</div>
+      <div class="kpi-meta">${F.brlP(m.liquidez)} · ${esc(m.label)}</div>
+    </div>
+    <div class="kpi-card" style="--kpi-accent:var(--purple);--kpi-bg:var(--purple-50)">
+      <div class="kpi-head"><span class="kpi-lbl">Liquidez com DIFAL</span><span class="kpi-ico">🧮</span></div>
+      <div class="kpi-val" style="${kpiColor(m.liquidezComDifal)}">${F.kbrl(m.liquidezComDifal)}</div>
+      <div class="kpi-meta">${F.brlP(m.liquidezComDifal)} · Liquidez + DIFAL Retido</div>
+      <div class="kpi-breakdown">
+        <div class="kpi-bd-item">
+          <div class="kpi-bd-lbl">Liquidez</div>
+          <div class="kpi-bd-val">${F.kbrl(m.liquidez)}</div>
+        </div>
+        <div class="kpi-bd-item">
+          <div class="kpi-bd-lbl">DIFAL Retido</div>
+          <div class="kpi-bd-val">${F.kbrl(m.ativo?.difalRetido)}</div>
+        </div>
+      </div>
+    </div>
+    <div class="kpi-card" style="--kpi-accent:var(--primary);--kpi-bg:var(--primary-50)">
+      <div class="kpi-head"><span class="kpi-lbl">Total a Receber</span><span class="kpi-ico">📥</span></div>
+      <div class="kpi-val">${F.kbrl(receber)}</div>
+      <div class="kpi-meta">${F.brlP(receber)} · soma das 8 origens</div>
+    </div>
+    <div class="kpi-card" style="--kpi-accent:var(--danger);--kpi-bg:var(--danger-50)">
+      <div class="kpi-head"><span class="kpi-lbl">A Pagar Fornecedores</span><span class="kpi-ico">📤</span></div>
+      <div class="kpi-val" style="${kpiColor(m.ativo.aPagarFornecedores)}">${F.kbrl(m.ativo.aPagarFornecedores)}</div>
+      <div class="kpi-meta">${F.brlP(m.ativo.aPagarFornecedores)}</div>
+    </div>
+  `;
+}
+
+function renderAtivoChart(m){
+  if (typeof Chart === 'undefined') return;   // CDN bloqueado: tabela continua
+  kill('ativo');
+  if (!m) { semDados('cAtivo','Selecione um mês com Evolução do Ativo'); return; }
+
+  const itens = [];
+  ATIVO_GRUPOS.forEach(g => g.itens.forEach(([k,lbl]) => {
+    const v = (Number(m.ativo[k]) || 0) * (g.sinal ?? 1);
+    if (v !== 0) itens.push({ lbl, v });
+  }));
+  itens.sort((a,b) => b.v - a.v);
+
+  if (!itens.length) { semDados('cAtivo','Sem itens com valor neste mês'); return; }
+
+  CH.ativo = new Chart(document.getElementById('cAtivo').getContext('2d'), {
+    type:'bar',
+    data:{
+      labels: itens.map(i => i.lbl.length > 24 ? i.lbl.slice(0,24)+'…' : i.lbl),
+      datasets:[{
+        label:'Valor',
+        data: itens.map(i => i.v),
+        backgroundColor: itens.map(i => (i.v >= 0 ? P[1] : P[3]) + 'CC'),
+        borderColor:     itens.map(i => i.v >= 0 ? P[1] : P[3]),
+        borderWidth:1.5, borderRadius:5, borderSkipped:false
+      }]
+    },
+    options:{
+      indexAxis:'y', responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{ display:false },
+        tooltip:{ ...TT, callbacks:{
+          title: ctxs => itens[ctxs[0].dataIndex].lbl,
+          label: ctx => {
+            return ' ' + F.brlP(ctx.parsed.x);
+          } } }
+      },
+      scales:{
+        x:{ grid:GRID, ticks:{...TICK, callback:v=>F.k(v)} },
+        y:{ grid:{display:false}, ticks:{...TICK, color:'#475569'} }
+      }
+    }
+  });
+}
+
+function renderReceberChart(m){
+  if (typeof Chart === 'undefined') return;   // CDN bloqueado: tabela continua
+  kill('receber');
+  if (!m) { semDados('cReceber','Selecione um mês com Evolução do Ativo'); return; }
+
+  const itens = RECEBER_ITENS
+    .map(([k,lbl]) => ({ lbl: lbl.replace('A Receber — ',''), v: Number(m.ativo[k]) || 0 }))
+    .filter(i => i.v > 0)
+    .sort((a,b) => b.v - a.v);
+
+  if (!itens.length) { semDados('cReceber','Nenhum contas a receber neste mês'); return; }
+
+  const total = itens.reduce((s,i)=> s + i.v, 0);
+
+  CH.receber = new Chart(document.getElementById('cReceber').getContext('2d'), {
+    type:'doughnut',
+    data:{
+      labels: itens.map(i => i.lbl),
+      datasets:[{
+        data: itens.map(i => i.v),
+        backgroundColor: itens.map((_,i) => P[i % P.length]),
+        borderColor:'#fff', borderWidth:1.5, hoverBorderWidth:4
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false, cutout:'62%',
+      plugins:{
+        legend:{ position:'bottom', labels:LEGEND },
+        tooltip:{ ...TT, callbacks:{ label: ctx => {
+          const pct = total ? ((ctx.parsed/total)*100).toFixed(1).replace('.',',') : '0,0';
+          return ` ${ctx.label}: ${F.brlP(ctx.parsed)} (${pct}%)`;
+        } } }
+      }
+    }
+  });
+}
+
+function renderAtivoTabela(m){
+  const el = document.getElementById('tblAtivo');
+  const head = `<thead><tr><th scope="col">Item</th><th scope="col">Valor</th><th scope="col">% s/ Liquidez</th></tr></thead>`;
+
+  if (!m) {
+    el.innerHTML = head +
+      `<tbody><tr><td colspan="3" style="text-align:center;color:var(--text-400);padding:24px">Nenhum mês com Evolução do Ativo no período selecionado</td></tr></tbody>`;
+    return;
+  }
+
+  const liq = m.liquidez;
+  const corpo = ATIVO_GRUPOS.map(g => {
+    const linhas = g.itens.map(([k,lbl]) => {
+      // Aplica o sinal do grupo: deduções entram negativas (senão a coluna % somava 268%)
+      const raw = Number(m.ativo[k]);
+      const v = isNum(raw) ? raw * (g.sinal ?? 1) : raw;
+      return `<tr>
+        <td class="td-sub">${esc(lbl)}</td>
+        <td>${mny(v)}</td>
+        <td>${F.pct(isNum(liq) && liq !== 0 && isNum(v) ? v/liq : null)}</td>
+      </tr>`;
+    }).join('');
+    return `<tr class="row-grp"><td colspan="3">${esc(g.grupo)}</td></tr>${linhas}`;
+  }).join('');
+
+  el.innerHTML = head + `
+    <tbody>
+      ${corpo}
+      <tr class="row-total">
+        <td>💧 Liquidez (campo da planilha)</td>
+        <td>${mny(liq)}</td>
+        <td>${isNum(liq) ? '100,0%' : DASH}</td>
+      </tr>
+      <tr class="row-total">
+        <td>🧮 Liquidez com DIFAL (corrigida)</td>
+        <td>${mny(m.liquidezComDifal)}</td>
+        <td>${DASH}</td>
+      </tr>
+    </tbody>`;
+}
+
+/* ============================================================
+   10. AUDITORIA
+============================================================ */
+function renderAuditoria(){
+  const v = FIN.validacao || {};
+
+  /* --- KPIs de saúde da extração --- */
+  const reconOK = isNum(v.checkReconciliacaoMax) && Math.abs(v.checkReconciliacaoMax) < 0.01;
+  document.getElementById('kpiAuditoria').innerHTML = `
+    <div class="kpi-card" style="--kpi-accent:var(--primary);--kpi-bg:var(--primary-50)">
+      <div class="kpi-head"><span class="kpi-lbl">Meses com Vendas</span><span class="kpi-ico">📅</span></div>
+      <div class="kpi-val">${F.n(v.mesesComVendas || 0)}</div>
+      <div class="kpi-meta">de 12 meses do ano de ${esc(FIN.ano)}</div>
+    </div>
+    <div class="kpi-card" style="--kpi-accent:var(--teal);--kpi-bg:var(--teal-50)">
+      <div class="kpi-head"><span class="kpi-lbl">Meses com Ativo</span><span class="kpi-ico">🏦</span></div>
+      <div class="kpi-val">${F.n(v.mesesComAtivo || 0)}</div>
+      <div class="kpi-meta">Evolução do Ativo digitada</div>
+    </div>
+    <div class="kpi-card" style="--kpi-accent:${reconOK ? 'var(--success)' : 'var(--danger)'};--kpi-bg:${reconOK ? 'var(--success-50)' : 'var(--danger-50)'}">
+      <div class="kpi-head"><span class="kpi-lbl">Reconciliação (máx.)</span><span class="kpi-ico">${reconOK ? '✅' : '❌'}</span></div>
+      <div class="kpi-val" style="color:${reconOK ? 'var(--success)' : 'var(--danger)'}">${F.brlP(v.checkReconciliacaoMax)}</div>
+      <div class="kpi-meta">Maior diferença absoluta entre os meses</div>
+    </div>
+    <div class="kpi-card" style="--kpi-accent:${v.liquidezConfere ? 'var(--success)' : 'var(--danger)'};--kpi-bg:${v.liquidezConfere ? 'var(--success-50)' : 'var(--danger-50)'}">
+      <div class="kpi-head"><span class="kpi-lbl">Liquidez Confere</span><span class="kpi-ico">${v.liquidezConfere ? '✅' : '❌'}</span></div>
+      <div class="kpi-val" style="color:${v.liquidezConfere ? 'var(--success)' : 'var(--danger)'}">${v.liquidezConfere ? 'SIM' : 'NÃO'}</div>
+      <div class="kpi-meta">Recálculo item a item × valor da planilha</div>
+    </div>
+  `;
+
+  /* --- Check de reconciliação por mês (só meses com vendas) --- */
+  document.getElementById('tblRecon').innerHTML = `
+    <thead><tr><th scope="col">Mês</th><th scope="col">Check de Reconciliação</th><th scope="col">Movimento Líquido de Caixa</th><th scope="col">SG&amp;A</th><th scope="col">Status</th></tr></thead>
+    <tbody>${
+      mesesVendas.length
+        ? mesesVendas.map(m => {
+            const ok = Math.abs(Number(m.checkReconciliacao) || 0) < 0.01;
+            return `<tr>
+              <td><strong>${esc(m.label)}</strong></td>
+              <td>${mny(m.checkReconciliacao, 2)}</td>
+              <td>${mny(m.despesaTotal)}</td>
+              <td>${mny(m.sgna)}</td>
+              <td><span class="badge ${ok ? 'badge-ok' : 'badge-err'}">${ok ? '✅ OK' : '❌ DIVERGE'}</span></td>
+            </tr>`;
+          }).join('')
+        : `<tr><td colspan="5" style="text-align:center;color:var(--text-400);padding:24px">Nenhum mês com vendas</td></tr>`
+    }</tbody>`;
+
+  /* --- Liquidez com DIFAL: sistema × planilha (deve bater exatamente) ---
+     Também confere a identidade da planilha: linha 115 = linha 114 + DIFAL Retido. */
+  document.getElementById('tblLiqAudit').innerHTML = `
+    <thead><tr><th scope="col">Mês</th><th scope="col">Sistema</th><th scope="col">Planilha</th><th scope="col">Diferença</th><th scope="col">Liquidez + DIFAL Retido</th><th scope="col">Status</th></tr></thead>
+    <tbody>${
+      mesesAtivo.length
+        ? mesesAtivo.map(m => {
+            const dif = isNum(m.liquidezComDifal) && isNum(m.liquidezComDifalPlanilha)
+              ? m.liquidezComDifal - m.liquidezComDifalPlanilha : null;
+            /* Identidade da planilha: Liquidez + DIFAL Retido deve reproduzir a linha 115 */
+            const soma = isNum(m.liquidez) ? m.liquidez + (Number(m.ativo.difalRetido) || 0) : null;
+            const bateEspelho  = isNum(dif) && Math.abs(dif) < 0.005;
+            const bateIdentidade = isNum(soma) && isNum(m.liquidezComDifalPlanilha)
+              && Math.abs(soma - m.liquidezComDifalPlanilha) < 0.02;
+            const ok = bateEspelho && bateIdentidade;
+            return `<tr>
+              <td><strong>${esc(m.label)}</strong></td>
+              <td>${mny(m.liquidezComDifal)}</td>
+              <td>${mny(m.liquidezComDifalPlanilha)}</td>
+              <td>${bateEspelho ? mny(0) : `<span class="neg">${F.brlP(dif)}</span>`}</td>
+              <td>${mny(soma)}</td>
+              <td><span class="badge ${ok ? 'badge-ok' : 'badge-err'}">${
+                ok ? '✅ CONFERE' : '❌ VERIFICAR'}</span></td>
+            </tr>`;
+          }).join('')
+        : `<tr><td colspan="6" style="text-align:center;color:var(--text-400);padding:24px">Nenhum mês com Evolução do Ativo</td></tr>`
+    }</tbody>`;
+
+  /* --- Avisos vindos da extração --- */
+  const avisos = Array.isArray(v.avisos) ? v.avisos : [];
+  document.getElementById('avisosGrid').innerHTML = avisos.length
+    ? avisos.map((a,i) => `
+        <div class="ins-item">
+          <div class="ins-cat"><span class="ins-dot" style="background:${P[i % P.length]}"></span>Aviso ${i+1}</div>
+          <div class="ins-txt">${esc(a)}</div>
+        </div>`).join('')
+    : `<div class="ins-item"><div class="ins-txt">Nenhum aviso registrado nesta extração.</div></div>`;
+
+  /* --- Rastreabilidade da carga --- */
+  document.getElementById('tblOrigem').innerHTML = `
+    <thead><tr><th scope="col">Campo</th><th scope="col">Valor</th></tr></thead>
+    <tbody>
+      <tr><td>Planilha de origem</td><td style="text-align:right">${esc(FIN.fonte)}</td></tr>
+      <tr><td>Ano de referência</td><td style="text-align:right">${esc(FIN.ano)}</td></tr>
+      <tr><td>Versão do extrator</td><td style="text-align:right">${esc(FIN.version)}</td></tr>
+      <tr><td>Gerado em (savedAt)</td><td style="text-align:right">${new Date(FIN.savedAt).toLocaleString('pt-BR')}</td></tr>
+      <tr><td>Arquivo de dados</td><td style="text-align:right">${esc(FIN_DATA)}</td></tr>
+      <tr class="row-total"><td>Meses no arquivo</td><td style="text-align:right">${F.n(FIN.meses.length)}</td></tr>
+    </tbody>`;
+}
+
+/* ============================================================
+   ALERTA UI
+============================================================ */
+function showAlert(msg, type='error'){
+  clearTimeout(alertTimer);   // um alerta novo cancela o auto-fechamento do anterior
+  const cls = type === 'success' ? 'alert-success' : type === 'warning' ? 'alert-warning' : 'alert-error';
+  const ico = type === 'success' ? '✅' : type === 'warning' ? '⚠️' : '❌';
+  document.getElementById('alertArea').innerHTML = `<div class="alert ${cls}">${ico} ${msg}</div>`;
+}
+function clearAlert(){ clearTimeout(alertTimer); document.getElementById('alertArea').innerHTML = ''; }
+
+/* Timer único do alerta: sem isso, um clearAlert agendado apagava uma
+   mensagem de erro mais recente que tivesse aparecido no meio do caminho. */
+let alertTimer = null;
+function autoClear(ms = 4000){ clearTimeout(alertTimer); alertTimer = setTimeout(clearAlert, ms); }
+
+/* Estado vazio configurável (carregando / erro) */
+function setEmpty(icone, titulo, texto){
+  document.getElementById('emptyState').classList.remove('hidden');
+  document.getElementById('dashboard').classList.add('hidden');
+  document.querySelector('.upload-icon').textContent = icone;
+  document.getElementById('emptyTitle').textContent  = titulo;
+  document.getElementById('emptyText').innerHTML     = texto;
+}
+
+/* Sai do estado vazio/erro e mostra o dashboard.
+   Chamado tanto na carga inicial quanto no auto-refresh — sem isso, uma falha
+   na primeira carga deixava a tela de erro presa para sempre. */
+function mostrarDashboard(){
+  document.getElementById('emptyState').classList.add('hidden');
+  document.getElementById('dashboard').classList.remove('hidden');
+}
+
+/* ============================================================
+   ☁️  CARREGAR DADOS
+============================================================ */
+function ingest(payload){
+  FIN = payload;
+  /* REGRA 1 — separa de uma vez os meses realmente preenchidos */
+  mesesVendas = FIN.meses.filter(m => m.vendasPreenchido === true);
+  mesesAtivo  = FIN.meses.filter(m => m.ativoPreenchido  === true);
+}
+
+async function loadDados(){
+  let step = 'início';
+  try {
+    step = 'fetch';
+    const res = await fetch(`${FIN_DATA}?t=${Date.now()}`, { cache:'no-store' });
+
+    step = `status ${res.status}`;
+    if (!res.ok) {
+      showAlert(`Erro ao carregar dados: o servidor retornou ${res.status}.`, 'error');
+      setEmpty('❌','Não foi possível carregar os dados',
+        `O arquivo <strong>${esc(FIN_DATA)}</strong> respondeu com status <strong>${res.status}</strong>. Verifique se ele foi publicado na mesma pasta deste dashboard.`);
+      return false;
+    }
+
+    step = 'parse';
+    const payload = await res.json();
+    if (!payload.meses || !payload.meses.length) {
+      showAlert('O arquivo dados_financeiro.json existe mas não contém meses.', 'error');
+      setEmpty('⚠️','Arquivo sem dados','O JSON foi lido mas a lista <strong>meses</strong> está vazia.');
+      return false;
+    }
+
+    step = 'render';
+    lastSavedAt = payload.savedAt;
+    ingest(payload);
+
+    if (!mesesVendas.length) {
+      showAlert('Nenhum mês preenchido na planilha ainda.', 'warning');
+      setEmpty('⏳','Aguardando lançamentos','O arquivo foi carregado, mas nenhum mês tem vendas preenchidas.');
+      return false;
+    }
+
+    initFilters();
+    applyFilters();
+    mostrarDashboard();
+    document.getElementById('lastUpdTime').textContent =
+      new Date(payload.savedAt).toLocaleString('pt-BR');
+
+    clearAlert();
+    showAlert(`${mesesVendas.length} ${mesesVendas.length===1?'mês carregado':'meses carregados'} de ${esc(payload.fonte)}.`, 'success');
+    autoClear();
+    return true;
+
+  } catch(e) {
+    showAlert(`Erro ao carregar (${step}): ${esc(e.message)}`, 'error');
+    setEmpty('❌','Falha na leitura dos dados',
+      `Etapa: <strong>${esc(step)}</strong> — ${esc(e.message)}. Se você abriu o arquivo direto do disco (file://), o navegador bloqueia o fetch: publique no GitHub Pages ou use um servidor local.`);
+    console.error('loadDados:', step, e);
+    return false;
+  }
+}
+
+/* ============================================================
+   AUTO-REFRESH — verifica a cada 2 min se há dados novos
+   Atualiza sozinho, preservando o período e a aba do usuário.
+============================================================ */
+let atualizando = false;   // guarda contra requisições concorrentes (render/toast duplicado)
+async function checkForUpdates(){
+  if (atualizando) return;
+  atualizando = true;
+  try {
+    const res = await fetch(`${FIN_DATA}?t=${Date.now()}`, { cache:'no-store' });
+    if (!res.ok) return;
+    const payload = await res.json();
+    if (!payload.meses || !payload.meses.length) return;
+    if (payload.savedAt === lastSavedAt) return;   // nada mudou
+
+    /* Preserva o período selecionado e o mês do ativo */
+    const savedFrom  = document.getElementById('fFrom').value;
+    const savedTo    = document.getElementById('fTo').value;
+    const savedAtivo = document.getElementById('fAtivoMes').value;
+
+    lastSavedAt = payload.savedAt;
+    ingest(payload);
+    if (!mesesVendas.length) return;
+
+    initFilters();                                  // reconstrói mantendo seleção válida
+    const validos = mesesVendas.map(m => String(m.mes));
+    if (validos.includes(savedFrom)) document.getElementById('fFrom').value = savedFrom;
+    if (validos.includes(savedTo))   document.getElementById('fTo').value   = savedTo;
+    applyFilters();
+    mostrarDashboard();   // recupera a tela caso a carga inicial tenha falhado
+    /* Restaura o mês do ativo se ele continuar válido */
+    const selAtivo = document.getElementById('fAtivoMes');
+    if (savedAtivo && [...selAtivo.options].some(o => o.value === savedAtivo)) {
+      selAtivo.value = savedAtivo;
+      if (TAB === 'detalhado') renderAtivoBloco();
+    }
+
+    document.getElementById('lastUpdTime').textContent =
+      new Date(payload.savedAt).toLocaleString('pt-BR');
+    const hora = new Date().toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit' });
+    showAlert(`Dados atualizados às ${hora}.`, 'success');
+    autoClear();
+  } catch(e) {
+    /* Falha de rede não deve incomodar o usuário — apenas registra no console */
+    console.warn('checkForUpdates:', e.message);
+  } finally {
+    atualizando = false;
+  }
+}
+
+/* ============================================================
+   AUTO-RELOAD — detecta nova versão do dashboard e recarrega
+============================================================ */
+async function checkAppVersion(){
+  try {
+    /* HEAD: só precisamos dos headers, não do corpo (economiza ~97 KB por verificação) */
+    const r  = await fetch(`${location.pathname}?v=${Date.now()}`, { method:'HEAD', cache:'no-store' });
+    const et = r.headers.get('etag') || r.headers.get('last-modified');
+    if (!et) return;
+    if (appETag === null) { appETag = et; return; }   // baseline na 1ª verificação
+    if (et !== appETag) {
+      /* Exige 2 leituras iguais e diferentes da baseline antes de recarregar:
+         evita loop de reload por ETag instável atrás de CDN. */
+      if (etagPendente === et) location.replace(`${location.pathname}?v=${Date.now()}`);
+      else etagPendente = et;
+    } else {
+      etagPendente = null;
+    }
+  } catch(e) {
+    console.warn('checkAppVersion:', e.message);
+  }
+}
+let etagPendente = null;
+
+/* Redesenha os gráficos quando a janela muda de tamanho de forma relevante */
+let resizeTimer = null;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => { if (FIN) renderChartsAtivos(); }, 250);
+});
+
+/* ============================================================
+   INICIALIZAÇÃO
+============================================================ */
+(async () => {
+  await loadDados();
+  if (window.__noChart) {
+    showAlert('Biblioteca de gráficos bloqueada pela rede — as tabelas continuam funcionando.', 'warning');
+  }
+  await checkAppVersion();   // captura o ETag da versão atual (baseline)
+
+  /* A cada 2 min: dados novos E nova versão do dashboard */
+  setInterval(() => { checkForUpdates(); checkAppVersion(); }, 120000);
+
+  /* Revalida imediatamente quando o usuário volta para a aba.
+     visibilitychange e focus disparam juntos — o debounce evita a requisição dobrada. */
+  let ultimoPoke = 0;
+  const poke = () => {
+    const t = Date.now();
+    if (t - ultimoPoke < 3000) return;
+    ultimoPoke = t;
+    checkForUpdates();
+    checkAppVersion();
+  };
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') poke();
+  });
+  window.addEventListener('focus', poke);
+})();
+</script>
+</body>
+</html>

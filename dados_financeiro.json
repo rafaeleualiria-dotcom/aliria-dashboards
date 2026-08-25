@@ -1,0 +1,3178 @@
+{
+  "savedAt": "2026-08-25T14:57:34.613Z",
+  "version": 1,
+  "fonte": "Aliria Controle Final_v1 - 2026 V4.xlsx",
+  "ano": 2026,
+  "meses": [
+    {
+      "mes": 1,
+      "label": "Jan/2026",
+      "dataFim": "2026-01-31",
+      "vendasPreenchido": true,
+      "ativoPreenchido": true,
+      "vendas": {
+        "valorTotal": 2204840.48,
+        "totalCompra": 1867262.53,
+        "icmsEntrada": 105493.91,
+        "icmsSaida": 125792.7,
+        "difal": 65761.21,
+        "irpjCsll": 73200.7,
+        "cartao": 0.0,
+        "cr": 0.0,
+        "frete": 0.0,
+        "resultado": 178317.24,
+        "margemPct": 0.080875
+      },
+      "licitacao": {
+        "vendas": 379056.46,
+        "resultado": 40788.3,
+        "margemPct": 0.107605
+      },
+      "aliria": {
+        "vendas": 1825784.02,
+        "resultado": 137528.94,
+        "margemPct": 0.075326
+      },
+      "difalNaoPago": 0.0,
+      "aliquotas": {
+        "icms": 0.009206,
+        "difal": 0.029826,
+        "irpjCsll": 0.0332
+      },
+      "despesas": [
+        {
+          "categoria": "ALUGUEL / CONDOMINIO /",
+          "valor": -13094.22
+        },
+        {
+          "categoria": "LUZ / AGUA / TELEFONE / INTERNET",
+          "valor": -2488.74
+        },
+        {
+          "categoria": "SISTEMAS / TI",
+          "valor": -2483.44
+        },
+        {
+          "categoria": "ESTRUTURAL",
+          "valor": -9378.19
+        },
+        {
+          "categoria": "CONTABILIDADE",
+          "valor": -2873.23
+        },
+        {
+          "categoria": "MARKETING / BRANDING",
+          "valor": -600.0
+        },
+        {
+          "categoria": "EFFECTI",
+          "valor": -1799.0
+        },
+        {
+          "categoria": "AFYA (CLIQUE FARMA)",
+          "valor": 0.0
+        },
+        {
+          "categoria": "FARMAINDEX",
+          "valor": -500.0
+        },
+        {
+          "categoria": "COTA MEDICAMENTOS",
+          "valor": -1923.75
+        },
+        {
+          "categoria": "RAFA NEVES + DANTE (ROBO)",
+          "valor": 0.0
+        },
+        {
+          "categoria": "ARTUR - CONSULTA",
+          "valor": -2000.0
+        },
+        {
+          "categoria": "JOANA",
+          "valor": -7559.62
+        },
+        {
+          "categoria": "IMPOSTOS - FGTS",
+          "valor": -3061.69
+        },
+        {
+          "categoria": "VINICIUS",
+          "valor": -17982.56
+        },
+        {
+          "categoria": "IZA",
+          "valor": -7424.0
+        },
+        {
+          "categoria": "RAFAEL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "INGRID",
+          "valor": 0.0
+        },
+        {
+          "categoria": "ALEXANDRE",
+          "valor": -3030.47
+        },
+        {
+          "categoria": "CASSIANA",
+          "valor": -2016.31
+        },
+        {
+          "categoria": "LUANA",
+          "valor": -1998.57
+        },
+        {
+          "categoria": "AUGUSTO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IZABELLA FERREIRA",
+          "valor": -2299.32
+        },
+        {
+          "categoria": "KLISSIA",
+          "valor": -3598.62
+        },
+        {
+          "categoria": "REBECA",
+          "valor": -4279.6
+        },
+        {
+          "categoria": "GEORGEA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "MANOELA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "BENEFÍCIOS",
+          "valor": -12814.22
+        },
+        {
+          "categoria": "RELACIONAMENTO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "VIAGENS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RECEITA DE VENDAS",
+          "valor": 1521305.12
+        },
+        {
+          "categoria": "DEVOLUCAO VENDAS",
+          "valor": -12330.0
+        },
+        {
+          "categoria": "COMPRAS (VENDAS)",
+          "valor": -1597421.57
+        },
+        {
+          "categoria": "IMPOSTOS - DCTF",
+          "valor": -11817.09
+        },
+        {
+          "categoria": "IMPOSTOS - ICMS",
+          "valor": -2749.09
+        },
+        {
+          "categoria": "IMPOSTOS - CSLL",
+          "valor": -61237.32
+        },
+        {
+          "categoria": "IMPOSTOS - IRPJ",
+          "valor": -113185.15
+        },
+        {
+          "categoria": "IMPOSTOS - ISS",
+          "valor": -640.93
+        },
+        {
+          "categoria": "DIFAL",
+          "valor": -92939.46
+        },
+        {
+          "categoria": "FRETE",
+          "valor": -10050.33
+        },
+        {
+          "categoria": "COMISSAO",
+          "valor": -180.0
+        },
+        {
+          "categoria": "APLICACAO ITAU PRIVILEGE",
+          "valor": -1056922.09
+        },
+        {
+          "categoria": "RESGATE ITAU PRIVILEGE",
+          "valor": 1538912.02
+        },
+        {
+          "categoria": "APP AUTOMATICA",
+          "valor": 0.05
+        },
+        {
+          "categoria": "TARIFAS BANCARIAS",
+          "valor": -9.89
+        }
+      ],
+      "despesaTotal": -2471.28,
+      "checkReconciliacao": 0.0,
+      "sgna": -125252.97,
+      "resultadoOperacional": 53064.27,
+      "ativo": {
+        "caixa": 0.25,
+        "privilegeDi": 259827.0,
+        "aReceberItau": 0.0,
+        "aReceberAsaas": 23653.01,
+        "aReceberLicitacoes": 652986.16,
+        "aReceberEpharma": 23982.0,
+        "aReceberUnimed": 95518.0,
+        "aReceberSami": 152282.59,
+        "aReceberScSaude": 0.0,
+        "aReceberAlice": 1646569.0,
+        "depositadoNaoIdentificado": 55444.4,
+        "aPagarFornecedores": -1965730.0,
+        "icms": -20298.79,
+        "irpjCsll": -73200.7,
+        "difalAPagar": -65761.21,
+        "docAPagar": -3600.0,
+        "difalRetido": 906419.55,
+        "estoque": 358885.0,
+        "loggo": 28748.68
+      },
+      "liquidez": 151997.03,
+      "liquidezComDifal": 1058416.59,
+      "liquidezComDifalPlanilha": 1058416.59,
+      "correcaoScSaude": 0
+    },
+    {
+      "mes": 2,
+      "label": "Fev/2026",
+      "dataFim": "2026-02-28",
+      "vendasPreenchido": true,
+      "ativoPreenchido": true,
+      "vendas": {
+        "valorTotal": 2403700.89,
+        "totalCompra": 1984889.62,
+        "icmsEntrada": 101926.92,
+        "icmsSaida": 125547.61,
+        "difal": 77594.27,
+        "irpjCsll": 80855.33,
+        "cartao": 0.0,
+        "cr": 0.0,
+        "frete": 598.6,
+        "resultado": 236142.38,
+        "margemPct": 0.098241
+      },
+      "licitacao": {
+        "vendas": 307118.3,
+        "resultado": 77853.9,
+        "margemPct": 0.253498
+      },
+      "aliria": {
+        "vendas": 2096582.59,
+        "resultado": 158288.48,
+        "margemPct": 0.075498
+      },
+      "difalNaoPago": 0.0,
+      "aliquotas": {
+        "icms": 0.009827,
+        "difal": 0.032281,
+        "irpjCsll": 0.033638
+      },
+      "despesas": [
+        {
+          "categoria": "ALUGUEL / CONDOMINIO /",
+          "valor": -14256.34
+        },
+        {
+          "categoria": "LUZ / AGUA / TELEFONE / INTERNET",
+          "valor": -1586.37
+        },
+        {
+          "categoria": "SISTEMAS / TI",
+          "valor": -3107.43
+        },
+        {
+          "categoria": "ESTRUTURAL",
+          "valor": -25886.03
+        },
+        {
+          "categoria": "CONTABILIDADE",
+          "valor": -3462.23
+        },
+        {
+          "categoria": "MARKETING / BRANDING",
+          "valor": -600.0
+        },
+        {
+          "categoria": "EFFECTI",
+          "valor": -1799.0
+        },
+        {
+          "categoria": "AFYA (CLIQUE FARMA)",
+          "valor": -122.96
+        },
+        {
+          "categoria": "FARMAINDEX",
+          "valor": 0.0
+        },
+        {
+          "categoria": "COTA MEDICAMENTOS",
+          "valor": -855.0
+        },
+        {
+          "categoria": "RAFA NEVES + DANTE (ROBO)",
+          "valor": 0.0
+        },
+        {
+          "categoria": "ARTUR - CONSULTA",
+          "valor": -1600.0
+        },
+        {
+          "categoria": "JOANA",
+          "valor": -3043.55
+        },
+        {
+          "categoria": "IMPOSTOS - FGTS",
+          "valor": -3189.52
+        },
+        {
+          "categoria": "VINICIUS",
+          "valor": -18000.0
+        },
+        {
+          "categoria": "IZA",
+          "valor": -12390.0
+        },
+        {
+          "categoria": "RAFAEL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "INGRID",
+          "valor": 0.0
+        },
+        {
+          "categoria": "ALEXANDRE",
+          "valor": -2826.64
+        },
+        {
+          "categoria": "CASSIANA",
+          "valor": -2938.44
+        },
+        {
+          "categoria": "LUANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "AUGUSTO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IZABELLA FERREIRA",
+          "valor": -2461.76
+        },
+        {
+          "categoria": "KLISSIA",
+          "valor": -3643.62
+        },
+        {
+          "categoria": "REBECA",
+          "valor": -4042.56
+        },
+        {
+          "categoria": "GEORGEA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "MANOELA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "BENEFÍCIOS",
+          "valor": -17199.44
+        },
+        {
+          "categoria": "RELACIONAMENTO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "VIAGENS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RECEITA DE VENDAS",
+          "valor": 2643706.79
+        },
+        {
+          "categoria": "DEVOLUCAO VENDAS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "COMPRAS (VENDAS)",
+          "valor": -1566880.29
+        },
+        {
+          "categoria": "IMPOSTOS - DCTF",
+          "valor": -10067.76
+        },
+        {
+          "categoria": "IMPOSTOS - ICMS",
+          "valor": -13436.24
+        },
+        {
+          "categoria": "IMPOSTOS - CSLL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - IRPJ",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - ISS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "DIFAL",
+          "valor": -72988.25
+        },
+        {
+          "categoria": "FRETE",
+          "valor": -7550.46
+        },
+        {
+          "categoria": "COMISSAO",
+          "valor": -423.86
+        },
+        {
+          "categoria": "APLICACAO ITAU PRIVILEGE",
+          "valor": -1270891.93
+        },
+        {
+          "categoria": "RESGATE ITAU PRIVILEGE",
+          "valor": 423575.97
+        },
+        {
+          "categoria": "APP AUTOMATICA",
+          "valor": 1.32
+        },
+        {
+          "categoria": "TARIFAS BANCARIAS",
+          "valor": -2034.34
+        }
+      ],
+      "despesaTotal": 0.06,
+      "checkReconciliacao": 0.0,
+      "sgna": -141052.97,
+      "resultadoOperacional": 95089.41,
+      "ativo": {
+        "caixa": 0.07,
+        "privilegeDi": 1108113.96,
+        "aReceberItau": 0.0,
+        "aReceberAsaas": 4228.99,
+        "aReceberLicitacoes": 496108.42,
+        "aReceberEpharma": 2376.18,
+        "aReceberUnimed": 50809.0,
+        "aReceberSami": 269390.0,
+        "aReceberScSaude": 0.0,
+        "aReceberAlice": 1533237.0,
+        "depositadoNaoIdentificado": 55444.4,
+        "aPagarFornecedores": -2622647.54,
+        "icms": -23620.69,
+        "irpjCsll": -154056.04,
+        "difalAPagar": -77594.27,
+        "docAPagar": -3600.0,
+        "difalRetido": 906419.55,
+        "estoque": 608465.66,
+        "loggo": 28244.35
+      },
+      "liquidez": 257591.14,
+      "liquidezComDifal": 1164010.7,
+      "liquidezComDifalPlanilha": 1164010.7,
+      "correcaoScSaude": 0
+    },
+    {
+      "mes": 3,
+      "label": "Mar/2026",
+      "dataFim": "2026-03-31",
+      "vendasPreenchido": true,
+      "ativoPreenchido": true,
+      "vendas": {
+        "valorTotal": 2720515.49,
+        "totalCompra": 2169481.73,
+        "icmsEntrada": 139212.07,
+        "icmsSaida": 172247.28,
+        "difal": 96309.72,
+        "irpjCsll": 90321.11,
+        "cartao": 0.0,
+        "cr": 9640.8,
+        "frete": 0.0,
+        "resultado": 321726.92,
+        "margemPct": 0.11826
+      },
+      "licitacao": {
+        "vendas": 610090.44,
+        "resultado": 99505.11,
+        "margemPct": 0.163099
+      },
+      "aliria": {
+        "vendas": 2110425.05,
+        "resultado": 222221.81,
+        "margemPct": 0.105297
+      },
+      "difalNaoPago": 0.0,
+      "aliquotas": {
+        "icms": 0.012143,
+        "difal": 0.035401,
+        "irpjCsll": 0.0332
+      },
+      "despesas": [
+        {
+          "categoria": "ALUGUEL / CONDOMINIO /",
+          "valor": -15037.99
+        },
+        {
+          "categoria": "LUZ / AGUA / TELEFONE / INTERNET",
+          "valor": -4068.19
+        },
+        {
+          "categoria": "SISTEMAS / TI",
+          "valor": -17558.68
+        },
+        {
+          "categoria": "ESTRUTURAL",
+          "valor": -20562.79
+        },
+        {
+          "categoria": "CONTABILIDADE",
+          "valor": -2873.23
+        },
+        {
+          "categoria": "MARKETING / BRANDING",
+          "valor": -844.65
+        },
+        {
+          "categoria": "EFFECTI",
+          "valor": -1799.0
+        },
+        {
+          "categoria": "AFYA (CLIQUE FARMA)",
+          "valor": -44.53
+        },
+        {
+          "categoria": "FARMAINDEX",
+          "valor": 0.0
+        },
+        {
+          "categoria": "COTA MEDICAMENTOS",
+          "valor": -1282.5
+        },
+        {
+          "categoria": "RAFA NEVES + DANTE (ROBO)",
+          "valor": 0.0
+        },
+        {
+          "categoria": "ARTUR - CONSULTA",
+          "valor": -1600.0
+        },
+        {
+          "categoria": "JOANA",
+          "valor": -5154.32
+        },
+        {
+          "categoria": "IMPOSTOS - FGTS",
+          "valor": -1741.05
+        },
+        {
+          "categoria": "VINICIUS",
+          "valor": -17955.0
+        },
+        {
+          "categoria": "IZA",
+          "valor": -11608.0
+        },
+        {
+          "categoria": "RAFAEL",
+          "valor": -3408.76
+        },
+        {
+          "categoria": "INGRID",
+          "valor": -732.0
+        },
+        {
+          "categoria": "ALEXANDRE",
+          "valor": -3383.11
+        },
+        {
+          "categoria": "CASSIANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "LUANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "AUGUSTO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IZABELLA FERREIRA",
+          "valor": -2214.32
+        },
+        {
+          "categoria": "KLISSIA",
+          "valor": -3643.62
+        },
+        {
+          "categoria": "REBECA",
+          "valor": -4167.2
+        },
+        {
+          "categoria": "GEORGEA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "MANOELA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "BENEFÍCIOS",
+          "valor": -18395.58
+        },
+        {
+          "categoria": "RELACIONAMENTO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "VIAGENS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RECEITA DE VENDAS",
+          "valor": 2098033.41
+        },
+        {
+          "categoria": "DEVOLUCAO VENDAS",
+          "valor": -50794.0
+        },
+        {
+          "categoria": "COMPRAS (VENDAS)",
+          "valor": -2244996.18
+        },
+        {
+          "categoria": "IMPOSTOS - DCTF",
+          "valor": -9311.33
+        },
+        {
+          "categoria": "IMPOSTOS - ICMS",
+          "valor": -13965.94
+        },
+        {
+          "categoria": "IMPOSTOS - CSLL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - IRPJ",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - ISS",
+          "valor": -1429.02
+        },
+        {
+          "categoria": "DIFAL",
+          "valor": -86182.28
+        },
+        {
+          "categoria": "FRETE",
+          "valor": -6373.85
+        },
+        {
+          "categoria": "COMISSAO",
+          "valor": -12270.0
+        },
+        {
+          "categoria": "APLICACAO ITAU PRIVILEGE",
+          "valor": -1133739.21
+        },
+        {
+          "categoria": "RESGATE ITAU PRIVILEGE",
+          "valor": 1600875.79
+        },
+        {
+          "categoria": "APP AUTOMATICA",
+          "valor": 0.05
+        },
+        {
+          "categoria": "TARIFAS BANCARIAS",
+          "valor": -125.58
+        }
+      ],
+      "despesaTotal": 1647.34,
+      "checkReconciliacao": 0.0,
+      "sgna": -166029.7,
+      "resultadoOperacional": 155697.22,
+      "ativo": {
+        "caixa": 0.01,
+        "privilegeDi": 644599.78,
+        "aReceberItau": 0.0,
+        "aReceberAsaas": 403289.62,
+        "aReceberLicitacoes": 726798.45,
+        "aReceberEpharma": 28726.05,
+        "aReceberUnimed": 0.0,
+        "aReceberSami": 375854.63,
+        "aReceberScSaude": 0.0,
+        "aReceberAlice": 1380290.17,
+        "depositadoNaoIdentificado": 55444.4,
+        "aPagarFornecedores": -2635242.93,
+        "icms": -33035.21,
+        "irpjCsll": -244377.15,
+        "difalAPagar": -96309.72,
+        "docAPagar": -3600.0,
+        "difalRetido": 906419.55,
+        "estoque": 797946.28,
+        "loggo": 28244.35
+      },
+      "liquidez": 411320.38,
+      "liquidezComDifal": 1317739.93,
+      "liquidezComDifalPlanilha": 1317739.93,
+      "correcaoScSaude": 0
+    },
+    {
+      "mes": 4,
+      "label": "Abr/2026",
+      "dataFim": "2026-04-30",
+      "vendasPreenchido": true,
+      "ativoPreenchido": true,
+      "vendas": {
+        "valorTotal": 3079984.98,
+        "totalCompra": 2455464.89,
+        "icmsEntrada": 119732.95,
+        "icmsSaida": 155406.47,
+        "difal": 102166.94,
+        "irpjCsll": 102255.5,
+        "cartao": 0.0,
+        "cr": 8600.0,
+        "frete": 0.0,
+        "resultado": 375824.13,
+        "margemPct": 0.122021
+      },
+      "licitacao": {
+        "vendas": 1012207.63,
+        "resultado": 179736.17,
+        "margemPct": 0.177568
+      },
+      "aliria": {
+        "vendas": 2067777.35,
+        "resultado": 196087.96,
+        "margemPct": 0.09483
+      },
+      "difalNaoPago": 0.0,
+      "aliquotas": {
+        "icms": 0.011582,
+        "difal": 0.033171,
+        "irpjCsll": 0.0332
+      },
+      "despesas": [
+        {
+          "categoria": "ALUGUEL / CONDOMINIO /",
+          "valor": -13829.08
+        },
+        {
+          "categoria": "LUZ / AGUA / TELEFONE / INTERNET",
+          "valor": -2046.78
+        },
+        {
+          "categoria": "SISTEMAS / TI",
+          "valor": -17636.6
+        },
+        {
+          "categoria": "ESTRUTURAL",
+          "valor": -18251.36
+        },
+        {
+          "categoria": "CONTABILIDADE",
+          "valor": -2873.23
+        },
+        {
+          "categoria": "MARKETING / BRANDING",
+          "valor": -844.65
+        },
+        {
+          "categoria": "EFFECTI",
+          "valor": -1799.0
+        },
+        {
+          "categoria": "AFYA (CLIQUE FARMA)",
+          "valor": -51.78
+        },
+        {
+          "categoria": "FARMAINDEX",
+          "valor": 0.0
+        },
+        {
+          "categoria": "COTA MEDICAMENTOS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RAFA NEVES + DANTE (ROBO)",
+          "valor": 0.0
+        },
+        {
+          "categoria": "ARTUR - CONSULTA",
+          "valor": -1600.0
+        },
+        {
+          "categoria": "JOANA",
+          "valor": -5157.13
+        },
+        {
+          "categoria": "IMPOSTOS - FGTS",
+          "valor": -4229.07
+        },
+        {
+          "categoria": "VINICIUS",
+          "valor": -18000.0
+        },
+        {
+          "categoria": "IZA",
+          "valor": -15103.81
+        },
+        {
+          "categoria": "RAFAEL",
+          "valor": -3643.62
+        },
+        {
+          "categoria": "INGRID",
+          "valor": -3591.42
+        },
+        {
+          "categoria": "ALEXANDRE",
+          "valor": -11430.57
+        },
+        {
+          "categoria": "CASSIANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "LUANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "AUGUSTO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IZABELLA FERREIRA",
+          "valor": -2274.32
+        },
+        {
+          "categoria": "KLISSIA",
+          "valor": -7683.32
+        },
+        {
+          "categoria": "REBECA",
+          "valor": -5042.9
+        },
+        {
+          "categoria": "GEORGEA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "MANOELA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "BENEFÍCIOS",
+          "valor": -17758.76
+        },
+        {
+          "categoria": "RELACIONAMENTO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "VIAGENS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RECEITA DE VENDAS",
+          "valor": 2429762.76
+        },
+        {
+          "categoria": "DEVOLUCAO VENDAS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "COMPRAS (VENDAS)",
+          "valor": -1901568.05
+        },
+        {
+          "categoria": "IMPOSTOS - DCTF",
+          "valor": -9654.24
+        },
+        {
+          "categoria": "IMPOSTOS - ICMS",
+          "valor": -8230.87
+        },
+        {
+          "categoria": "IMPOSTOS - CSLL",
+          "valor": -58132.36
+        },
+        {
+          "categoria": "IMPOSTOS - IRPJ",
+          "valor": -115903.64
+        },
+        {
+          "categoria": "IMPOSTOS - ISS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "DIFAL",
+          "valor": -65757.5
+        },
+        {
+          "categoria": "FRETE",
+          "valor": -6941.29
+        },
+        {
+          "categoria": "COMISSAO",
+          "valor": -8424.5
+        },
+        {
+          "categoria": "APLICACAO ITAU PRIVILEGE",
+          "valor": -1061607.73
+        },
+        {
+          "categoria": "RESGATE ITAU PRIVILEGE",
+          "valor": 963654.61
+        },
+        {
+          "categoria": "APP AUTOMATICA",
+          "valor": 0.32
+        },
+        {
+          "categoria": "TARIFAS BANCARIAS",
+          "valor": -12.5
+        }
+      ],
+      "despesaTotal": 4337.61,
+      "checkReconciliacao": -0.0,
+      "sgna": -177867.43,
+      "resultadoOperacional": 197956.7,
+      "ativo": {
+        "caixa": 5985.02,
+        "privilegeDi": 387570.17,
+        "aReceberItau": 0.0,
+        "aReceberAsaas": 597198.64,
+        "aReceberLicitacoes": 1282147.95,
+        "aReceberEpharma": 12797.62,
+        "aReceberUnimed": 0.0,
+        "aReceberSami": 352449.35,
+        "aReceberScSaude": 0.0,
+        "aReceberAlice": 1613715.91,
+        "depositadoNaoIdentificado": 55444.4,
+        "aPagarFornecedores": -3094066.52,
+        "icms": -35673.52,
+        "irpjCsll": -102255.5,
+        "difalAPagar": -102166.94,
+        "docAPagar": -3600.0,
+        "difalRetido": 906419.55,
+        "estoque": 630054.23,
+        "loggo": 28244.35
+      },
+      "liquidez": 610536.8,
+      "liquidezComDifal": 1516956.36,
+      "liquidezComDifalPlanilha": 1516956.36,
+      "correcaoScSaude": 0
+    },
+    {
+      "mes": 5,
+      "label": "Mai/2026",
+      "dataFim": "2026-05-31",
+      "vendasPreenchido": true,
+      "ativoPreenchido": true,
+      "vendas": {
+        "valorTotal": 3275597.53,
+        "totalCompra": 2648427.56,
+        "icmsEntrada": 158342.75,
+        "icmsSaida": 215036.29,
+        "difal": 70615.71,
+        "irpjCsll": 108749.84,
+        "cartao": 0.0,
+        "cr": 22900.0,
+        "frete": 1580.0,
+        "resultado": 366630.88,
+        "margemPct": 0.111928
+      },
+      "licitacao": {
+        "vendas": 179613.76,
+        "resultado": 26314.81,
+        "margemPct": 0.146508
+      },
+      "aliria": {
+        "vendas": 3095983.77,
+        "resultado": 340316.07,
+        "margemPct": 0.109922
+      },
+      "difalNaoPago": 0.0,
+      "aliquotas": {
+        "icms": 0.017308,
+        "difal": 0.021558,
+        "irpjCsll": 0.0332
+      },
+      "despesas": [
+        {
+          "categoria": "ALUGUEL / CONDOMINIO /",
+          "valor": -15546.18
+        },
+        {
+          "categoria": "LUZ / AGUA / TELEFONE / INTERNET",
+          "valor": -2805.69
+        },
+        {
+          "categoria": "SISTEMAS / TI",
+          "valor": -19295.53
+        },
+        {
+          "categoria": "ESTRUTURAL",
+          "valor": -17400.75
+        },
+        {
+          "categoria": "CONTABILIDADE",
+          "valor": -4051.23
+        },
+        {
+          "categoria": "MARKETING / BRANDING",
+          "valor": -844.65
+        },
+        {
+          "categoria": "EFFECTI",
+          "valor": -2563.1
+        },
+        {
+          "categoria": "AFYA (CLIQUE FARMA)",
+          "valor": 0.0
+        },
+        {
+          "categoria": "FARMAINDEX",
+          "valor": 0.0
+        },
+        {
+          "categoria": "COTA MEDICAMENTOS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RAFA NEVES + DANTE (ROBO)",
+          "valor": 0.0
+        },
+        {
+          "categoria": "ARTUR - CONSULTA",
+          "valor": -1600.0
+        },
+        {
+          "categoria": "JOANA",
+          "valor": -5157.13
+        },
+        {
+          "categoria": "IMPOSTOS - FGTS",
+          "valor": -3315.29
+        },
+        {
+          "categoria": "VINICIUS",
+          "valor": -17940.0
+        },
+        {
+          "categoria": "IZA",
+          "valor": -23562.67
+        },
+        {
+          "categoria": "RAFAEL",
+          "valor": -3643.62
+        },
+        {
+          "categoria": "INGRID",
+          "valor": -3591.42
+        },
+        {
+          "categoria": "ALEXANDRE",
+          "valor": 0.0
+        },
+        {
+          "categoria": "CASSIANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "LUANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "AUGUSTO",
+          "valor": -46537.88
+        },
+        {
+          "categoria": "IZABELLA FERREIRA",
+          "valor": -4167.2
+        },
+        {
+          "categoria": "KLISSIA",
+          "valor": -3820.23
+        },
+        {
+          "categoria": "REBECA",
+          "valor": -5225.69
+        },
+        {
+          "categoria": "GEORGEA",
+          "valor": -838.76
+        },
+        {
+          "categoria": "MANOELA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "BENEFÍCIOS",
+          "valor": -18155.31
+        },
+        {
+          "categoria": "RELACIONAMENTO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "VIAGENS",
+          "valor": -4113.71
+        },
+        {
+          "categoria": "RECEITA DE VENDAS",
+          "valor": 2892795.92
+        },
+        {
+          "categoria": "DEVOLUCAO VENDAS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "COMPRAS (VENDAS)",
+          "valor": -2171992.42
+        },
+        {
+          "categoria": "IMPOSTOS - DCTF",
+          "valor": -10761.07
+        },
+        {
+          "categoria": "IMPOSTOS - ICMS",
+          "valor": -46848.94
+        },
+        {
+          "categoria": "IMPOSTOS - CSLL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - IRPJ",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - ISS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "DIFAL",
+          "valor": -55453.07
+        },
+        {
+          "categoria": "FRETE",
+          "valor": -8494.79
+        },
+        {
+          "categoria": "COMISSAO",
+          "valor": -14465.45
+        },
+        {
+          "categoria": "APLICACAO ITAU PRIVILEGE",
+          "valor": -1548483.6
+        },
+        {
+          "categoria": "RESGATE ITAU PRIVILEGE",
+          "valor": 1161894.45
+        },
+        {
+          "categoria": "APP AUTOMATICA",
+          "valor": 0.03
+        },
+        {
+          "categoria": "TARIFAS BANCARIAS",
+          "valor": -0.04
+        }
+      ],
+      "despesaTotal": -5985.02,
+      "checkReconciliacao": 0.0,
+      "sgna": -191359.47,
+      "resultadoOperacional": 175271.41,
+      "ativo": {
+        "caixa": 0.0,
+        "privilegeDi": 778023.09,
+        "aReceberItau": 0.0,
+        "aReceberAsaas": 1648092.19,
+        "aReceberLicitacoes": 520192.98,
+        "aReceberEpharma": 8547.62,
+        "aReceberUnimed": 0.0,
+        "aReceberSami": 383487.77,
+        "aReceberScSaude": 0.0,
+        "aReceberAlice": 1633641.93,
+        "depositadoNaoIdentificado": 84844.4,
+        "aPagarFornecedores": -3456123.77,
+        "icms": -56693.54,
+        "irpjCsll": -211005.34,
+        "difalAPagar": -70615.71,
+        "docAPagar": -3600.0,
+        "difalRetido": 906419.55,
+        "estoque": 580800.94,
+        "loggo": 28244.35
+      },
+      "liquidez": 791728.55,
+      "liquidezComDifal": 1698148.11,
+      "liquidezComDifalPlanilha": 1698148.11,
+      "correcaoScSaude": 0
+    },
+    {
+      "mes": 6,
+      "label": "Jun/2026",
+      "dataFim": "2026-06-30",
+      "vendasPreenchido": true,
+      "ativoPreenchido": true,
+      "vendas": {
+        "valorTotal": 3095666.52,
+        "totalCompra": 2615523.26,
+        "icmsEntrada": 146592.13,
+        "icmsSaida": 162152.32,
+        "difal": 93672.1,
+        "irpjCsll": 102776.13,
+        "cartao": 0.0,
+        "cr": 1200.0,
+        "frete": 0.0,
+        "resultado": 266934.84,
+        "margemPct": 0.086229
+      },
+      "licitacao": {
+        "vendas": 622731.23,
+        "resultado": 66059.11,
+        "margemPct": 0.10608
+      },
+      "aliria": {
+        "vendas": 2472935.29,
+        "resultado": 200875.73,
+        "margemPct": 0.08123
+      },
+      "difalNaoPago": 0.0,
+      "aliquotas": {
+        "icms": 0.005026,
+        "difal": 0.030259,
+        "irpjCsll": 0.0332
+      },
+      "despesas": [
+        {
+          "categoria": "ALUGUEL / CONDOMINIO /",
+          "valor": -16167.28
+        },
+        {
+          "categoria": "LUZ / AGUA / TELEFONE / INTERNET",
+          "valor": -3529.61
+        },
+        {
+          "categoria": "SISTEMAS / TI",
+          "valor": -2715.07
+        },
+        {
+          "categoria": "ESTRUTURAL",
+          "valor": -32445.17
+        },
+        {
+          "categoria": "CONTABILIDADE",
+          "valor": -2873.23
+        },
+        {
+          "categoria": "MARKETING / BRANDING",
+          "valor": 0.0
+        },
+        {
+          "categoria": "EFFECTI",
+          "valor": -2563.1
+        },
+        {
+          "categoria": "AFYA (CLIQUE FARMA)",
+          "valor": -131.25
+        },
+        {
+          "categoria": "FARMAINDEX",
+          "valor": 0.0
+        },
+        {
+          "categoria": "COTA MEDICAMENTOS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RAFA NEVES + DANTE (ROBO)",
+          "valor": 0.0
+        },
+        {
+          "categoria": "ARTUR - CONSULTA",
+          "valor": -1600.0
+        },
+        {
+          "categoria": "JOANA",
+          "valor": -5071.34
+        },
+        {
+          "categoria": "IMPOSTOS - FGTS",
+          "valor": -14465.51
+        },
+        {
+          "categoria": "VINICIUS",
+          "valor": -17880.0
+        },
+        {
+          "categoria": "IZA",
+          "valor": -9110.0
+        },
+        {
+          "categoria": "RAFAEL",
+          "valor": -3643.62
+        },
+        {
+          "categoria": "INGRID",
+          "valor": -3591.42
+        },
+        {
+          "categoria": "ALEXANDRE",
+          "valor": 0.0
+        },
+        {
+          "categoria": "CASSIANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "LUANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "AUGUSTO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IZABELLA FERREIRA",
+          "valor": -4167.2
+        },
+        {
+          "categoria": "KLISSIA",
+          "valor": -3820.23
+        },
+        {
+          "categoria": "REBECA",
+          "valor": -5225.69
+        },
+        {
+          "categoria": "GEORGEA",
+          "valor": -2274.32
+        },
+        {
+          "categoria": "MANOELA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "BENEFÍCIOS",
+          "valor": -18257.82
+        },
+        {
+          "categoria": "RELACIONAMENTO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "VIAGENS",
+          "valor": -7171.63
+        },
+        {
+          "categoria": "RECEITA DE VENDAS",
+          "valor": 2366055.45
+        },
+        {
+          "categoria": "DEVOLUCAO VENDAS",
+          "valor": -1130.0
+        },
+        {
+          "categoria": "COMPRAS (VENDAS)",
+          "valor": -2521237.97
+        },
+        {
+          "categoria": "IMPOSTOS - DCTF",
+          "valor": -176.49
+        },
+        {
+          "categoria": "IMPOSTOS - ICMS",
+          "valor": -71829.64
+        },
+        {
+          "categoria": "IMPOSTOS - CSLL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - IRPJ",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - ISS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "DIFAL",
+          "valor": -54316.0
+        },
+        {
+          "categoria": "FRETE",
+          "valor": -11172.81
+        },
+        {
+          "categoria": "COMISSAO",
+          "valor": -6906.64
+        },
+        {
+          "categoria": "APLICACAO ITAU PRIVILEGE",
+          "valor": -1577336.91
+        },
+        {
+          "categoria": "RESGATE ITAU PRIVILEGE",
+          "valor": 1970757.42
+        },
+        {
+          "categoria": "APP AUTOMATICA",
+          "valor": 0.1
+        },
+        {
+          "categoria": "TARIFAS BANCARIAS",
+          "valor": -210.9
+        }
+      ],
+      "despesaTotal": -64207.88,
+      "checkReconciliacao": 0.0,
+      "sgna": -156879.98,
+      "resultadoOperacional": 110054.86,
+      "ativo": {
+        "caixa": 0.0,
+        "privilegeDi": 321959.99,
+        "aReceberItau": 287004.46,
+        "aReceberAsaas": 1128994.98,
+        "aReceberLicitacoes": 928237.36,
+        "aReceberEpharma": 4750.0,
+        "aReceberUnimed": 0.0,
+        "aReceberSami": 497129.06,
+        "aReceberScSaude": 0.0,
+        "aReceberAlice": 1966025.79,
+        "depositadoNaoIdentificado": 55444.4,
+        "aPagarFornecedores": -3293275.02,
+        "icms": -15560.19,
+        "irpjCsll": -313781.47,
+        "difalAPagar": -93672.1,
+        "docAPagar": 0.0,
+        "difalRetido": 906419.55,
+        "estoque": 416545.02,
+        "loggo": 28244.35
+      },
+      "liquidez": 900738.28,
+      "liquidezComDifal": 1807157.83,
+      "liquidezComDifalPlanilha": 1807157.83,
+      "correcaoScSaude": 0
+    },
+    {
+      "mes": 7,
+      "label": "Jul/2026",
+      "dataFim": "2026-07-31",
+      "vendasPreenchido": true,
+      "ativoPreenchido": true,
+      "vendas": {
+        "valorTotal": 3225156.57,
+        "totalCompra": 2587083.75,
+        "icmsEntrada": 188036.22,
+        "icmsSaida": 197297.5,
+        "difal": 123644.46,
+        "irpjCsll": 107075.2,
+        "cartao": 0.0,
+        "cr": 3500.0,
+        "frete": 0.0,
+        "resultado": 394591.88,
+        "margemPct": 0.122348
+      },
+      "licitacao": {
+        "vendas": 425626.9,
+        "resultado": 94900.84,
+        "margemPct": 0.222967
+      },
+      "aliria": {
+        "vendas": 2799529.67,
+        "resultado": 299691.04,
+        "margemPct": 0.10705
+      },
+      "difalNaoPago": 0.0,
+      "aliquotas": {
+        "icms": 0.002872,
+        "difal": 0.038338,
+        "irpjCsll": 0.0332
+      },
+      "despesas": [
+        {
+          "categoria": "ALUGUEL / CONDOMINIO /",
+          "valor": -19815.02
+        },
+        {
+          "categoria": "LUZ / AGUA / TELEFONE / INTERNET",
+          "valor": -1587.59
+        },
+        {
+          "categoria": "SISTEMAS / TI",
+          "valor": -2448.87
+        },
+        {
+          "categoria": "ESTRUTURAL",
+          "valor": -23566.12
+        },
+        {
+          "categoria": "CONTABILIDADE",
+          "valor": -2873.23
+        },
+        {
+          "categoria": "MARKETING / BRANDING",
+          "valor": 0.0
+        },
+        {
+          "categoria": "EFFECTI",
+          "valor": -2563.1
+        },
+        {
+          "categoria": "AFYA (CLIQUE FARMA)",
+          "valor": -78.14
+        },
+        {
+          "categoria": "FARMAINDEX",
+          "valor": 0.0
+        },
+        {
+          "categoria": "COTA MEDICAMENTOS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RAFA NEVES + DANTE (ROBO)",
+          "valor": 0.0
+        },
+        {
+          "categoria": "ARTUR - CONSULTA",
+          "valor": -1600.0
+        },
+        {
+          "categoria": "JOANA",
+          "valor": -7004.92
+        },
+        {
+          "categoria": "IMPOSTOS - FGTS",
+          "valor": -2644.3
+        },
+        {
+          "categoria": "VINICIUS",
+          "valor": -17790.0
+        },
+        {
+          "categoria": "IZA",
+          "valor": -16177.71
+        },
+        {
+          "categoria": "RAFAEL",
+          "valor": -3643.62
+        },
+        {
+          "categoria": "INGRID",
+          "valor": -3591.42
+        },
+        {
+          "categoria": "ALEXANDRE",
+          "valor": 0.0
+        },
+        {
+          "categoria": "CASSIANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "LUANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "AUGUSTO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IZABELLA FERREIRA",
+          "valor": -4120.42
+        },
+        {
+          "categoria": "KLISSIA",
+          "valor": -3775.23
+        },
+        {
+          "categoria": "REBECA",
+          "valor": -5180.69
+        },
+        {
+          "categoria": "GEORGEA",
+          "valor": -67.01
+        },
+        {
+          "categoria": "MANOELA",
+          "valor": -1387.5
+        },
+        {
+          "categoria": "BENEFÍCIOS",
+          "valor": -19072.43
+        },
+        {
+          "categoria": "RELACIONAMENTO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "VIAGENS",
+          "valor": -1141.58
+        },
+        {
+          "categoria": "RECEITA DE VENDAS",
+          "valor": 4241212.28
+        },
+        {
+          "categoria": "DEVOLUCAO VENDAS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "COMPRAS (VENDAS)",
+          "valor": -3109942.82
+        },
+        {
+          "categoria": "IMPOSTOS - DCTF",
+          "valor": -12808.14
+        },
+        {
+          "categoria": "IMPOSTOS - ICMS",
+          "valor": -27013.42
+        },
+        {
+          "categoria": "IMPOSTOS - CSLL",
+          "valor": -174642.46
+        },
+        {
+          "categoria": "IMPOSTOS - IRPJ",
+          "valor": -91749.62
+        },
+        {
+          "categoria": "IMPOSTOS - ISS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "DIFAL",
+          "valor": -63573.19
+        },
+        {
+          "categoria": "FRETE",
+          "valor": -8104.64
+        },
+        {
+          "categoria": "COMISSAO",
+          "valor": -904.79
+        },
+        {
+          "categoria": "APLICACAO ITAU PRIVILEGE",
+          "valor": -2759118.84
+        },
+        {
+          "categoria": "RESGATE ITAU PRIVILEGE",
+          "valor": 2211231.59
+        },
+        {
+          "categoria": "APP AUTOMATICA",
+          "valor": 0.31
+        },
+        {
+          "categoria": "TARIFAS BANCARIAS",
+          "valor": -249.48
+        }
+      ],
+      "despesaTotal": 64207.88,
+      "checkReconciliacao": 0.0,
+      "sgna": -152937.04,
+      "resultadoOperacional": 241654.84,
+      "ativo": {
+        "caixa": 0.0,
+        "privilegeDi": 922663.69,
+        "aReceberItau": 960831.38,
+        "aReceberAsaas": 206638.64,
+        "aReceberLicitacoes": 587681.18,
+        "aReceberEpharma": 4750.0,
+        "aReceberUnimed": 0.0,
+        "aReceberSami": 380696.71,
+        "aReceberScSaude": 22241.68,
+        "aReceberAlice": 1802063.41,
+        "depositadoNaoIdentificado": 55444.4,
+        "aPagarFornecedores": -3231025.17,
+        "icms": -9261.28,
+        "irpjCsll": -107075.2,
+        "difalAPagar": -123644.46,
+        "docAPagar": 0.0,
+        "difalRetido": 906419.55,
+        "estoque": 660169.1,
+        "loggo": 28244.35
+      },
+      "liquidez": 1143110.07,
+      "liquidezComDifal": 2049529.63,
+      "liquidezComDifalPlanilha": 2049529.63,
+      "correcaoScSaude": 0
+    },
+    {
+      "mes": 8,
+      "label": "Ago/2026",
+      "dataFim": "2026-08-31",
+      "vendasPreenchido": true,
+      "ativoPreenchido": false,
+      "vendas": {
+        "valorTotal": 2257956.68,
+        "totalCompra": 1878920.45,
+        "icmsEntrada": 105673.9,
+        "icmsSaida": 130985.3,
+        "difal": 97127.87,
+        "irpjCsll": 74964.16,
+        "cartao": 0.0,
+        "cr": 0.0,
+        "frete": 0.0,
+        "resultado": 181632.8,
+        "margemPct": 0.080441
+      },
+      "licitacao": {
+        "vendas": 369002.67,
+        "resultado": 38444.63,
+        "margemPct": 0.104185
+      },
+      "aliria": {
+        "vendas": 1888954.01,
+        "resultado": 143188.17,
+        "margemPct": 0.075803
+      },
+      "difalNaoPago": 0.0,
+      "aliquotas": {
+        "icms": 0.01121,
+        "difal": 0.043016,
+        "irpjCsll": 0.0332
+      },
+      "despesas": [
+        {
+          "categoria": "ALUGUEL / CONDOMINIO /",
+          "valor": -6838.57
+        },
+        {
+          "categoria": "LUZ / AGUA / TELEFONE / INTERNET",
+          "valor": -371.56
+        },
+        {
+          "categoria": "SISTEMAS / TI",
+          "valor": -865.44
+        },
+        {
+          "categoria": "ESTRUTURAL",
+          "valor": -11025.0
+        },
+        {
+          "categoria": "CONTABILIDADE",
+          "valor": -2379.93
+        },
+        {
+          "categoria": "MARKETING / BRANDING",
+          "valor": 0.0
+        },
+        {
+          "categoria": "EFFECTI",
+          "valor": 0.0
+        },
+        {
+          "categoria": "AFYA (CLIQUE FARMA)",
+          "valor": 0.0
+        },
+        {
+          "categoria": "FARMAINDEX",
+          "valor": 0.0
+        },
+        {
+          "categoria": "COTA MEDICAMENTOS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RAFA NEVES + DANTE (ROBO)",
+          "valor": 0.0
+        },
+        {
+          "categoria": "ARTUR - CONSULTA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "JOANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - FGTS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "VINICIUS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IZA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RAFAEL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "INGRID",
+          "valor": 0.0
+        },
+        {
+          "categoria": "ALEXANDRE",
+          "valor": 0.0
+        },
+        {
+          "categoria": "CASSIANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "LUANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "AUGUSTO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IZABELLA FERREIRA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "KLISSIA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "REBECA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "GEORGEA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "MANOELA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "BENEFÍCIOS",
+          "valor": -150.55
+        },
+        {
+          "categoria": "RELACIONAMENTO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "VIAGENS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RECEITA DE VENDAS",
+          "valor": 1097679.65
+        },
+        {
+          "categoria": "DEVOLUCAO VENDAS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "COMPRAS (VENDAS)",
+          "valor": -626450.94
+        },
+        {
+          "categoria": "IMPOSTOS - DCTF",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - ICMS",
+          "valor": -3340.3
+        },
+        {
+          "categoria": "IMPOSTOS - CSLL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - IRPJ",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - ISS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "DIFAL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "FRETE",
+          "valor": -5070.56
+        },
+        {
+          "categoria": "COMISSAO",
+          "valor": -14183.39
+        },
+        {
+          "categoria": "APLICACAO ITAU PRIVILEGE",
+          "valor": -729477.5
+        },
+        {
+          "categoria": "RESGATE ITAU PRIVILEGE",
+          "valor": 302495.02
+        },
+        {
+          "categoria": "APP AUTOMATICA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "TARIFAS BANCARIAS",
+          "valor": 0.0
+        }
+      ],
+      "despesaTotal": 20.93,
+      "checkReconciliacao": -0.0,
+      "sgna": -21631.05,
+      "resultadoOperacional": 160001.75,
+      "ativo": {
+        "caixa": 0,
+        "privilegeDi": 0,
+        "aReceberItau": 0,
+        "aReceberAsaas": 0,
+        "aReceberLicitacoes": 0,
+        "aReceberEpharma": 0,
+        "aReceberUnimed": 0,
+        "aReceberSami": 0,
+        "aReceberScSaude": 0,
+        "aReceberAlice": 0,
+        "depositadoNaoIdentificado": 0,
+        "aPagarFornecedores": 0,
+        "icms": 0,
+        "irpjCsll": 0,
+        "difalAPagar": 0,
+        "docAPagar": 0,
+        "difalRetido": 0,
+        "estoque": 0,
+        "loggo": 0
+      },
+      "liquidez": null,
+      "liquidezComDifal": null,
+      "liquidezComDifalPlanilha": null,
+      "correcaoScSaude": 0
+    },
+    {
+      "mes": 9,
+      "label": "Set/2026",
+      "dataFim": "2026-09-30",
+      "vendasPreenchido": false,
+      "ativoPreenchido": false,
+      "vendas": {
+        "valorTotal": 0.0,
+        "totalCompra": 0.0,
+        "icmsEntrada": 0.0,
+        "icmsSaida": 0.0,
+        "difal": 0.0,
+        "irpjCsll": 0.0,
+        "cartao": 0.0,
+        "cr": 0.0,
+        "frete": 0.0,
+        "resultado": 0.0,
+        "margemPct": null
+      },
+      "licitacao": {
+        "vendas": 0.0,
+        "resultado": 0.0,
+        "margemPct": null
+      },
+      "aliria": {
+        "vendas": 0.0,
+        "resultado": 0.0,
+        "margemPct": null
+      },
+      "difalNaoPago": 0.0,
+      "aliquotas": {
+        "icms": null,
+        "difal": null,
+        "irpjCsll": null
+      },
+      "despesas": [
+        {
+          "categoria": "ALUGUEL / CONDOMINIO /",
+          "valor": 0.0
+        },
+        {
+          "categoria": "LUZ / AGUA / TELEFONE / INTERNET",
+          "valor": 0.0
+        },
+        {
+          "categoria": "SISTEMAS / TI",
+          "valor": 0.0
+        },
+        {
+          "categoria": "ESTRUTURAL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "CONTABILIDADE",
+          "valor": 0.0
+        },
+        {
+          "categoria": "MARKETING / BRANDING",
+          "valor": 0.0
+        },
+        {
+          "categoria": "EFFECTI",
+          "valor": 0.0
+        },
+        {
+          "categoria": "AFYA (CLIQUE FARMA)",
+          "valor": 0.0
+        },
+        {
+          "categoria": "FARMAINDEX",
+          "valor": 0.0
+        },
+        {
+          "categoria": "COTA MEDICAMENTOS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RAFA NEVES + DANTE (ROBO)",
+          "valor": 0.0
+        },
+        {
+          "categoria": "ARTUR - CONSULTA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "JOANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - FGTS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "VINICIUS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IZA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RAFAEL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "INGRID",
+          "valor": 0.0
+        },
+        {
+          "categoria": "ALEXANDRE",
+          "valor": 0.0
+        },
+        {
+          "categoria": "CASSIANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "LUANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "AUGUSTO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IZABELLA FERREIRA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "KLISSIA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "REBECA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "GEORGEA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "MANOELA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "BENEFÍCIOS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RELACIONAMENTO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "VIAGENS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RECEITA DE VENDAS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "DEVOLUCAO VENDAS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "COMPRAS (VENDAS)",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - DCTF",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - ICMS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - CSLL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - IRPJ",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - ISS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "DIFAL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "FRETE",
+          "valor": 0.0
+        },
+        {
+          "categoria": "COMISSAO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "APLICACAO ITAU PRIVILEGE",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RESGATE ITAU PRIVILEGE",
+          "valor": 0.0
+        },
+        {
+          "categoria": "APP AUTOMATICA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "TARIFAS BANCARIAS",
+          "valor": 0.0
+        }
+      ],
+      "despesaTotal": 0.0,
+      "checkReconciliacao": 0.0,
+      "sgna": 0.0,
+      "resultadoOperacional": 0.0,
+      "ativo": {
+        "caixa": 0,
+        "privilegeDi": 0,
+        "aReceberItau": 0,
+        "aReceberAsaas": 0,
+        "aReceberLicitacoes": 0,
+        "aReceberEpharma": 0,
+        "aReceberUnimed": 0,
+        "aReceberSami": 0,
+        "aReceberScSaude": 0,
+        "aReceberAlice": 0,
+        "depositadoNaoIdentificado": 0,
+        "aPagarFornecedores": 0,
+        "icms": 0,
+        "irpjCsll": 0,
+        "difalAPagar": 0,
+        "docAPagar": 0,
+        "difalRetido": 0,
+        "estoque": 0,
+        "loggo": 0
+      },
+      "liquidez": null,
+      "liquidezComDifal": null,
+      "liquidezComDifalPlanilha": null,
+      "correcaoScSaude": 0
+    },
+    {
+      "mes": 10,
+      "label": "Out/2026",
+      "dataFim": "2026-10-31",
+      "vendasPreenchido": false,
+      "ativoPreenchido": false,
+      "vendas": {
+        "valorTotal": 0.0,
+        "totalCompra": 0.0,
+        "icmsEntrada": 0.0,
+        "icmsSaida": 0.0,
+        "difal": 0.0,
+        "irpjCsll": 0.0,
+        "cartao": 0.0,
+        "cr": 0.0,
+        "frete": 0.0,
+        "resultado": 0.0,
+        "margemPct": null
+      },
+      "licitacao": {
+        "vendas": 0.0,
+        "resultado": 0.0,
+        "margemPct": null
+      },
+      "aliria": {
+        "vendas": 0.0,
+        "resultado": 0.0,
+        "margemPct": null
+      },
+      "difalNaoPago": 0.0,
+      "aliquotas": {
+        "icms": null,
+        "difal": null,
+        "irpjCsll": null
+      },
+      "despesas": [
+        {
+          "categoria": "ALUGUEL / CONDOMINIO /",
+          "valor": 0.0
+        },
+        {
+          "categoria": "LUZ / AGUA / TELEFONE / INTERNET",
+          "valor": 0.0
+        },
+        {
+          "categoria": "SISTEMAS / TI",
+          "valor": 0.0
+        },
+        {
+          "categoria": "ESTRUTURAL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "CONTABILIDADE",
+          "valor": 0.0
+        },
+        {
+          "categoria": "MARKETING / BRANDING",
+          "valor": 0.0
+        },
+        {
+          "categoria": "EFFECTI",
+          "valor": 0.0
+        },
+        {
+          "categoria": "AFYA (CLIQUE FARMA)",
+          "valor": 0.0
+        },
+        {
+          "categoria": "FARMAINDEX",
+          "valor": 0.0
+        },
+        {
+          "categoria": "COTA MEDICAMENTOS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RAFA NEVES + DANTE (ROBO)",
+          "valor": 0.0
+        },
+        {
+          "categoria": "ARTUR - CONSULTA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "JOANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - FGTS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "VINICIUS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IZA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RAFAEL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "INGRID",
+          "valor": 0.0
+        },
+        {
+          "categoria": "ALEXANDRE",
+          "valor": 0.0
+        },
+        {
+          "categoria": "CASSIANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "LUANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "AUGUSTO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IZABELLA FERREIRA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "KLISSIA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "REBECA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "GEORGEA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "MANOELA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "BENEFÍCIOS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RELACIONAMENTO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "VIAGENS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RECEITA DE VENDAS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "DEVOLUCAO VENDAS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "COMPRAS (VENDAS)",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - DCTF",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - ICMS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - CSLL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - IRPJ",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - ISS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "DIFAL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "FRETE",
+          "valor": 0.0
+        },
+        {
+          "categoria": "COMISSAO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "APLICACAO ITAU PRIVILEGE",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RESGATE ITAU PRIVILEGE",
+          "valor": 0.0
+        },
+        {
+          "categoria": "APP AUTOMATICA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "TARIFAS BANCARIAS",
+          "valor": 0.0
+        }
+      ],
+      "despesaTotal": 0.0,
+      "checkReconciliacao": 0.0,
+      "sgna": 0.0,
+      "resultadoOperacional": 0.0,
+      "ativo": {
+        "caixa": 0,
+        "privilegeDi": 0,
+        "aReceberItau": 0,
+        "aReceberAsaas": 0,
+        "aReceberLicitacoes": 0,
+        "aReceberEpharma": 0,
+        "aReceberUnimed": 0,
+        "aReceberSami": 0,
+        "aReceberScSaude": 0,
+        "aReceberAlice": 0,
+        "depositadoNaoIdentificado": 0,
+        "aPagarFornecedores": 0,
+        "icms": 0,
+        "irpjCsll": 0,
+        "difalAPagar": 0,
+        "docAPagar": 0,
+        "difalRetido": 0,
+        "estoque": 0,
+        "loggo": 0
+      },
+      "liquidez": null,
+      "liquidezComDifal": null,
+      "liquidezComDifalPlanilha": null,
+      "correcaoScSaude": 0
+    },
+    {
+      "mes": 11,
+      "label": "Nov/2026",
+      "dataFim": "2026-11-30",
+      "vendasPreenchido": false,
+      "ativoPreenchido": false,
+      "vendas": {
+        "valorTotal": 0.0,
+        "totalCompra": 0.0,
+        "icmsEntrada": 0.0,
+        "icmsSaida": 0.0,
+        "difal": 0.0,
+        "irpjCsll": 0.0,
+        "cartao": 0.0,
+        "cr": 0.0,
+        "frete": 0.0,
+        "resultado": 0.0,
+        "margemPct": null
+      },
+      "licitacao": {
+        "vendas": 0.0,
+        "resultado": 0.0,
+        "margemPct": null
+      },
+      "aliria": {
+        "vendas": 0.0,
+        "resultado": 0.0,
+        "margemPct": null
+      },
+      "difalNaoPago": 0.0,
+      "aliquotas": {
+        "icms": null,
+        "difal": null,
+        "irpjCsll": null
+      },
+      "despesas": [
+        {
+          "categoria": "ALUGUEL / CONDOMINIO /",
+          "valor": 0.0
+        },
+        {
+          "categoria": "LUZ / AGUA / TELEFONE / INTERNET",
+          "valor": 0.0
+        },
+        {
+          "categoria": "SISTEMAS / TI",
+          "valor": 0.0
+        },
+        {
+          "categoria": "ESTRUTURAL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "CONTABILIDADE",
+          "valor": 0.0
+        },
+        {
+          "categoria": "MARKETING / BRANDING",
+          "valor": 0.0
+        },
+        {
+          "categoria": "EFFECTI",
+          "valor": 0.0
+        },
+        {
+          "categoria": "AFYA (CLIQUE FARMA)",
+          "valor": 0.0
+        },
+        {
+          "categoria": "FARMAINDEX",
+          "valor": 0.0
+        },
+        {
+          "categoria": "COTA MEDICAMENTOS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RAFA NEVES + DANTE (ROBO)",
+          "valor": 0.0
+        },
+        {
+          "categoria": "ARTUR - CONSULTA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "JOANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - FGTS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "VINICIUS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IZA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RAFAEL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "INGRID",
+          "valor": 0.0
+        },
+        {
+          "categoria": "ALEXANDRE",
+          "valor": 0.0
+        },
+        {
+          "categoria": "CASSIANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "LUANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "AUGUSTO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IZABELLA FERREIRA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "KLISSIA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "REBECA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "GEORGEA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "MANOELA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "BENEFÍCIOS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RELACIONAMENTO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "VIAGENS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RECEITA DE VENDAS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "DEVOLUCAO VENDAS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "COMPRAS (VENDAS)",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - DCTF",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - ICMS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - CSLL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - IRPJ",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - ISS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "DIFAL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "FRETE",
+          "valor": 0.0
+        },
+        {
+          "categoria": "COMISSAO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "APLICACAO ITAU PRIVILEGE",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RESGATE ITAU PRIVILEGE",
+          "valor": 0.0
+        },
+        {
+          "categoria": "APP AUTOMATICA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "TARIFAS BANCARIAS",
+          "valor": 0.0
+        }
+      ],
+      "despesaTotal": 0.0,
+      "checkReconciliacao": 0.0,
+      "sgna": 0.0,
+      "resultadoOperacional": 0.0,
+      "ativo": {
+        "caixa": 0,
+        "privilegeDi": 0,
+        "aReceberItau": 0,
+        "aReceberAsaas": 0,
+        "aReceberLicitacoes": 0,
+        "aReceberEpharma": 0,
+        "aReceberUnimed": 0,
+        "aReceberSami": 0,
+        "aReceberScSaude": 0,
+        "aReceberAlice": 0,
+        "depositadoNaoIdentificado": 0,
+        "aPagarFornecedores": 0,
+        "icms": 0,
+        "irpjCsll": 0,
+        "difalAPagar": 0,
+        "docAPagar": 0,
+        "difalRetido": 0,
+        "estoque": 0,
+        "loggo": 0
+      },
+      "liquidez": null,
+      "liquidezComDifal": null,
+      "liquidezComDifalPlanilha": null,
+      "correcaoScSaude": 0
+    },
+    {
+      "mes": 12,
+      "label": "Dez/2026",
+      "dataFim": "2026-12-31",
+      "vendasPreenchido": false,
+      "ativoPreenchido": false,
+      "vendas": {
+        "valorTotal": 0.0,
+        "totalCompra": 0.0,
+        "icmsEntrada": 0.0,
+        "icmsSaida": 0.0,
+        "difal": 0.0,
+        "irpjCsll": 0.0,
+        "cartao": 0.0,
+        "cr": 0.0,
+        "frete": 0.0,
+        "resultado": 0.0,
+        "margemPct": null
+      },
+      "licitacao": {
+        "vendas": 0.0,
+        "resultado": 0.0,
+        "margemPct": null
+      },
+      "aliria": {
+        "vendas": 0.0,
+        "resultado": 0.0,
+        "margemPct": null
+      },
+      "difalNaoPago": 0.0,
+      "aliquotas": {
+        "icms": null,
+        "difal": null,
+        "irpjCsll": null
+      },
+      "despesas": [
+        {
+          "categoria": "ALUGUEL / CONDOMINIO /",
+          "valor": 0.0
+        },
+        {
+          "categoria": "LUZ / AGUA / TELEFONE / INTERNET",
+          "valor": 0.0
+        },
+        {
+          "categoria": "SISTEMAS / TI",
+          "valor": 0.0
+        },
+        {
+          "categoria": "ESTRUTURAL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "CONTABILIDADE",
+          "valor": 0.0
+        },
+        {
+          "categoria": "MARKETING / BRANDING",
+          "valor": 0.0
+        },
+        {
+          "categoria": "EFFECTI",
+          "valor": 0.0
+        },
+        {
+          "categoria": "AFYA (CLIQUE FARMA)",
+          "valor": 0.0
+        },
+        {
+          "categoria": "FARMAINDEX",
+          "valor": 0.0
+        },
+        {
+          "categoria": "COTA MEDICAMENTOS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RAFA NEVES + DANTE (ROBO)",
+          "valor": 0.0
+        },
+        {
+          "categoria": "ARTUR - CONSULTA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "JOANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - FGTS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "VINICIUS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IZA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RAFAEL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "INGRID",
+          "valor": 0.0
+        },
+        {
+          "categoria": "ALEXANDRE",
+          "valor": 0.0
+        },
+        {
+          "categoria": "CASSIANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "LUANA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "AUGUSTO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IZABELLA FERREIRA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "KLISSIA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "REBECA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "GEORGEA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "MANOELA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "BENEFÍCIOS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RELACIONAMENTO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "VIAGENS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RECEITA DE VENDAS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "DEVOLUCAO VENDAS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "COMPRAS (VENDAS)",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - DCTF",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - ICMS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - CSLL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - IRPJ",
+          "valor": 0.0
+        },
+        {
+          "categoria": "IMPOSTOS - ISS",
+          "valor": 0.0
+        },
+        {
+          "categoria": "DIFAL",
+          "valor": 0.0
+        },
+        {
+          "categoria": "FRETE",
+          "valor": 0.0
+        },
+        {
+          "categoria": "COMISSAO",
+          "valor": 0.0
+        },
+        {
+          "categoria": "APLICACAO ITAU PRIVILEGE",
+          "valor": 0.0
+        },
+        {
+          "categoria": "RESGATE ITAU PRIVILEGE",
+          "valor": 0.0
+        },
+        {
+          "categoria": "APP AUTOMATICA",
+          "valor": 0.0
+        },
+        {
+          "categoria": "TARIFAS BANCARIAS",
+          "valor": 0.0
+        }
+      ],
+      "despesaTotal": 0.0,
+      "checkReconciliacao": 0.0,
+      "sgna": 0.0,
+      "resultadoOperacional": 0.0,
+      "ativo": {
+        "caixa": 0,
+        "privilegeDi": 0,
+        "aReceberItau": 0,
+        "aReceberAsaas": 0,
+        "aReceberLicitacoes": 0,
+        "aReceberEpharma": 0,
+        "aReceberUnimed": 0,
+        "aReceberSami": 0,
+        "aReceberScSaude": 0,
+        "aReceberAlice": 0,
+        "depositadoNaoIdentificado": 0,
+        "aPagarFornecedores": 0,
+        "icms": 0,
+        "irpjCsll": 0,
+        "difalAPagar": 0,
+        "docAPagar": 0,
+        "difalRetido": 0,
+        "estoque": 0,
+        "loggo": 0
+      },
+      "liquidez": null,
+      "liquidezComDifal": null,
+      "liquidezComDifalPlanilha": null,
+      "correcaoScSaude": 0
+    }
+  ],
+  "anual": {
+    "vendas": 22263419.14,
+    "resultado": 2321801.07,
+    "margemPct": 0.104288,
+    "licitacao": 3905447.39,
+    "resultadoLicitacao": 623602.87,
+    "aliria": 18357971.75,
+    "resultadoAliria": 1698198.2,
+    "sgna": -1133010.61,
+    "resultadoOperacional": 1188790.46,
+    "despesas": [
+      {
+        "categoria": "ALUGUEL / CONDOMINIO /",
+        "valor": -114584.68
+      },
+      {
+        "categoria": "LUZ / AGUA / TELEFONE / INTERNET",
+        "valor": -18484.53
+      },
+      {
+        "categoria": "SISTEMAS / TI",
+        "valor": -66111.06
+      },
+      {
+        "categoria": "ESTRUTURAL",
+        "valor": -158515.41
+      },
+      {
+        "categoria": "CONTABILIDADE",
+        "valor": -24259.54
+      },
+      {
+        "categoria": "MARKETING / BRANDING",
+        "valor": -3733.95
+      },
+      {
+        "categoria": "EFFECTI",
+        "valor": -14885.3
+      },
+      {
+        "categoria": "AFYA (CLIQUE FARMA)",
+        "valor": -428.66
+      },
+      {
+        "categoria": "FARMAINDEX",
+        "valor": -500.0
+      },
+      {
+        "categoria": "COTA MEDICAMENTOS",
+        "valor": -4061.25
+      },
+      {
+        "categoria": "RAFA NEVES + DANTE (ROBO)",
+        "valor": 0.0
+      },
+      {
+        "categoria": "ARTUR - CONSULTA",
+        "valor": -11600.0
+      },
+      {
+        "categoria": "JOANA",
+        "valor": -38148.01
+      },
+      {
+        "categoria": "IMPOSTOS - FGTS",
+        "valor": -32646.43
+      },
+      {
+        "categoria": "VINICIUS",
+        "valor": -125547.56
+      },
+      {
+        "categoria": "IZA",
+        "valor": -95376.19
+      },
+      {
+        "categoria": "RAFAEL",
+        "valor": -17983.24
+      },
+      {
+        "categoria": "INGRID",
+        "valor": -15097.68
+      },
+      {
+        "categoria": "ALEXANDRE",
+        "valor": -20670.79
+      },
+      {
+        "categoria": "CASSIANA",
+        "valor": -4954.75
+      },
+      {
+        "categoria": "LUANA",
+        "valor": -1998.57
+      },
+      {
+        "categoria": "AUGUSTO",
+        "valor": -46537.88
+      },
+      {
+        "categoria": "IZABELLA FERREIRA",
+        "valor": -21704.54
+      },
+      {
+        "categoria": "KLISSIA",
+        "valor": -29984.87
+      },
+      {
+        "categoria": "REBECA",
+        "valor": -33164.33
+      },
+      {
+        "categoria": "GEORGEA",
+        "valor": -3180.09
+      },
+      {
+        "categoria": "MANOELA",
+        "valor": -1387.5
+      },
+      {
+        "categoria": "BENEFÍCIOS",
+        "valor": -121804.11
+      },
+      {
+        "categoria": "RELACIONAMENTO",
+        "valor": 0.0
+      },
+      {
+        "categoria": "VIAGENS",
+        "valor": -12426.92
+      },
+      {
+        "categoria": "RECEITA DE VENDAS",
+        "valor": 19290551.38
+      },
+      {
+        "categoria": "DEVOLUCAO VENDAS",
+        "valor": -64254.0
+      },
+      {
+        "categoria": "COMPRAS (VENDAS)",
+        "valor": -15740490.24
+      },
+      {
+        "categoria": "IMPOSTOS - DCTF",
+        "valor": -64596.12
+      },
+      {
+        "categoria": "IMPOSTOS - ICMS",
+        "valor": -187414.44
+      },
+      {
+        "categoria": "IMPOSTOS - CSLL",
+        "valor": -294012.14
+      },
+      {
+        "categoria": "IMPOSTOS - IRPJ",
+        "valor": -320838.41
+      },
+      {
+        "categoria": "IMPOSTOS - ISS",
+        "valor": -2069.95
+      },
+      {
+        "categoria": "DIFAL",
+        "valor": -491209.75
+      },
+      {
+        "categoria": "FRETE",
+        "valor": -63758.73
+      },
+      {
+        "categoria": "COMISSAO",
+        "valor": -57758.63
+      },
+      {
+        "categoria": "APLICACAO ITAU PRIVILEGE",
+        "valor": -11137577.81
+      },
+      {
+        "categoria": "RESGATE ITAU PRIVILEGE",
+        "valor": 10173396.87
+      },
+      {
+        "categoria": "APP AUTOMATICA",
+        "valor": 2.18
+      },
+      {
+        "categoria": "TARIFAS BANCARIAS",
+        "valor": -2642.73
+      }
+    ]
+  },
+  "validacao": {
+    "mesesComVendas": 8,
+    "mesesComAtivo": 7,
+    "checkReconciliacaoMax": 0.0,
+    "liquidezConfere": true,
+    "avisos": [
+      "Despesa 'AUGUSTO' (linha 58): coluna Q (total anual) esta VAZIA na planilha, mas os meses somam -46537.88.",
+      "Meses com vendas mas SEM Evolucao do Ativo (ocultar na visao de liquidez): Ago/2026.",
+      "Somar os 19 componentes JA ARREDONDADOS de 'ativo' devolve ate 0.01 de diferenca vs 'liquidez' (a planilha soma em precisao total). Use o campo 'liquidez' direto; nao recalcule no front-end.",
+      "'despesaTotal' e a soma liquida de TODAS as linhas 36..84 do extrato (inclui RECEITA DE VENDAS, COMPRAS, APLICACAO/RESGATE ITAU) = movimento liquido de caixa, NAO despesa operacional. Para despesa operacional use 'sgna'.",
+      "Liquidez com DIFAL (linha 115) = Liquidez (linha 114) + DIFAL Retido. Conferido na formula literal: nenhum item e omitido pela planilha. Os campos 'liquidezComDifal' e 'liquidezComDifalPlanilha' sao identicos."
+    ]
+  }
+}
