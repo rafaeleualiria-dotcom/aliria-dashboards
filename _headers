@@ -1,0 +1,17 @@
+# Cabecalhos servidos pelo Cloudflare Pages (arquivo _headers)
+# Objetivo: os JSON de dados nunca ficam em cache (o dashboard sempre le a versao recem-publicada),
+# e nenhuma pagina pode ser embutida em iframe de outro site.
+
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: same-origin
+
+/dados.json
+  Cache-Control: no-store
+
+/dados_financeiro.json
+  Cache-Control: no-store
+
+/*.html
+  Cache-Control: no-cache

@@ -1869,7 +1869,10 @@ async function loadDados(){
   let step = 'início';
   try {
     step = 'fetch';
-    const res = await fetch(`${FIN_DATA}?t=${Date.now()}`, { cache:'no-store' });
+    // redirect:'manual' — sessão de acesso expirada (Cloudflare Access) vira redirect
+    // para login; detectamos e recarregamos a página para a pessoa entrar de novo.
+    const res = await fetch(`${FIN_DATA}?t=${Date.now()}`, { cache:'no-store', redirect:'manual' });
+    if (res.type === 'opaqueredirect' || res.status === 0) { location.reload(); return false; }
 
     step = `status ${res.status}`;
     if (!res.ok) {
@@ -1926,7 +1929,9 @@ async function checkForUpdates(){
   if (atualizando) return;
   atualizando = true;
   try {
-    const res = await fetch(`${FIN_DATA}?t=${Date.now()}`, { cache:'no-store' });
+    const res = await fetch(`${FIN_DATA}?t=${Date.now()}`, { cache:'no-store', redirect:'manual' });
+    // Sessão de acesso expirou (redirect para login) → recarrega para autenticar de novo
+    if (res.type === 'opaqueredirect' || res.status === 0) { location.reload(); return; }
     if (!res.ok) return;
     const payload = await res.json();
     if (!payload.meses || !payload.meses.length) return;

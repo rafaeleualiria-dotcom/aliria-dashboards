@@ -1444,11 +1444,15 @@ async function loadFromGitHub() {
     // Leitura via raw.githubusercontent (CDN público, sem limite de 60/h da API).
     // Cache-buster (?t=) garante que a versão mais recente seja sempre buscada.
     step = 'fetch';
-    const res = await fetch(`${GH_DATA}?t=${Date.now()}`, { cache: 'no-store' });
+    // redirect:'manual' — se a sessão de acesso (Cloudflare Access) expirou, o servidor
+    // responde com redirect para a tela de login; detectamos e recarregamos a página
+    // para a pessoa entrar de novo, em vez de mostrar um erro sem sentido.
+    const res = await fetch(`${GH_DATA}?t=${Date.now()}`, { cache: 'no-store', redirect: 'manual' });
+    if (res.type === 'opaqueredirect' || res.status === 0) { location.reload(); return; }
 
     step = `status ${res.status}`;
     if (!res.ok) {
-      showAlert(`Erro ao carregar dados: GitHub retornou ${res.status}`, 'error');
+      showAlert(`Erro ao carregar dados: o servidor retornou ${res.status}`, 'error');
       return;
     }
 
@@ -1485,7 +1489,9 @@ async function loadFromGitHub() {
 ============================================================ */
 async function checkForUpdates() {
   try {
-    const res = await fetch(`${GH_DATA}?t=${Date.now()}`, { cache: 'no-store' });
+    const res = await fetch(`${GH_DATA}?t=${Date.now()}`, { cache: 'no-store', redirect: 'manual' });
+    // Sessão de acesso expirou (redirect para login) → recarrega para autenticar de novo
+    if (res.type === 'opaqueredirect' || res.status === 0) { location.reload(); return; }
     if (!res.ok) return;
     const payload = await res.json();
     if (!payload.records || !payload.records.length) return;
