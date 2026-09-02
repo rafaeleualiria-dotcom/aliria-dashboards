@@ -1,5 +1,5 @@
 {
-  "savedAt": "2026-08-25T14:57:34.613Z",
+  "savedAt": "2026-09-02T15:40:34.168Z",
   "version": 1,
   "fonte": "Aliria Controle Final_v1 - 2026 V4.xlsx",
   "ano": 2026,
@@ -89,64 +89,16 @@
           "valor": -2000.0
         },
         {
-          "categoria": "JOANA",
-          "valor": -7559.62
+          "categoria": "SALÁRIOS",
+          "valor": -24782.51
         },
         {
           "categoria": "IMPOSTOS - FGTS",
           "valor": -3061.69
         },
         {
-          "categoria": "VINICIUS",
-          "valor": -17982.56
-        },
-        {
-          "categoria": "IZA",
-          "valor": -7424.0
-        },
-        {
-          "categoria": "RAFAEL",
-          "valor": 0.0
-        },
-        {
-          "categoria": "INGRID",
-          "valor": 0.0
-        },
-        {
-          "categoria": "ALEXANDRE",
-          "valor": -3030.47
-        },
-        {
-          "categoria": "CASSIANA",
-          "valor": -2016.31
-        },
-        {
-          "categoria": "LUANA",
-          "valor": -1998.57
-        },
-        {
-          "categoria": "AUGUSTO",
-          "valor": 0.0
-        },
-        {
-          "categoria": "IZABELLA FERREIRA",
-          "valor": -2299.32
-        },
-        {
-          "categoria": "KLISSIA",
-          "valor": -3598.62
-        },
-        {
-          "categoria": "REBECA",
-          "valor": -4279.6
-        },
-        {
-          "categoria": "GEORGEA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "MANOELA",
-          "valor": 0.0
+          "categoria": "SÓCIOS",
+          "valor": -25406.56
         },
         {
           "categoria": "BENEFÍCIOS",
@@ -336,64 +288,16 @@
           "valor": -1600.0
         },
         {
-          "categoria": "JOANA",
-          "valor": -3043.55
+          "categoria": "SALÁRIOS",
+          "valor": -18956.57
         },
         {
           "categoria": "IMPOSTOS - FGTS",
           "valor": -3189.52
         },
         {
-          "categoria": "VINICIUS",
-          "valor": -18000.0
-        },
-        {
-          "categoria": "IZA",
-          "valor": -12390.0
-        },
-        {
-          "categoria": "RAFAEL",
-          "valor": 0.0
-        },
-        {
-          "categoria": "INGRID",
-          "valor": 0.0
-        },
-        {
-          "categoria": "ALEXANDRE",
-          "valor": -2826.64
-        },
-        {
-          "categoria": "CASSIANA",
-          "valor": -2938.44
-        },
-        {
-          "categoria": "LUANA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "AUGUSTO",
-          "valor": 0.0
-        },
-        {
-          "categoria": "IZABELLA FERREIRA",
-          "valor": -2461.76
-        },
-        {
-          "categoria": "KLISSIA",
-          "valor": -3643.62
-        },
-        {
-          "categoria": "REBECA",
-          "valor": -4042.56
-        },
-        {
-          "categoria": "GEORGEA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "MANOELA",
-          "valor": 0.0
+          "categoria": "SÓCIOS",
+          "valor": -30390.0
         },
         {
           "categoria": "BENEFÍCIOS",
@@ -583,64 +487,16 @@
           "valor": -1600.0
         },
         {
-          "categoria": "JOANA",
-          "valor": -5154.32
+          "categoria": "SALÁRIOS",
+          "valor": -22703.33
         },
         {
           "categoria": "IMPOSTOS - FGTS",
           "valor": -1741.05
         },
         {
-          "categoria": "VINICIUS",
-          "valor": -17955.0
-        },
-        {
-          "categoria": "IZA",
-          "valor": -11608.0
-        },
-        {
-          "categoria": "RAFAEL",
-          "valor": -3408.76
-        },
-        {
-          "categoria": "INGRID",
-          "valor": -732.0
-        },
-        {
-          "categoria": "ALEXANDRE",
-          "valor": -3383.11
-        },
-        {
-          "categoria": "CASSIANA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "LUANA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "AUGUSTO",
-          "valor": 0.0
-        },
-        {
-          "categoria": "IZABELLA FERREIRA",
-          "valor": -2214.32
-        },
-        {
-          "categoria": "KLISSIA",
-          "valor": -3643.62
-        },
-        {
-          "categoria": "REBECA",
-          "valor": -4167.2
-        },
-        {
-          "categoria": "GEORGEA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "MANOELA",
-          "valor": 0.0
+          "categoria": "SÓCIOS",
+          "valor": -29563.0
         },
         {
           "categoria": "BENEFÍCIOS",
@@ -830,64 +686,16 @@
           "valor": -1600.0
         },
         {
-          "categoria": "JOANA",
-          "valor": -5157.13
+          "categoria": "SALÁRIOS",
+          "valor": -38823.28
         },
         {
           "categoria": "IMPOSTOS - FGTS",
           "valor": -4229.07
         },
         {
-          "categoria": "VINICIUS",
-          "valor": -18000.0
-        },
-        {
-          "categoria": "IZA",
-          "valor": -15103.81
-        },
-        {
-          "categoria": "RAFAEL",
-          "valor": -3643.62
-        },
-        {
-          "categoria": "INGRID",
-          "valor": -3591.42
-        },
-        {
-          "categoria": "ALEXANDRE",
-          "valor": -11430.57
-        },
-        {
-          "categoria": "CASSIANA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "LUANA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "AUGUSTO",
-          "valor": 0.0
-        },
-        {
-          "categoria": "IZABELLA FERREIRA",
-          "valor": -2274.32
-        },
-        {
-          "categoria": "KLISSIA",
-          "valor": -7683.32
-        },
-        {
-          "categoria": "REBECA",
-          "valor": -5042.9
-        },
-        {
-          "categoria": "GEORGEA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "MANOELA",
-          "valor": 0.0
+          "categoria": "SÓCIOS",
+          "valor": -33103.81
         },
         {
           "categoria": "BENEFÍCIOS",
@@ -1077,64 +885,16 @@
           "valor": -1600.0
         },
         {
-          "categoria": "JOANA",
-          "valor": -5157.13
+          "categoria": "SALÁRIOS",
+          "valor": -26444.05
         },
         {
           "categoria": "IMPOSTOS - FGTS",
-          "valor": -3315.29
+          "valor": -3501.49
         },
         {
-          "categoria": "VINICIUS",
-          "valor": -17940.0
-        },
-        {
-          "categoria": "IZA",
-          "valor": -23562.67
-        },
-        {
-          "categoria": "RAFAEL",
-          "valor": -3643.62
-        },
-        {
-          "categoria": "INGRID",
-          "valor": -3591.42
-        },
-        {
-          "categoria": "ALEXANDRE",
-          "valor": 0.0
-        },
-        {
-          "categoria": "CASSIANA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "LUANA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "AUGUSTO",
-          "valor": -46537.88
-        },
-        {
-          "categoria": "IZABELLA FERREIRA",
-          "valor": -4167.2
-        },
-        {
-          "categoria": "KLISSIA",
-          "valor": -3820.23
-        },
-        {
-          "categoria": "REBECA",
-          "valor": -5225.69
-        },
-        {
-          "categoria": "GEORGEA",
-          "valor": -838.76
-        },
-        {
-          "categoria": "MANOELA",
-          "valor": 0.0
+          "categoria": "SÓCIOS",
+          "valor": -88040.55
         },
         {
           "categoria": "BENEFÍCIOS",
@@ -1162,7 +922,7 @@
         },
         {
           "categoria": "IMPOSTOS - DCTF",
-          "valor": -10761.07
+          "valor": -10574.87
         },
         {
           "categoria": "IMPOSTOS - ICMS",
@@ -1211,8 +971,8 @@
       ],
       "despesaTotal": -5985.02,
       "checkReconciliacao": 0.0,
-      "sgna": -191359.47,
-      "resultadoOperacional": 175271.41,
+      "sgna": -237897.35,
+      "resultadoOperacional": 128733.53,
       "ativo": {
         "caixa": 0.0,
         "privilegeDi": 778023.09,
@@ -1324,64 +1084,16 @@
           "valor": -1600.0
         },
         {
-          "categoria": "JOANA",
-          "valor": -5071.34
+          "categoria": "SALÁRIOS",
+          "valor": -27793.82
         },
         {
           "categoria": "IMPOSTOS - FGTS",
-          "valor": -14465.51
+          "valor": -14642.0
         },
         {
-          "categoria": "VINICIUS",
-          "valor": -17880.0
-        },
-        {
-          "categoria": "IZA",
-          "valor": -9110.0
-        },
-        {
-          "categoria": "RAFAEL",
-          "valor": -3643.62
-        },
-        {
-          "categoria": "INGRID",
-          "valor": -3591.42
-        },
-        {
-          "categoria": "ALEXANDRE",
-          "valor": 0.0
-        },
-        {
-          "categoria": "CASSIANA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "LUANA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "AUGUSTO",
-          "valor": 0.0
-        },
-        {
-          "categoria": "IZABELLA FERREIRA",
-          "valor": -4167.2
-        },
-        {
-          "categoria": "KLISSIA",
-          "valor": -3820.23
-        },
-        {
-          "categoria": "REBECA",
-          "valor": -5225.69
-        },
-        {
-          "categoria": "GEORGEA",
-          "valor": -2274.32
-        },
-        {
-          "categoria": "MANOELA",
-          "valor": 0.0
+          "categoria": "SÓCIOS",
+          "valor": -26990.0
         },
         {
           "categoria": "BENEFÍCIOS",
@@ -1409,7 +1121,7 @@
         },
         {
           "categoria": "IMPOSTOS - DCTF",
-          "valor": -176.49
+          "valor": 0.0
         },
         {
           "categoria": "IMPOSTOS - ICMS",
@@ -1571,64 +1283,16 @@
           "valor": -1600.0
         },
         {
-          "categoria": "JOANA",
-          "valor": -7004.92
+          "categoria": "SALÁRIOS",
+          "valor": -27383.31
         },
         {
           "categoria": "IMPOSTOS - FGTS",
           "valor": -2644.3
         },
         {
-          "categoria": "VINICIUS",
-          "valor": -17790.0
-        },
-        {
-          "categoria": "IZA",
-          "valor": -16177.71
-        },
-        {
-          "categoria": "RAFAEL",
-          "valor": -3643.62
-        },
-        {
-          "categoria": "INGRID",
-          "valor": -3591.42
-        },
-        {
-          "categoria": "ALEXANDRE",
-          "valor": 0.0
-        },
-        {
-          "categoria": "CASSIANA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "LUANA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "AUGUSTO",
-          "valor": 0.0
-        },
-        {
-          "categoria": "IZABELLA FERREIRA",
-          "valor": -4120.42
-        },
-        {
-          "categoria": "KLISSIA",
-          "valor": -3775.23
-        },
-        {
-          "categoria": "REBECA",
-          "valor": -5180.69
-        },
-        {
-          "categoria": "GEORGEA",
-          "valor": -67.01
-        },
-        {
-          "categoria": "MANOELA",
-          "valor": -1387.5
+          "categoria": "SÓCIOS",
+          "valor": -33967.71
         },
         {
           "categoria": "BENEFÍCIOS",
@@ -1703,10 +1367,10 @@
           "valor": -249.48
         }
       ],
-      "despesaTotal": 64207.88,
-      "checkReconciliacao": 0.0,
-      "sgna": -152937.04,
-      "resultadoOperacional": 241654.84,
+      "despesaTotal": 65595.38,
+      "checkReconciliacao": 1387.5,
+      "sgna": -151549.54,
+      "resultadoOperacional": 243042.34,
       "ativo": {
         "caixa": 0.0,
         "privilegeDi": 922663.69,
@@ -1740,50 +1404,50 @@
       "vendasPreenchido": true,
       "ativoPreenchido": false,
       "vendas": {
-        "valorTotal": 2257956.68,
-        "totalCompra": 1878920.45,
-        "icmsEntrada": 105673.9,
-        "icmsSaida": 130985.3,
-        "difal": 97127.87,
-        "irpjCsll": 74964.16,
+        "valorTotal": 3285424.13,
+        "totalCompra": 2738336.97,
+        "icmsEntrada": 153009.25,
+        "icmsSaida": 189870.31,
+        "difal": 130370.06,
+        "irpjCsll": 109076.08,
         "cartao": 0.0,
         "cr": 0.0,
         "frete": 0.0,
-        "resultado": 181632.8,
-        "margemPct": 0.080441
+        "resultado": 270779.95,
+        "margemPct": 0.082419
       },
       "licitacao": {
-        "vendas": 369002.67,
-        "resultado": 38444.63,
-        "margemPct": 0.104185
+        "vendas": 462136.31,
+        "resultado": 50452.91,
+        "margemPct": 0.109173
       },
       "aliria": {
-        "vendas": 1888954.01,
-        "resultado": 143188.17,
-        "margemPct": 0.075803
+        "vendas": 2823287.82,
+        "resultado": 220327.04,
+        "margemPct": 0.078039
       },
       "difalNaoPago": 0.0,
       "aliquotas": {
-        "icms": 0.01121,
-        "difal": 0.043016,
+        "icms": 0.01122,
+        "difal": 0.039681,
         "irpjCsll": 0.0332
       },
       "despesas": [
         {
           "categoria": "ALUGUEL / CONDOMINIO /",
-          "valor": -6838.57
+          "valor": -18619.39
         },
         {
           "categoria": "LUZ / AGUA / TELEFONE / INTERNET",
-          "valor": -371.56
+          "valor": -1508.49
         },
         {
           "categoria": "SISTEMAS / TI",
-          "valor": -865.44
+          "valor": -3596.54
         },
         {
           "categoria": "ESTRUTURAL",
-          "valor": -11025.0
+          "valor": -17614.45
         },
         {
           "categoria": "CONTABILIDADE",
@@ -1795,7 +1459,7 @@
         },
         {
           "categoria": "EFFECTI",
-          "valor": 0.0
+          "valor": -2563.1
         },
         {
           "categoria": "AFYA (CLIQUE FARMA)",
@@ -1815,71 +1479,23 @@
         },
         {
           "categoria": "ARTUR - CONSULTA",
-          "valor": 0.0
+          "valor": -1600.0
         },
         {
-          "categoria": "JOANA",
-          "valor": 0.0
+          "categoria": "SALÁRIOS",
+          "valor": -24725.68
         },
         {
           "categoria": "IMPOSTOS - FGTS",
-          "valor": 0.0
+          "valor": -2539.26
         },
         {
-          "categoria": "VINICIUS",
-          "valor": 0.0
-        },
-        {
-          "categoria": "IZA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "RAFAEL",
-          "valor": 0.0
-        },
-        {
-          "categoria": "INGRID",
-          "valor": 0.0
-        },
-        {
-          "categoria": "ALEXANDRE",
-          "valor": 0.0
-        },
-        {
-          "categoria": "CASSIANA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "LUANA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "AUGUSTO",
-          "valor": 0.0
-        },
-        {
-          "categoria": "IZABELLA FERREIRA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "KLISSIA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "REBECA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "GEORGEA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "MANOELA",
-          "valor": 0.0
+          "categoria": "SÓCIOS",
+          "valor": -75000.0
         },
         {
           "categoria": "BENEFÍCIOS",
-          "valor": -150.55
+          "valor": -22262.95
         },
         {
           "categoria": "RELACIONAMENTO",
@@ -1887,11 +1503,11 @@
         },
         {
           "categoria": "VIAGENS",
-          "valor": 0.0
+          "valor": -1173.45
         },
         {
           "categoria": "RECEITA DE VENDAS",
-          "valor": 1097679.65
+          "valor": 2542997.9
         },
         {
           "categoria": "DEVOLUCAO VENDAS",
@@ -1899,23 +1515,23 @@
         },
         {
           "categoria": "COMPRAS (VENDAS)",
-          "valor": -626450.94
+          "valor": -2716697.12
         },
         {
           "categoria": "IMPOSTOS - DCTF",
-          "valor": 0.0
+          "valor": -2466.12
         },
         {
           "categoria": "IMPOSTOS - ICMS",
-          "valor": -3340.3
+          "valor": -64372.18
         },
         {
           "categoria": "IMPOSTOS - CSLL",
-          "valor": 0.0
+          "valor": -86.85
         },
         {
           "categoria": "IMPOSTOS - IRPJ",
-          "valor": 0.0
+          "valor": -28.01
         },
         {
           "categoria": "IMPOSTOS - ISS",
@@ -1923,11 +1539,11 @@
         },
         {
           "categoria": "DIFAL",
-          "valor": 0.0
+          "valor": -20459.87
         },
         {
           "categoria": "FRETE",
-          "valor": -5070.56
+          "valor": -11527.02
         },
         {
           "categoria": "COMISSAO",
@@ -1935,11 +1551,11 @@
         },
         {
           "categoria": "APLICACAO ITAU PRIVILEGE",
-          "valor": -729477.5
+          "valor": -1262677.5
         },
         {
           "categoria": "RESGATE ITAU PRIVILEGE",
-          "valor": 302495.02
+          "valor": 1729580.72
         },
         {
           "categoria": "APP AUTOMATICA",
@@ -1947,13 +1563,13 @@
         },
         {
           "categoria": "TARIFAS BANCARIAS",
-          "valor": 0.0
+          "valor": -49.0
         }
       ],
-      "despesaTotal": 20.93,
-      "checkReconciliacao": -0.0,
-      "sgna": -21631.05,
-      "resultadoOperacional": 160001.75,
+      "despesaTotal": 6448.32,
+      "checkReconciliacao": 1853.98,
+      "sgna": -176049.36,
+      "resultadoOperacional": 94730.59,
       "ativo": {
         "caixa": 0,
         "privilegeDi": 0,
@@ -2065,7 +1681,7 @@
           "valor": 0.0
         },
         {
-          "categoria": "JOANA",
+          "categoria": "SALÁRIOS",
           "valor": 0.0
         },
         {
@@ -2073,55 +1689,7 @@
           "valor": 0.0
         },
         {
-          "categoria": "VINICIUS",
-          "valor": 0.0
-        },
-        {
-          "categoria": "IZA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "RAFAEL",
-          "valor": 0.0
-        },
-        {
-          "categoria": "INGRID",
-          "valor": 0.0
-        },
-        {
-          "categoria": "ALEXANDRE",
-          "valor": 0.0
-        },
-        {
-          "categoria": "CASSIANA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "LUANA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "AUGUSTO",
-          "valor": 0.0
-        },
-        {
-          "categoria": "IZABELLA FERREIRA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "KLISSIA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "REBECA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "GEORGEA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "MANOELA",
+          "categoria": "SÓCIOS",
           "valor": 0.0
         },
         {
@@ -2312,7 +1880,7 @@
           "valor": 0.0
         },
         {
-          "categoria": "JOANA",
+          "categoria": "SALÁRIOS",
           "valor": 0.0
         },
         {
@@ -2320,55 +1888,7 @@
           "valor": 0.0
         },
         {
-          "categoria": "VINICIUS",
-          "valor": 0.0
-        },
-        {
-          "categoria": "IZA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "RAFAEL",
-          "valor": 0.0
-        },
-        {
-          "categoria": "INGRID",
-          "valor": 0.0
-        },
-        {
-          "categoria": "ALEXANDRE",
-          "valor": 0.0
-        },
-        {
-          "categoria": "CASSIANA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "LUANA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "AUGUSTO",
-          "valor": 0.0
-        },
-        {
-          "categoria": "IZABELLA FERREIRA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "KLISSIA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "REBECA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "GEORGEA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "MANOELA",
+          "categoria": "SÓCIOS",
           "valor": 0.0
         },
         {
@@ -2559,7 +2079,7 @@
           "valor": 0.0
         },
         {
-          "categoria": "JOANA",
+          "categoria": "SALÁRIOS",
           "valor": 0.0
         },
         {
@@ -2567,55 +2087,7 @@
           "valor": 0.0
         },
         {
-          "categoria": "VINICIUS",
-          "valor": 0.0
-        },
-        {
-          "categoria": "IZA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "RAFAEL",
-          "valor": 0.0
-        },
-        {
-          "categoria": "INGRID",
-          "valor": 0.0
-        },
-        {
-          "categoria": "ALEXANDRE",
-          "valor": 0.0
-        },
-        {
-          "categoria": "CASSIANA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "LUANA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "AUGUSTO",
-          "valor": 0.0
-        },
-        {
-          "categoria": "IZABELLA FERREIRA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "KLISSIA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "REBECA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "GEORGEA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "MANOELA",
+          "categoria": "SÓCIOS",
           "valor": 0.0
         },
         {
@@ -2806,7 +2278,7 @@
           "valor": 0.0
         },
         {
-          "categoria": "JOANA",
+          "categoria": "SALÁRIOS",
           "valor": 0.0
         },
         {
@@ -2814,55 +2286,7 @@
           "valor": 0.0
         },
         {
-          "categoria": "VINICIUS",
-          "valor": 0.0
-        },
-        {
-          "categoria": "IZA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "RAFAEL",
-          "valor": 0.0
-        },
-        {
-          "categoria": "INGRID",
-          "valor": 0.0
-        },
-        {
-          "categoria": "ALEXANDRE",
-          "valor": 0.0
-        },
-        {
-          "categoria": "CASSIANA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "LUANA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "AUGUSTO",
-          "valor": 0.0
-        },
-        {
-          "categoria": "IZABELLA FERREIRA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "KLISSIA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "REBECA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "GEORGEA",
-          "valor": 0.0
-        },
-        {
-          "categoria": "MANOELA",
+          "categoria": "SÓCIOS",
           "valor": 0.0
         },
         {
@@ -2970,31 +2394,31 @@
     }
   ],
   "anual": {
-    "vendas": 22263419.14,
-    "resultado": 2321801.07,
-    "margemPct": 0.104288,
-    "licitacao": 3905447.39,
-    "resultadoLicitacao": 623602.87,
-    "aliria": 18357971.75,
-    "resultadoAliria": 1698198.2,
-    "sgna": -1133010.61,
-    "resultadoOperacional": 1188790.46,
+    "vendas": 23290886.59,
+    "resultado": 2410948.22,
+    "margemPct": 0.103515,
+    "licitacao": 3998581.03,
+    "resultadoLicitacao": 635611.15,
+    "aliria": 19292305.56,
+    "resultadoAliria": 1775337.07,
+    "sgna": -1332579.3,
+    "resultadoOperacional": 1078368.92,
     "despesas": [
       {
         "categoria": "ALUGUEL / CONDOMINIO /",
-        "valor": -114584.68
+        "valor": -126365.5
       },
       {
         "categoria": "LUZ / AGUA / TELEFONE / INTERNET",
-        "valor": -18484.53
+        "valor": -19621.46
       },
       {
         "categoria": "SISTEMAS / TI",
-        "valor": -66111.06
+        "valor": -68842.16
       },
       {
         "categoria": "ESTRUTURAL",
-        "valor": -158515.41
+        "valor": -165104.86
       },
       {
         "categoria": "CONTABILIDADE",
@@ -3006,7 +2430,7 @@
       },
       {
         "categoria": "EFFECTI",
-        "valor": -14885.3
+        "valor": -17448.4
       },
       {
         "categoria": "AFYA (CLIQUE FARMA)",
@@ -3026,71 +2450,23 @@
       },
       {
         "categoria": "ARTUR - CONSULTA",
-        "valor": -11600.0
+        "valor": -13200.0
       },
       {
-        "categoria": "JOANA",
-        "valor": -38148.01
+        "categoria": "SALÁRIOS",
+        "valor": -211612.55
       },
       {
         "categoria": "IMPOSTOS - FGTS",
-        "valor": -32646.43
+        "valor": -35548.38
       },
       {
-        "categoria": "VINICIUS",
-        "valor": -125547.56
-      },
-      {
-        "categoria": "IZA",
-        "valor": -95376.19
-      },
-      {
-        "categoria": "RAFAEL",
-        "valor": -17983.24
-      },
-      {
-        "categoria": "INGRID",
-        "valor": -15097.68
-      },
-      {
-        "categoria": "ALEXANDRE",
-        "valor": -20670.79
-      },
-      {
-        "categoria": "CASSIANA",
-        "valor": -4954.75
-      },
-      {
-        "categoria": "LUANA",
-        "valor": -1998.57
-      },
-      {
-        "categoria": "AUGUSTO",
-        "valor": -46537.88
-      },
-      {
-        "categoria": "IZABELLA FERREIRA",
-        "valor": -21704.54
-      },
-      {
-        "categoria": "KLISSIA",
-        "valor": -29984.87
-      },
-      {
-        "categoria": "REBECA",
-        "valor": -33164.33
-      },
-      {
-        "categoria": "GEORGEA",
-        "valor": -3180.09
-      },
-      {
-        "categoria": "MANOELA",
-        "valor": -1387.5
+        "categoria": "SÓCIOS",
+        "valor": -342461.63
       },
       {
         "categoria": "BENEFÍCIOS",
-        "valor": -121804.11
+        "valor": -143916.51
       },
       {
         "categoria": "RELACIONAMENTO",
@@ -3098,11 +2474,11 @@
       },
       {
         "categoria": "VIAGENS",
-        "valor": -12426.92
+        "valor": -13600.37
       },
       {
         "categoria": "RECEITA DE VENDAS",
-        "valor": 19290551.38
+        "valor": 20735869.63
       },
       {
         "categoria": "DEVOLUCAO VENDAS",
@@ -3110,23 +2486,23 @@
       },
       {
         "categoria": "COMPRAS (VENDAS)",
-        "valor": -15740490.24
+        "valor": -17830736.42
       },
       {
         "categoria": "IMPOSTOS - DCTF",
-        "valor": -64596.12
+        "valor": -66699.55
       },
       {
         "categoria": "IMPOSTOS - ICMS",
-        "valor": -187414.44
+        "valor": -248446.32
       },
       {
         "categoria": "IMPOSTOS - CSLL",
-        "valor": -294012.14
+        "valor": -294098.99
       },
       {
         "categoria": "IMPOSTOS - IRPJ",
-        "valor": -320838.41
+        "valor": -320866.42
       },
       {
         "categoria": "IMPOSTOS - ISS",
@@ -3134,11 +2510,11 @@
       },
       {
         "categoria": "DIFAL",
-        "valor": -491209.75
+        "valor": -511669.62
       },
       {
         "categoria": "FRETE",
-        "valor": -63758.73
+        "valor": -70215.19
       },
       {
         "categoria": "COMISSAO",
@@ -3146,11 +2522,11 @@
       },
       {
         "categoria": "APLICACAO ITAU PRIVILEGE",
-        "valor": -11137577.81
+        "valor": -11670777.81
       },
       {
         "categoria": "RESGATE ITAU PRIVILEGE",
-        "valor": 10173396.87
+        "valor": 11600482.57
       },
       {
         "categoria": "APP AUTOMATICA",
@@ -3158,21 +2534,24 @@
       },
       {
         "categoria": "TARIFAS BANCARIAS",
-        "valor": -2642.73
+        "valor": -2691.73
       }
     ]
   },
   "validacao": {
     "mesesComVendas": 8,
     "mesesComAtivo": 7,
-    "checkReconciliacaoMax": 0.0,
+    "checkReconciliacaoMax": 1853.98,
     "liquidezConfere": true,
     "avisos": [
-      "Despesa 'AUGUSTO' (linha 58): coluna Q (total anual) esta VAZIA na planilha, mas os meses somam -46537.88.",
+      "A formula de SG&A (aba 'Relatorio - 26', linha 23) NAO e a mesma em todos os meses -- ha 2 variantes, logo 'sgna' nao e 100% comparavel mes a mes. Variantes: [Jun, Jul, Ago, Set, Out, Nov, Dez] =+SUM('GLOBAL - 26'!36:55,'GLOBAL - 26'!60) || [Jan, Fev, Mar, Abr, Mai] =+SUM('GLOBAL - 26'!36:55,'GLOBAL - 26'!60,'GLOBAL - 26'!66:67)",
+      "Jul/2026: check de reconciliacao (linha 34) = 1387.5000 (esperado ~0).",
+      "Ago/2026: check de reconciliacao (linha 34) = 1853.9800 (esperado ~0).",
       "Meses com vendas mas SEM Evolucao do Ativo (ocultar na visao de liquidez): Ago/2026.",
       "Somar os 19 componentes JA ARREDONDADOS de 'ativo' devolve ate 0.01 de diferenca vs 'liquidez' (a planilha soma em precisao total). Use o campo 'liquidez' direto; nao recalcule no front-end.",
-      "'despesaTotal' e a soma liquida de TODAS as linhas 36..84 do extrato (inclui RECEITA DE VENDAS, COMPRAS, APLICACAO/RESGATE ITAU) = movimento liquido de caixa, NAO despesa operacional. Para despesa operacional use 'sgna'.",
-      "Liquidez com DIFAL (linha 115) = Liquidez (linha 114) + DIFAL Retido. Conferido na formula literal: nenhum item e omitido pela planilha. Os campos 'liquidezComDifal' e 'liquidezComDifalPlanilha' sao identicos."
+      "'despesaTotal' e a soma liquida das 33 categorias do extrato (linhas 36..72, inclui RECEITA DE VENDAS, COMPRAS, APLICACAO/RESGATE ITAU) = movimento liquido de caixa, NAO despesa operacional. Para despesa operacional use 'sgna'.",
+      "Liquidez com DIFAL (linha 103) = Liquidez (linha 102) + DIFAL Retido. Conferido na formula literal: nenhum item e omitido pela planilha. Os campos 'liquidezComDifal' e 'liquidezComDifalPlanilha' sao identicos.",
+      "Todas as posicoes desta extracao foram DESCOBERTAS por rotulo/formula, nao fixadas em codigo. Confira o MAPA DE DESCOBERTA impresso no terminal."
     ]
   }
 }
