@@ -1,5 +1,5 @@
 {
-  "savedAt": "2026-09-02T21:04:06.895Z",
+  "savedAt": "2026-09-02T21:09:37.837Z",
   "version": 1,
   "fonte": "Aliria Controle Final_v1 - 2026 V4.xlsx",
   "ano": 2026,
@@ -1600,36 +1600,36 @@
       "mes": 9,
       "label": "Set/2026",
       "dataFim": "2026-09-30",
-      "vendasPreenchido": false,
+      "vendasPreenchido": true,
       "ativoPreenchido": false,
       "vendas": {
-        "valorTotal": 0.0,
-        "totalCompra": 0.0,
-        "icmsEntrada": 0.0,
-        "icmsSaida": 0.0,
+        "valorTotal": 376248.28,
+        "totalCompra": 300762.09,
+        "icmsEntrada": 14352.06,
+        "icmsSaida": 19417.77,
         "difal": 0.0,
-        "irpjCsll": 0.0,
+        "irpjCsll": 12491.44,
         "cartao": 0.0,
         "cr": 0.0,
         "frete": 0.0,
-        "resultado": 0.0,
-        "margemPct": null
+        "resultado": 57929.04,
+        "margemPct": 0.153965
       },
       "licitacao": {
-        "vendas": 0.0,
-        "resultado": 0.0,
-        "margemPct": null
+        "vendas": 68157.1,
+        "resultado": 15694.28,
+        "margemPct": 0.230266
       },
       "aliria": {
-        "vendas": 0.0,
-        "resultado": 0.0,
-        "margemPct": null
+        "vendas": 308091.18,
+        "resultado": 42234.76,
+        "margemPct": 0.137085
       },
       "difalNaoPago": 0.0,
       "aliquotas": {
-        "icms": null,
-        "difal": null,
-        "irpjCsll": null
+        "icms": 0.013464,
+        "difal": 0.0,
+        "irpjCsll": 0.0332
       },
       "despesas": [
         {
@@ -1768,7 +1768,7 @@
       "despesaTotal": 0.0,
       "checkReconciliacao": 0.0,
       "sgna": 0.0,
-      "resultadoOperacional": 0.0,
+      "resultadoOperacional": 57929.04,
       "ativo": {
         "caixa": 0,
         "privilegeDi": 0,
@@ -2394,15 +2394,15 @@
     }
   ],
   "anual": {
-    "vendas": 23290886.59,
-    "resultado": 2410948.22,
-    "margemPct": 0.103515,
-    "licitacao": 3998581.03,
-    "resultadoLicitacao": 635611.15,
-    "aliria": 19292305.56,
-    "resultadoAliria": 1775337.07,
+    "vendas": 23667134.87,
+    "resultado": 2468877.26,
+    "margemPct": 0.104317,
+    "licitacao": 4066738.13,
+    "resultadoLicitacao": 651305.43,
+    "aliria": 19600396.74,
+    "resultadoAliria": 1817571.83,
     "sgna": -1385378.59,
-    "resultadoOperacional": 1025569.63,
+    "resultadoOperacional": 1083498.67,
     "despesas": [
       {
         "categoria": "ALUGUEL / CONDOMINIO /",
@@ -2539,14 +2539,14 @@
     ]
   },
   "validacao": {
-    "mesesComVendas": 8,
+    "mesesComVendas": 9,
     "mesesComAtivo": 7,
     "checkReconciliacaoMax": 1853.98,
     "liquidezConfere": true,
     "avisos": [
       "Jul/2026: check de reconciliacao (linha 34) = 1387.5000 (esperado ~0).",
       "Ago/2026: check de reconciliacao (linha 34) = 1853.9800 (esperado ~0).",
-      "Meses com vendas mas SEM Evolucao do Ativo (ocultar na visao de liquidez): Ago/2026.",
+      "Meses com vendas mas SEM Evolucao do Ativo (ocultar na visao de liquidez): Ago/2026, Set/2026.",
       "Somar os 19 componentes JA ARREDONDADOS de 'ativo' devolve ate 0.01 de diferenca vs 'liquidez' (a planilha soma em precisao total). Use o campo 'liquidez' direto; nao recalcule no front-end.",
       "'despesaTotal' e a soma liquida das 33 categorias do extrato (linhas 36..72, inclui RECEITA DE VENDAS, COMPRAS, APLICACAO/RESGATE ITAU) = movimento liquido de caixa, NAO despesa operacional. Para despesa operacional use 'sgna'.",
       "Liquidez com DIFAL (linha 103) = Liquidez (linha 102) + DIFAL Retido. Conferido na formula literal: nenhum item e omitido pela planilha. Os campos 'liquidezComDifal' e 'liquidezComDifalPlanilha' sao identicos.",
