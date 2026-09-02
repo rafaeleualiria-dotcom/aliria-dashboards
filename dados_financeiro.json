@@ -1,5 +1,5 @@
 {
-  "savedAt": "2026-09-02T15:40:34.168Z",
+  "savedAt": "2026-09-02T15:49:23.546Z",
   "version": 1,
   "fonte": "Aliria Controle Final_v1 - 2026 V4.xlsx",
   "ano": 2026,
@@ -1170,8 +1170,8 @@
       ],
       "despesaTotal": -64207.88,
       "checkReconciliacao": 0.0,
-      "sgna": -156879.98,
-      "resultadoOperacional": 110054.86,
+      "sgna": -174959.43,
+      "resultadoOperacional": 91975.41,
       "ativo": {
         "caixa": 0.0,
         "privilegeDi": 321959.99,
@@ -1369,8 +1369,8 @@
       ],
       "despesaTotal": 65595.38,
       "checkReconciliacao": 1387.5,
-      "sgna": -151549.54,
-      "resultadoOperacional": 243042.34,
+      "sgna": -160558.97,
+      "resultadoOperacional": 234032.91,
       "ativo": {
         "caixa": 0.0,
         "privilegeDi": 922663.69,
@@ -1568,8 +1568,8 @@
       ],
       "despesaTotal": 6448.32,
       "checkReconciliacao": 1853.98,
-      "sgna": -176049.36,
-      "resultadoOperacional": 94730.59,
+      "sgna": -201759.77,
+      "resultadoOperacional": 69020.18,
       "ativo": {
         "caixa": 0,
         "privilegeDi": 0,
@@ -2401,8 +2401,8 @@
     "resultadoLicitacao": 635611.15,
     "aliria": 19292305.56,
     "resultadoAliria": 1775337.07,
-    "sgna": -1332579.3,
-    "resultadoOperacional": 1078368.92,
+    "sgna": -1385378.59,
+    "resultadoOperacional": 1025569.63,
     "despesas": [
       {
         "categoria": "ALUGUEL / CONDOMINIO /",
@@ -2544,7 +2544,6 @@
     "checkReconciliacaoMax": 1853.98,
     "liquidezConfere": true,
     "avisos": [
-      "A formula de SG&A (aba 'Relatorio - 26', linha 23) NAO e a mesma em todos os meses -- ha 2 variantes, logo 'sgna' nao e 100% comparavel mes a mes. Variantes: [Jun, Jul, Ago, Set, Out, Nov, Dez] =+SUM('GLOBAL - 26'!36:55,'GLOBAL - 26'!60) || [Jan, Fev, Mar, Abr, Mai] =+SUM('GLOBAL - 26'!36:55,'GLOBAL - 26'!60,'GLOBAL - 26'!66:67)",
       "Jul/2026: check de reconciliacao (linha 34) = 1387.5000 (esperado ~0).",
       "Ago/2026: check de reconciliacao (linha 34) = 1853.9800 (esperado ~0).",
       "Meses com vendas mas SEM Evolucao do Ativo (ocultar na visao de liquidez): Ago/2026.",
