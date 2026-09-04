@@ -168,6 +168,12 @@ th.sortable .sort-ind{margin-left:4px;color:var(--primary)}
 
 /* ABC */
 .abc-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+/* Seletor segmentado Receita | Quantidade (cabeçalho da Curva ABC) */
+.seg{display:inline-flex;gap:0;margin-top:10px;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.seg .btn{border:0;border-radius:0;padding:6px 14px;font-size:12px;font-weight:600;background:var(--surface);color:var(--text-600)}
+.seg .btn+.btn{border-left:1px solid var(--border)}
+.seg .btn[aria-pressed="true"]{background:var(--primary);color:#fff}
+.seg .btn:focus-visible{outline:2px solid var(--primary);outline-offset:-2px}
 .abc-card{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--abc-color);border-radius:var(--radius-sm);padding:12px 16px;box-shadow:var(--shadow)}
 .abc-card-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-400)}
 .abc-card-val{font-size:18px;font-weight:800;color:var(--text-900);margin-top:2px;font-variant-numeric:tabular-nums}
@@ -391,6 +397,10 @@ th.sortable .sort-ind{margin-left:4px;color:var(--primary)}
           <div>
             <div class="chart-title" id="abcTitle">Pareto de receita por item</div>
             <div class="chart-sub" id="abcSub">Barras: receita por item (top 30) · Linha: % acumulado · Cortes em 80% (A) e 95% (B)</div>
+            <div class="seg" id="abcSeg" role="group" aria-label="Métrica da curva ABC">
+              <button class="btn btn-outline" type="button" data-met="receita" aria-pressed="true"  onclick="setAbcMetrica('receita')">Receita</button>
+              <button class="btn btn-outline" type="button" data-met="qtd"     aria-pressed="false" onclick="setAbcMetrica('qtd')">Quantidade</button>
+            </div>
           </div>
         </div>
         <div class="chart-body" style="height:340px"><canvas id="cPareto" role="img" aria-label="Gráfico de Pareto da receita por item"></canvas></div>
@@ -638,20 +648,27 @@ window.__calc = (() => {
   }
 
   /* Curva ABC: classe A até cruzar 80% acumulado (inclusive), B até 95%, C o resto */
-  function abc(records) {
-    const tot = total(records);
-    const gs = grupo(records, r => r.item).sort(byReceitaDesc);
-    const resumo = { A:{n:0,receita:0,pct:0}, B:{n:0,receita:0,pct:0}, C:{n:0,receita:0,pct:0} };
+  /* Curva ABC por RECEITA (padrao) ou por QUANTIDADE (metrica='qtd').
+     A metrica define a ordenacao, o % de cada item, o acumulado e a classe.
+     Receita e qtd sao sempre devolvidos, seja qual for a metrica. */
+  function abc(records, metrica = 'receita') {
+    const porQtd = metrica === 'qtd';
+    const totR = total(records);
+    const totQ = records.reduce((s, r) => s + (Number(r.qtd) || 0), 0);
+    const tot = porQtd ? totQ : totR;
+    const gs = grupo(records, r => r.item).sort(porQtd ? ((a, b) => b.qtd - a.qtd || b.receita - a.receita) : byReceitaDesc);
+    const resumo = { A:{n:0,receita:0,qtd:0,pct:0}, B:{n:0,receita:0,qtd:0,pct:0}, C:{n:0,receita:0,qtd:0,pct:0} };
     let acum = 0;
     const itens = gs.map((g, i) => {
-      const pct = tot ? g.receita / tot * 100 : 0;
+      const valor = porQtd ? g.qtd : g.receita;
+      const pct = tot ? valor / tot * 100 : 0;
       const classe = acum < 80 ? 'A' : acum < 95 ? 'B' : 'C';   // decidido pelo acumulado ANTES do item
       acum += pct;
-      resumo[classe].n++; resumo[classe].receita += g.receita; resumo[classe].pct += pct;
+      resumo[classe].n++; resumo[classe].receita += g.receita; resumo[classe].qtd += g.qtd; resumo[classe].pct += pct;
       return { rank:i+1, item:g.key, laboratorio:labPrincipal(g), receita:g.receita, qtd:g.qtd, nVendas:g.nVendas,
                pct, pctAcum:Math.min(acum, 100), classe, nFontes:g.fontes.size };
     });
-    return { itens, resumo, total: tot };
+    return { itens, resumo, total: tot, totalReceita: totR, totalQtd: totQ, metrica: porQtd ? 'qtd' : 'receita' };
   }
 
   function porFonte(records) {
@@ -1133,28 +1150,46 @@ const liderPlugin = {
 /* ============================================================
    1. CURVA ABC — Pareto + cards A/B/C + tabela
 ============================================================ */
+/* Métrica da Curva ABC: 'receita' (padrão) ou 'qtd' (unidades). Trocada pelo seletor
+   Receita | Quantidade no cabeçalho da seção; preservada entre filtros e auto-refresh. */
+var abcMetrica = 'receita';
+var abcUltimo  = null;   // {data, f} da última renderização, para re-renderizar ao trocar a métrica
+
 function renderABC(data, f) {
-  const a = __calc.abc(data);
+  abcUltimo = { data, f };
+  const a = __calc.abc(data, abcMetrica);
+  const porQtd = a.metrica === 'qtd';
+  const nomeMet = porQtd ? 'quantidade' : 'receita';
+  const doQue   = porQtd ? 'das unidades' : 'da receita';
   const umaFonte = f && f.fontes.length === 1 ? f.fontes[0] : null;
 
   document.getElementById('secABC').textContent = umaFonte ? `Curva ABC — canal ${umaFonte}` : 'Curva ABC de produtos';
-  document.getElementById('abcTitle').textContent = umaFonte ? `Pareto de receita por item — canal ${umaFonte}` : 'Pareto de receita por item';
+  document.getElementById('abcTitle').textContent = umaFonte ? `Pareto de ${nomeMet} por item — canal ${umaFonte}` : `Pareto de ${nomeMet} por item`;
   document.getElementById('abcSub').textContent = (umaFonte ? `Somente vendas do canal ${umaFonte} · ` : '') +
-    `Barras: receita por item (top ${Math.min(30, a.itens.length)} de ${a.itens.length}) · Linha: % acumulado · Cortes em 80% (A) e 95% (B)`;
+    `Barras: ${porQtd ? 'unidades vendidas' : 'receita'} por item (top ${Math.min(30, a.itens.length)} de ${a.itens.length}) · Linha: % acumulado · Cortes em 80% (A) e 95% (B)`;
+  document.querySelectorAll('#abcSeg .btn').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.met === a.metrica)));
 
   // Cards A/B/C
   document.getElementById('abcCards').innerHTML = ['A','B','C'].map(c => {
     const r = a.resumo[c];
-    const desc = c === 'A' ? 'até 80% da receita' : c === 'B' ? 'de 80% a 95%' : 'os 5% restantes';
+    const desc = c === 'A' ? `até 80% ${doQue}` : c === 'B' ? 'de 80% a 95%' : 'os 5% restantes';
     return `<div class="abc-card" style="--abc-color:${CLASSE_COLOR[c]}">
       <div class="abc-card-lbl">Classe ${c} · ${desc}</div>
-      <div class="abc-card-val">${F.n(r.n)} ${r.n === 1 ? 'item' : 'itens'} · ${F.pct(r.pct)} da receita</div>
-      <div class="abc-card-sub">${F.brl(r.receita)}</div>
+      <div class="abc-card-val">${F.n(r.n)} ${r.n === 1 ? 'item' : 'itens'} · ${F.pct(r.pct)} ${doQue}</div>
+      <div class="abc-card-sub">${porQtd ? `${F.n(r.qtd)} ${r.qtd === 1 ? 'unidade' : 'unidades'} · ${F.brl(r.receita)}` : `${F.brl(r.receita)} · ${F.n(r.qtd)} ${r.qtd === 1 ? 'unidade' : 'unidades'}`}</div>
     </div>`;
   }).join('');
 
   renderPareto(a);
   renderAbcTable(a);
+}
+
+/* Seletor Receita | Quantidade — re-renderiza só a seção ABC, com os mesmos dados/filtro */
+function setAbcMetrica(m) {
+  if (m !== 'receita' && m !== 'qtd') return;
+  if (abcMetrica === m) return;
+  abcMetrica = m;
+  if (abcUltimo) renderABC(abcUltimo.data, abcUltimo.f);
 }
 
 function renderPareto(a) {
@@ -1164,13 +1199,16 @@ function renderPareto(a) {
   if (!top.length) { chartFallback('cPareto', 'Sem vendas no filtro atual.'); return; }
   const labels = top.map(i => i.item);
   const classes = top.map(i => i.classe);
-  setAria('cPareto', `Pareto: ${top.length} itens de maior receita; classe A tem ${a.resumo.A.n} itens com ${F.pct(a.resumo.A.pct)} da receita.`);
+  const porQtd = a.metrica === 'qtd';
+  const met = porQtd ? 'qtd' : 'receita';
+  const fmtMet = v => porQtd ? `${F.n(v)} un.` : F.brl(v);
+  setAria('cPareto', `Pareto: ${top.length} itens de maior ${porQtd ? 'quantidade' : 'receita'}; classe A tem ${a.resumo.A.n} itens com ${F.pct(a.resumo.A.pct)} ${porQtd ? 'das unidades' : 'da receita'}.`);
 
   CH.pareto = new Chart(document.getElementById('cPareto').getContext('2d'), {
     data: {
       labels,
       datasets: [
-        { type:'bar', label:'Receita', data: top.map(i => i.receita), yAxisID:'y', order:2,
+        { type:'bar', label: porQtd ? 'Unidades' : 'Receita', data: top.map(i => i[met]), yAxisID:'y', order:2,
           backgroundColor: classes.map(c => CLASSE_COLOR[c] + 'CC'), borderColor: classes.map(c => CLASSE_COLOR[c]),
           borderWidth:1.5, borderRadius:4, borderSkipped:false },
         { type:'line', label:'% acumulado', data: top.map(i => i.pctAcum), yAxisID:'y1', order:1,
@@ -1188,13 +1226,13 @@ function renderPareto(a) {
           title: items => items.length ? top[items[0].dataIndex].item : '',
           label: ctx => ctx.dataset.type === 'line'
             ? ` % acumulado: ${F.pct(ctx.parsed.y)}`
-            : ` Receita: ${F.brl(ctx.parsed.y)} (${F.pct(top[ctx.dataIndex].pct)})`,
+            : ` ${porQtd ? 'Unidades' : 'Receita'}: ${fmtMet(ctx.parsed.y)} (${F.pct(top[ctx.dataIndex].pct)})`,
           footer: items => items.length ? [`Classe ${top[items[0].dataIndex].classe} · rank #${top[items[0].dataIndex].rank} · ${top[items[0].dataIndex].laboratorio}`] : []   /* canvas: sem esc() */
         } }
       },
       scales: {
         x:{ grid:{display:false}, ticks:{ ...TICK, font:{size:10}, maxRotation:60, minRotation:45, callback:(v, i) => trunc(labels[i], 18) } },
-        y:{ position:'left', grid:GRID, ticks:{ ...TICK, callback:v => F.k(v) }, title:{ display:true, text:'Receita (R$)', color:'#94A3B8', font:{size:10} } },
+        y:{ position:'left', grid:GRID, ticks:{ ...TICK, callback:v => porQtd ? F.n(v) : F.k(v) }, title:{ display:true, text: porQtd ? 'Unidades vendidas' : 'Receita (R$)', color:'#94A3B8', font:{size:10} } },
         y1:{ position:'right', min:0, max:100, grid:{display:false}, ticks:{ ...TICK, callback:v => v + '%' }, title:{ display:true, text:'% acumulado', color:'#94A3B8', font:{size:10} } }
       }
     }
@@ -1215,7 +1253,7 @@ function renderAbcTable(a) {
   document.getElementById('abcTable').innerHTML = `
     <thead><tr>
       <th scope="col">Rank</th><th scope="col" class="txt">Item</th><th scope="col" class="txt">Laboratório</th>
-      <th scope="col">Receita</th><th scope="col">%</th><th scope="col">% acum.</th><th scope="col">Unidades</th><th scope="col">Classe</th>
+      <th scope="col">Receita</th><th scope="col">${a.metrica === 'qtd' ? '% unid.' : '% receita'}</th><th scope="col">% acum.</th><th scope="col">Unidades</th><th scope="col">Classe</th>
     </tr></thead>
     <tbody>${rows.length ? rows.map(i => `<tr>
       <td class="num">${i.rank}</td>
@@ -1231,7 +1269,7 @@ function renderAbcTable(a) {
 
 function toggleAbc() {
   abcExpanded = !abcExpanded;
-  renderAbcTable(__calc.abc(view));
+  renderAbcTable(__calc.abc(view, abcMetrica));
 }
 
 /* ============================================================
