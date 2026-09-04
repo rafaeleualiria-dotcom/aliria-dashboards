@@ -13,5 +13,8 @@
 /dados_financeiro.json
   Cache-Control: no-store
 
+/dados_comercial.json
+  Cache-Control: no-store
+
 /*.html
   Cache-Control: no-cache
